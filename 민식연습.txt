@@ -1,1 +1,2 @@
 hiwqeeqqs
+truncatechars_html
