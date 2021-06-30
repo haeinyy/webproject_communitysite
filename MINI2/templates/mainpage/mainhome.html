@@ -7,24 +7,78 @@
     <title>Document</title>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css">
-    <link rel="stylesheet" href="/MINI2/static/style.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/MINI2/static/style.css"/>
 
 </head>
 <body>
     <!-- HEA    DER-BOX START -->
     <div class="header-box">
-        <div class="header-box-title">
-            <i class="">아이콘</i>
-            <span>홈페이지이름</span>
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <ul class="header__top__left">
+                            <li><i class="fa fa-phone"></i> 1-677-124-44227</li>
+                            <li><i class="fa fa-map-marker"></i> Los Angeles Gournadi, 1230 Bariasl</li>
+                            <li><i class="fa fa-clock-o"></i> Mon to Sat 9:00am to 18:00pm</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="header__top__right">
+                            <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
+                            <a href="#"><i class="fas fa-sign-in-alt"></i></a> 
+                            <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="header-box-menu">
-            <ul>
-                <li>게시판</li>
-                <li>가디맛방</li>
-                <li>계산기</li>
-                <li>정보마당</li>
-            </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="/MINI2/templates/mainpage/mainhome.html">
+                            Kfq
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="header__menu__option">
+                        <nav class="header__menu">
+                            <ul>
+                                <li><a href="./index.html">Home</a></li>
+                                <!-- <li><a href="./about.html">게시판</a></li> -->
+                                <li class="active"><a href="#">게시판</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">자유게시판</a></li>
+                                        <li><a href="#">동아리/스터디</a></li>
+                                        <li><a href="#">취업/진로</a></li>
+                                        <li><a href="#">물물교환/무료나눔</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./services.html">맛집</a></li>
+                                <li><a href="#">계산기</a></li>
+                                <li class="active"><a href="#">정보마당</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">Q&A</a></li>
+                                        <li><a href="#">FAQ</a></li>
+                                        <li><a href="#">공지사항</a></li>
+                                        <li><a href="#">건의사항</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__btn">
+                            <a href="#" class="primary-btn">후원</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open">
+                <i class="fa fa-bars"></i>
+            </div>
         </div>
     </div>
     <!-- HEADER-BOX END -->
@@ -39,7 +93,7 @@
 
         <!-- SIDE-BOX START -->
         <div class="content-box-sidebar">
-
+            
         </div>
         <!-- SIDE-BOX END -->
     </div>
@@ -48,8 +102,98 @@
 
     <!-- FOOTER-BOX START -->
     <div class="footer-box">
-        <h3>wr</h3>
-        <span>rrrr</span>
+        <div class="footer__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="footer__logo">
+                            <a href="#">사이트이름</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-8">
+                        <div class="footer__newslatter">
+                            <form action="#">
+                                <input type="text" placeholder="Email">
+                                <button type="submit" class="site-btn">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="footer__social">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-dribbble"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h5>Company</h5>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Departments</a></li>
+                            <li><a href="#">Find a Doctor</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">News</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h5>Quick links</h5>
+                        <ul>
+                            <li><a href="#">Facial Fillers</a></li>
+                            <li><a href="#">Breast Surgery</a></li>
+                            <li><a href="#">Body Lifts</a></li>
+                            <li><a href="#">Face & Neck</a></li>
+                            <li><a href="#">Fat Reduction</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer__address">
+                        <h5>Contact Us</h5>
+                        <ul>
+                            <li><i class="fa fa-map-marker"></i> Los Angeles Gournadi, 1230 Bariasl</li>
+                            <li><i class="fa fa-phone"></i> 1-677-124-44227</li>
+                            <li><i class="fa fa-envelope"></i> Support@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-6">
+                    <div class="footer__map">
+                        <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48158.305462977965!2d-74.13283844036356!3d41.02757295168286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2e440473470d7%3A0xcaf503ca2ee57958!2sSaddle%20River%2C%20NJ%2007458%2C%20USA!5e0!3m2!1sen!2sbd!4v1575917275626!5m2!1sen!2sbd"
+                        height="190" style="border:0" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <div class="footer__copyright__text">
+                            <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                        </div>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                    <div class="col-lg-5">
+                        <ul>
+                            <li>All Rights Reserved</li>
+                            <li>Terms & Use</li>
+                            <li>Privacy Policy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- FOOTER-BOX END -->
 </body>
