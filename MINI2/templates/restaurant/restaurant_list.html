@@ -1,9 +1,19 @@
+{% include 'load-box.html' %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/screens/restaurant_list.css">
+    <link rel="stylesheet" href="/static/css/restaurant_list.css">
+</head>
 
 <body>
+    <!-- HEADER-BOX START -->
+    {% include 'header-box.html' %} 
+    <!-- HEADER-BOX END -->
 
-    <!-- Breadcrumb Section Begin -->
+    <!-- MIDDLE-BOX START -->
+    <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+    <!-- 실제 페이지 내용 쓰기 START-->
+<!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
         <div class="container">
             <div class="row">
@@ -160,5 +170,20 @@
         </div>
     </section>
     <!-- Blog Section End -->
+    <!-- 실제 페이지 내용 쓰기 END-->
+            </div>
+        </div>
+    </section>
+    <!-- MIDDLE-BOX END -->
+    
+     <!-- FOOTER-BOX START -->
+    {% include 'footer-box.html' %} 
+     <!-- FOOTER-BOX END -->
+
+    <!-- JS부분 -->
+    {% include 'js-script.html' %}
+    {% comment %} 추가하고싶은 js추가하면됨. -> <script src="/static/js/main.js"></script> {% endcomment %}
+    
 
 </body>
+</html>
