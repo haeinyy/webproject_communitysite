@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- calc Section -->
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1>한국품질재단 인공지능과정 username님 진행 상황</h1>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <h2>수료현황</h2>
+
+      <div class="progress">
+        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+          aria-valuemax="100"></div>
+      </div>
+      <p>
+        지금 까지 45/960 시간 완료 했습니다.
+        <br>
+        현재 수료 '불가' or '가능' 합니다.
+      </p>
+
+      <table class="table-success">
+        <thead>
+          <tr>
+            <th scope="col">출석일수</th>
+            <th scope="col">출석시간</th>
+            <th scope="col">남은일수</th>
+            <th scope="col">남은시간</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>수당현황
+      <!-- 수당관련 정보안내 -->
+      <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover"
+        data-bs-placement="top" data-bs-content="단위기간*출석률이 80% 이상일 경우에 한아여 교육수당을 지급받을 수 있습니다. 
+          교육수당 지급금액은 월 최대 300,000원 입니다. (단위기간: 교육 시작일을 기준으로 1개월 단위로 나눈 기간.)">
+        i
+      </button>
+    </h2>
+      <h3>내가 받을 수 있는 교육수당은?</h3>
+      <p>
+        '3'회차, 오늘 기준 '45,000'원
+      </p>
+
+      <hr>
+
+      <!-- 덧셈 계산기 -->
+      <h3>출석일수에 따른 교육수당 계산하기</h3>
+      <form action="calc" method="POST">
+
+        {% csrf_token %}
+
+        하루 4시간 이상 20일 기준 몇 일 출석했나요? =
+        <input type="number" name="num1" placeholder="ex) 19">
+        <button type="submit">계산하기</button>
+
+      </form>
+
+      <hr>
+      
+      <h3>지난달 내역</h3>
+      <table class="table-success">
+        <thead>
+          <tr>
+            <th scope="col">회차</th>
+            <th scope="col">수당</th>
+            <th scope="col">누적</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>11</td>
+            <td>11</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>11</td>
+            <td>22</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>11</td>
+            <td>33</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <th scope="row">총액</th>
+          <td colspan="2">66</td>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
