@@ -5,5 +5,5 @@ from restaurant import views as rest_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('restaurant/', rest_views.list_1),
+    path('restaurant/', rest_views.restaurant),
 ]
