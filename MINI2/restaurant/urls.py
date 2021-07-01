@@ -3,8 +3,7 @@ from django.urls import path
 from django.urls.conf import include
 from restaurant import views
 
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('restaurant/', include('restaurant.urls')),
+    path('', views.restaurant),
+    path('restaurant_list/', views.restaurant_list),
 ]

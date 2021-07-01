@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def restaurant(request):
     return render(request, 'restaurant/restaurant.html',{})
+
+def restaurant_list(request):
+    return render(request, 'restaurant/restaurant_list.html',{})
