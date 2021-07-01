@@ -6,4 +6,5 @@ from restaurant import views
 urlpatterns = [
     path('', views.restaurant),
     path('restaurant_list/', views.restaurant_list),
+    path('restaurant_detail/', views.restaurant_detail),
 ]

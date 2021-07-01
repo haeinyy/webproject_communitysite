@@ -122,5 +122,5 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
 #BASE_DIR / 'static'           #django ver 3
-    os.path.join(BASE_DIR, 'static') #django ver 2
+    os.path.join(BASE_DIR, 'static')#django ver 2
 ]

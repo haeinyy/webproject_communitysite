@@ -7,4 +7,3 @@ urlpatterns = [
     path('mainpage/', include('mainpage.urls')),
     path('restaurant/', include('restaurant.urls')),
 ]
-    

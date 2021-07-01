@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+@import "reset.css";
+
+/* Components */
+@import "components/header-box.css";
+@import "components/footer-box.css";
+
+/* Screens */
+@import "screens/side-bar-before.css";
+@import "screens/side-bar-after.css";
+@import "screens/board-study.css"; 
+
+body {
+    color: #2e363e;
+}
+.content-box{
+    display: flex;
+    width: 1170px;
+    height: 1000px;
+    justify-content: center;
+}
+.content-box-left{
+    width: 850px;
+    height: 1000px;
+    background-color: tomato;
+}
+.content-box-sidebar{
+    width: 350px;
+    height: 1000px;
+    background-color: violet;
+}
