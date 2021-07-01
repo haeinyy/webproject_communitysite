@@ -13,5 +13,20 @@
 
 body {
     color: #2e363e;
-    height:2000px;
+}
+.content-box{
+    display: flex;
+    width: 1170px;
+    height: 1000px;
+    justify-content: center;
+}
+.content-box-left{
+    width: 850px;
+    height: 1000px;
+    background-color: tomato;
+}
+.content-box-sidebar{
+    width: 350px;
+    height: 1000px;
+    background-color: violet;
 }
