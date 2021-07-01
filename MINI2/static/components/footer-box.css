@@ -1,13 +1,15 @@
 .footer-box {
     background: #121c1d;
+	width:100%;
+	position: relative;
+	bottom:0;
 	padding-top: 40px;
-    margin-top: 300px;
 }
 
 .footer__top {
 	padding-bottom: 40px;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-	margin-bottom: 65px;
+	/* margin-bottom: 65px; */
 }
 
 .footer__logo {
