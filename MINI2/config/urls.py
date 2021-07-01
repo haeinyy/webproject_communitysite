@@ -5,5 +5,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
      # App
     path('mainpage/', include('mainpage.urls')),
-    
+    path('restaurant/', include('restaurant.urls')),
 ]
+    
