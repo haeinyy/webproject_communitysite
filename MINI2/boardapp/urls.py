@@ -2,5 +2,6 @@ from django.urls import path, include
 from boardapp import views
 
 urlpatterns = [
-    path('', views.freeboard),
+    path('freeboard/', views.freeboard),
+    path('writetext/', views.writetext),
 ]
