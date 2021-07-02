@@ -1,6 +1,5 @@
 {% include 'load-box.html' %}
-{% comment %} 추가하고싶은 css추가 ->
-<link rel="stylesheet" href="/static/css/slicknav.min.css" type="text/css"> {% endcomment %}
+
 </head>
 
 <body>
@@ -33,12 +32,11 @@
     <!-- MIDDLE-BOX START -->
     <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
         <div class="container">
-            <div class="row">
                 <!-- 실제 페이지 내용 쓰기 START-->
                 <!-- <div style="height:600px; background-color: violet;">
                     <h1>내용넣어요</h1>
                 </div>  -->
-                <form method="get" action="write_action.php">
+                {% comment %} <form method="get" action="write_action.php">
                     <table style="padding-top:50px" align=center width=700 border=0 cellpadding=2>
                         <tr>
                             <td height=20 align=center bgcolor=#ccc>
@@ -46,7 +44,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td bgcolor = white>
+                            <td bgcolor=white>
                                 <table class="table2">
                                     <tr>
                                         <td>작성자</td>
@@ -75,208 +73,57 @@
                             </td>
                         </tr>
                     </table>
-                </form>
-</body>
+                </form> {% endcomment %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
 
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Recipient's username"
+                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <span class="input-group-text" id="basic-addon2">@example.com</span>
+                </div>
 
-{% comment %} <div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon1">@</span>
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-        aria-describedby="basic-addon1">
-</div>
+                <label for="basic-url" class="form-label">Your vanity URL</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
 
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
-        aria-describedby="basic-addon2">
-    <span class="input-group-text" id="basic-addon2">@example.com</span>
-</div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-text">.00</span>
+                </div>
 
-<label for="basic-url" class="form-label">Your vanity URL</label>
-<div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-</div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+                    <span class="input-group-text">@</span>
+                    <input type="text" class="form-control" placeholder="Server" aria-label="Server">
+                </div>
 
-<div class="input-group mb-3">
-    <span class="input-group-text">$</span>
-    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-    <span class="input-group-text">.00</span>
-</div>
+                <div class="input-group">
+                    <span class="input-group-text">With textarea</span>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                </div>
 
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username">
-    <span class="input-group-text">@</span>
-    <input type="text" class="form-control" placeholder="Server" aria-label="Server">
-</div>
-
-<div class="input-group">
-    <span class="input-group-text">With textarea</span>
-    <textarea class="form-control" aria-label="With textarea"></textarea>
-</div>
-<div class="input">
-    <input type="title" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력해주세요">
-</div>
-<div class="input-group mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-</div> {% endcomment %}
-
-<!-- 게시물 목록 리스트 -->
-<div class="container">
-    <!-- 목록 -->
-    {% comment %} <table class="table table-hover">
-        <thead>
-            <tr>
-                <td>번호</td>
-                <td>제목</td>
-                <td>작성자</td>
-                <td>작성일</td>
-                <td>조회</td>
-                <td>좋아요</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td><a href=#>아이참</a></td>
-                <td>민식</td>
-                <td>2021.06.30</td>
-                <td>10</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><a href=#>정말루????왜???</a></td>
-                <td>소희</td>
-                <td>2021.06.30</td>
-                <td>9</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><a href=#>자구싶다ㅠㅠ</a></td>
-                <td>지혁</td>
-                <td>2021.06.30</td>
-                <td>30</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td><a href=#>견딜수 있겔지롱..??</a></td>
-                <td>해인</td>
-                <td>2021.06.30</td>
-                <td>5</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td><a href=#>견딜수 있겔지롱..??</a></td>
-                <td>해인</td>
-                <td>2021.06.30</td>
-                <td>5</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td><a href=#>견딜수 있겔지롱..??</a></td>
-                <td>해인</td>
-                <td>2021.06.30</td>
-                <td>5</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td><a href=#>견딜수 있겔지롱..??</a></td>
-                <td>해인</td>
-                <td>2021.06.30</td>
-                <td>5</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td><a href=#>견딜수 있겔지롱..??</a></td>
-                <td>해인</td>
-                <td>2021.06.30</td>
-                <td>5</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td><a href=#>견딜수 있겔지롱..??</a></td>
-                <td>해인</td>
-                <td>2021.06.30</td>
-                <td>5</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td><a href=#>견딜수 있겔지롱..??</a></td>
-                <td>해인</td>
-                <td>2021.06.30</td>
-                <td>5</td>
-                <td>10</td>
-            </tr>
-        </tbody>
-    </table> {% endcomment %}
-
-    <hr />
-
-    <!-- 글쓰기 버튼 -->
-    {% comment %} <a class="btn btn-default pull-right">글쓰기</a> {% endcomment %}
-
-    <!-- 페이지번호 -->
-    {% comment %} <div class="text-center">
-        <ul class="pagination">
-            <li><a href=#>1</a></li>
-            <li><a href=#>2</a></li>
-            <li><a href=#>3</a></li>
-            <li><a href=#>5</a></li>
-            <li><a href=#>6</a></li>
-            <li><a href=#>7</a></li>
-            <li><a href=#>8</a></li>
-            <li><a href=#>9</a></li>
-            <li><a href=#>10</a></li>
-        </ul>
-    </div>
-    <hr> {% endcomment %}
-
-    <!-- 제목검색 -->
-    {% comment %} <form class='row g-3'>
-        <div class="col-sm">
-            <select class='form-select' aria-label="Default select example">
-                <option selected>제목+내용</option>
-                <option value="제목">제목</option>
-                <option value="내용">내용</option>
-                <option value="작성자">작성자</option>
-            </select>
-            <input type="password" class="form-control" id="inputPassword2" placeholder="검색어를 입력해주세요">
-            <button type="submit" class="btn btn-primary">검색</button>
+                <!-- 실제 페이지 내용 쓰기 END-->
         </div>
-        <!-- <div class="col-auto">
-                            <input type="password" class="form-control" id="inputPassword2" placeholder="검색어를 입력해주세요">
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">검색</button>
-                        </div> -->
-    </form> {% endcomment %}
-</div>
-<!-- 게시물 목록 리스트 끝 -->
+    </section>
+    <!-- MIDDLE-BOX END -->
 
-<!-- 실제 페이지 내용 쓰기 END-->
-</div>
-</div>
-</section>
-<!-- MIDDLE-BOX END -->
+    <!-- FOOTER-BOX START -->
+    {% include 'footer-box.html' %}
+    <!-- FOOTER-BOX END -->
 
-<!-- FOOTER-BOX START -->
-{% include 'footer-box.html' %}
-<!-- FOOTER-BOX END -->
-
-<!-- JS부분 -->
-{% include 'js-script.html' %}\
-{% comment %} 추가하고싶은 js추가하면됨. ->
-<script src="/static/js/main.js"></script> {% endcomment %}
-
+    <!-- JS부분 -->
+    {% include 'js-script.html' %}
+    {% comment %} 추가하고싶은 js추가하면됨. ->
+    <script src="/static/js/main.js"></script> {% endcomment %}
+    {% comment %} <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> {% endcomment %}
 
 </body>
 
