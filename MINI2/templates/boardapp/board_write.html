@@ -32,84 +32,60 @@
     <!-- MIDDLE-BOX START -->
     <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
         <div class="container">
-                <!-- 실제 페이지 내용 쓰기 START-->
-                <!-- <div style="height:600px; background-color: violet;">
-                    <h1>내용넣어요</h1>
-                </div>  -->
-                {% comment %} <form method="get" action="write_action.php">
-                    <table style="padding-top:50px" align=center width=700 border=0 cellpadding=2>
-                        <tr>
-                            <td height=20 align=center bgcolor=#ccc>
-                                <font color=white> 글쓰기</font>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td bgcolor=white>
-                                <table class="table2">
-                                    <tr>
-                                        <td>작성자</td>
-                                        <td><input type=text name=name size=20> </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>제목</td>
-                                        <td><input type=text name=title size=60></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>내용</td>
-                                        <td><textarea name=content cols=85 rows=15></textarea></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>비밀번호</td>
-                                        <td><input type=password name=pw size=10 maxlength=10></td>
-                                    </tr>
-                                </table>
-
-                                <center>
-                                    <input type="submit" value="작성">
-                                </center>
-                            </td>
-                        </tr>
-                    </table>
-                </form> {% endcomment %}
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                        aria-describedby="basic-addon1">
+            <!-- 개시판분류 -->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">분류</span>
                 </div>
+                <select class="custom-select" id="inputGroupSelect02">
+                    <!-- 게시판이름 자동으로 들어오게 해야함 -->
+                    <option selected>게시판</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
 
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Recipient's username"
-                        aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <span class="input-group-text" id="basic-addon2">@example.com</span>
+            <!-- 제목 -->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">제목</span>
                 </div>
+                <input type="text" class="form-control" placeholder="제목을 입력해주세요" aria-label="제목을 입력해주세요">
+            </div>
 
-                <label for="basic-url" class="form-label">Your vanity URL</label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+            <!-- 파일첨부 -->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">파일</span>
                 </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text">$</span>
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-text">.00</span>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile02">
+                    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">파일을
+                        첨부해주세요</label>
                 </div>
-
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username">
-                    <span class="input-group-text">@</span>
-                    <input type="text" class="form-control" placeholder="Server" aria-label="Server">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" id="button-addon2">업로드</button>
                 </div>
+            </div>
 
-                <div class="input-group">
-                    <span class="input-group-text">With textarea</span>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
+            <!-- 텍스트 -->
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">내용</span>
                 </div>
+                <!-- <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"> -->
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
 
-                <!-- 실제 페이지 내용 쓰기 END-->
+            <!-- 임시저장 / 검색 버튼 -->
+            <br><br>
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    <button type="submit" class="btn btn-secondary">임시저장</button>
+                    <button type="submit" class="btn btn-secondary">글쓰기</button>
+                </div>
+            </div>
         </div>
     </section>
     <!-- MIDDLE-BOX END -->
@@ -122,8 +98,13 @@
     {% include 'js-script.html' %}
     {% comment %} 추가하고싶은 js추가하면됨. ->
     <script src="/static/js/main.js"></script> {% endcomment %}
-    {% comment %} <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> {% endcomment %}
+    {% comment %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script> {% endcomment %}
 
 </body>
 

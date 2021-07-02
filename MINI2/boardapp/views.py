@@ -6,6 +6,3 @@ def freeboard(request):
 
 def writetext(request):
     return render(request, 'boardapp/board_write.html',{})
-
-def ddd(request):
-    return render(request, 'boardapp/ddd.html',{})
