@@ -1,0 +1,20 @@
+{% comment %} 검색한것과 같은 음식점 이름을 가진
+restaurant_detail 불러오기
+망고플레이트에도 없고 데이터 베이스에도 없으면 검색 없다고 표현 {% endcomment %}
+<style>
+.footer__newslatter form input::placeholder {
+	color: #D3D3D3;
+}
+
+.footer__newslatter form input {
+	color: #000000;
+</style>
+
+<div class="col-lg-4 col-md-8">
+    <div class="footer__newslatter">
+        <form action="restaurant/음식점id번호/">
+            <input type="text" placeholder="음식점 이름" autocomplete="on">
+            <button type="submit" class="site-btn">검색</button>
+        </form>
+    </div>
+</div>

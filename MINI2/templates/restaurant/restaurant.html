@@ -13,16 +13,17 @@
             <div class="row">
                 <!-- 실제 페이지 내용 쓰기 START-->
                 <!-- 검색창 시작 -->
-                <form action="address" method="get">
-                    <input type="search" name="q">
-                    <input type="submit" value='검색'>
-                </form>
+                {% include 'restaurant/restaurant_search.html' %} 
                 <!-- 검색창 끝-->
+                
+                <br>
+                <br>
+                <br>
                 <br>
                 <!-- 링크 이동 시작 -->
-                <a href="#Public">공무원추천</a>
-                <a href="#KFQ">KFQ연구원추천</a>
-                <a href=#Starscore>별점순</a>
+                <a href="#KFQ">KFQ연구원추천으로 이동</a>&nbsp;
+                <a href="#Public">공무원추천으로 이동</a>&nbsp;
+                <a href=#Starscore>별점순으로 이동</a>&nbsp;
                 <!-- 링크 이동 끝 -->
 
                 
@@ -32,15 +33,15 @@
         </div>
     </section>
 
-    <div id="Starscore">별점순</div>
+
     <!-- Testimonials Section Begin -->
-    <section class="testimonials spad">
+    <section class="testimonials spad"  id="KFQ">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="section-title">
                         <span>Testimonials</span>
-                        <h2>Happy clients</h2>
+                        <h2>KFQ연구원 추천</h2>
                     </div>
                 </div>
             </div>
@@ -184,15 +185,14 @@
     </section>
     <!-- Testimonials Section End -->
 
-    <div id="Public">공무원추천</div>
     <!-- Testimonials Section Begin -->
-    <section class="testimonials spad">
+    <section class="testimonials spad" id="Public">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="section-title">
                         <span>Testimonials</span>
-                        <h2>Happy clients</h2>
+                        <h2>공무원 추천</h2>
                     </div>
                 </div>
             </div>
@@ -336,15 +336,14 @@
     </section>
     <!-- Testimonials Section End -->
 
-    <div id="KFQ">KFQ연구원추천</div>
     <!-- Testimonials Section Begin -->
-    <section class="testimonials spad">
+    <section class="testimonials spad" id="Starscore">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="section-title">
                         <span>Testimonials</span>
-                        <h2>Happy clients</h2>
+                        <h2>별점순 추천</h2>
                     </div>
                 </div>
             </div>
