@@ -18,7 +18,7 @@
                     <div class="breadcrumb__text">
                         <h2>자유게시판</h2>
                         <div class="breadcrumb__links">
-                            <a href="mainpage/mainhome">Home</a>
+                            <a href="/mainpage/">Home</a>
                             <a href="#">게시판</a>
                             <span>자유게시판</span>
                         </div>
@@ -132,7 +132,7 @@
 
                 <!-- 글쓰기 버튼 -->
                 <br>
-                <button type="submit" class="btn btn-secondary pull-right">글쓰기</button>
+                <a href="{% url 'boardapp:writetext' %}"><button type="submit" class="btn btn-secondary pull-right">글쓰기</button></a>
                 <br><br>
 
                 <!-- 페이지번호 -->

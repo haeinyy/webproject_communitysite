@@ -1,7 +1,9 @@
 from django.urls import path, include
 from boardapp import views
 
+app_name = 'boardapp'
+
 urlpatterns = [
-    path('freeboard/', views.freeboard),
-    path('writetext/', views.writetext),
+    path('freeboard/', views.freeboard, name='freeboard'),
+    path('writetext/', views.writetext, name='writetext'),
 ]

@@ -17,9 +17,9 @@
                     <div class="breadcrumb__text">
                         <h2>글쓰기</h2>
                         <div class="breadcrumb__links">
-                            <a href="mainpage/mainhome">Home</a>
+                            <a href="/mainpage/">Home</a>
                             <a href="#">게시판</a>
-                            <a href="#">자유게시판</a>
+                            <a href="{% url 'boardapp:freeboard' %}">자유게시판</a>
                             <span>글쓰기</span>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
             <div class="row justify-content-md-center">
                 <div class="col col-lg-2">
                     <button type="submit" class="btn btn-secondary">임시저장</button>
-                    <button type="submit" class="btn btn-secondary">글쓰기</button>
+                    <button type="submit" class="btn btn-secondary">등록</button>
                 </div>
             </div>
         </div>
