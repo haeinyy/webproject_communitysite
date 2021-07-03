@@ -1,65 +1,88 @@
-{% include 'mainpage/load-box.html' %}
+{% include 'load-box.html' %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="/static/css/restaurant.css">
 </head>
 
 <body>
     <!-- HEADER-BOX START -->
-    {% include 'mainpage/header-box.html' %}
+    {% include 'header-box.html' %}
     <!-- HEADER-BOX END -->
 
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/dogie.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>맛집 게시판</h2>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <span>News</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    
     <!-- MIDDLE-BOX START -->
-    <section class="breadcrumb-option spad set-bg" data-setbg="static/img/breadcrumb-bg.jpg">
+    <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
         <div class="container">
             <div class="row">
                 <!-- 실제 페이지 내용 쓰기 START-->
+
+             <!-- 검색창 시작 -->
+                {% include 'restaurant/restaurant_search.html' %} 
+                <!-- 검색창 끝-->
+
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-11 col-md-10 col-centered">
 
-                            <div id="carousel1" class="carousel slide" data-ride="carousel" data-type="multi"
-                                data-interval="2500">
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <div class="carousel-col">
-                                            <div class="block red img-responsive"></div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="carousel-col">
-                                            <div class="block green img-responsive"></div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="carousel-col">
-                                            <div class="block blue img-responsive"></div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="carousel-col">
-                                            <div class="block yellow img-responsive"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Controls -->
-                                <div class="left carousel-control">
-                                    <a href="#carousel1" role="button" data-slide="prev">
-                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </div>
-                                <div class="right carousel-control">
-                                    <a href="#carousel1" role="button" data-slide="next">
-                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
+                        <div id="carousel1" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="2500">
+                            <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="carousel-col">
+                                <img src=/static/img/dogie.jpg class="block">
+                                {% comment %} <div class="block red img-responsive"></div> {% endcomment %}
                                 </div>
                             </div>
-
+                            <div class="item">
+                                <div class="carousel-col">
+                                <div class="block green img-responsive"></div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="carousel-col">
+                                <img src=/static/img/dogie.jpg class="block">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="carousel-col">
+                                <div class="block yellow img-responsive"></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+
+        <!-- Controls -->
+        <div class="left carousel-control">
+          <a href="#carousel1" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </div>
+        <div class="right carousel-control">
+          <a href="#carousel1" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
                 {% comment %} ########################################## {% endcomment %}
@@ -84,11 +107,11 @@
     <!-- MIDDLE-BOX END -->
 
     <!-- FOOTER-BOX START -->
-    {% include 'mainpage/footer-box.html' %}
+    {% include 'footer-box.html' %}
     <!-- FOOTER-BOX END -->
 
     <!-- JS부분 -->
-    {% include 'mainpage/js-script.html' %}
+    {% include 'js-script.html' %}
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
     <script defer src='/static/js/restaurant.js'></script>
