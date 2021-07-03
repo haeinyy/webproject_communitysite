@@ -1,0 +1,21 @@
+{% include 'mainpage/load-box.html' %}
+</head>
+
+<body>
+    <!-- HEADER-BOX START -->
+    {% include 'mainpage/header-box.html' %}
+    <!-- HEADER-BOX END -->
+
+    {% block content %}
+
+    <!-- MIDDLE-BOX -->
+
+    {% endblock content %}
+
+     <!-- FOOTER-BOX START -->
+    {% include 'mainpage/footer-box.html' %} 
+     <!-- FOOTER-BOX END -->
+</body>
+    <!-- JS부분 -->
+    {% include 'mainpage/js-script.html' %}
+</html>

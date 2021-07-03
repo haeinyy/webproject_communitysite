@@ -4,16 +4,17 @@
             <div class="row">
                 <div class="col-lg-8">
                     <ul class="header__top__left">
-                        <li><i class="fa fa-phone"></i> 1-677-124-44227</li>
-                        <li><i class="fa fa-map-marker"></i> Los Angeles Gournadi, 1230 Bariasl</li>
-                        <li><i class="fa fa-clock-o"></i> Mon to Sat 9:00am to 18:00pm</li>
+                        {% comment %} <li><i class="fa fa-phone"></i>1234-5678</li> {% endcomment %}
+                        <li><i class="fa fa-map-marker"></i>Seoul, Woorim Lions Valley, Building a, 6th floor A-6</li>
+                        {% comment %} <li><i class="fa fa-clock-o"></i>Mon to Sat 9:00am to 18:00pm</li> {% endcomment %}
                     </ul>
                 </div>
                 <div class="col-lg-4">
                     <div class="header__top__right">
-                        <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
-                        <a href="#"><i class="fas fa-sign-in-alt"></i></a> 
-                        <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+                        <a href="https://github.com/haeinyy/webproject_communitysite"><i class="fa fa-dribbble"></i></a>
+                        <a href="{% url 'member:login' %}">로그인<i class="fas fa-sign-in-alt"></i></a>
+                        <a href="{% url 'member:register' %}">회원가입<i class="fas fa-sign-up-alt"></i></a>
+                        <!-- <a href="{% url 'member:logout' %}">로그아웃<i class="fas fa-sign-out-alt"></i></a> -->
                     </div>
                 </div>
             </div>
@@ -23,8 +24,8 @@
         <div class="row">
             <div class="col-lg-2">
                 <div class="header__logo">
-                    <a href="/MINI2/templates/mainpage/mainhome.html">
-                        Kfq
+                    <a href="{% url 'mainhome' %}">
+                        KFQ 로고
                     </a>
                 </div>
             </div>
@@ -32,18 +33,27 @@
                 <div class="header__menu__option">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <!-- <li><a href="./about.html">게시판</a></li> -->
-                            <li><a href="#">게시판</a>
+                            <li><a href="{% url 'calcapp:calcpage_user' %}">마이페이지</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">자유게시판</a></li>
+                                    <li><a href="{% url 'calcapp:calcpage_user' %}">내정보</a></li>
+                                    <li><a href="{% url 'calcapp:calcpage_info' %}">교육정보</a></li>
+                                    <li><a href="{% url 'calcapp:calcpage_result' %}">계산기</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'boardapp:freeboard' %}">게시판</a>
+                                <ul class="dropdown">
+                                    <li><a href="{% url 'boardapp:freeboard' %}">자유게시판</a></li>
                                     <li><a href="#">동아리/스터디</a></li>
                                     <li><a href="#">취업/진로</a></li>
                                     <li><a href="#">물물교환/무료나눔</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./services.html">맛집</a></li>
-                            <li><a href="#">계산기</a></li>
+                            <li><a href="{% url 'restaurant:rest' %}">가디맛집</a>
+                                <ul class="dropdown">
+                                    <li><a href="{% url 'restaurant:rest' %}">추천별</a></li>
+                                    <li><a href="{% url 'restaurant:rest_list' %}">리스트</a></li>
+                                </ul>
+                            </li>
                             <li><a href="#">정보마당</a>
                                 <ul class="dropdown">
                                     <li><a href="#">Q&A</a></li>

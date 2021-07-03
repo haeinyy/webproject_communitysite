@@ -1,0 +1,56 @@
+{% extends 'mainpage/mainpage.html' %}
+{% block content %}
+
+{% include 'calcapp/calcpage_common.html' %}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>마이페이지</h2>
+                    <div class="breadcrumb__links">
+                        <a href="{% url 'mainhome' %}">Home</a>
+                        <a href="{% url 'calcapp:calcpage_user' %}">내정보</a>
+                        <a href="{% url 'calcapp:calcpage_info' %}">교육정보</a>
+                        <span>계산기</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Pricing Section Begin -->
+<section class="pricing spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="pricing__item">
+                    <div class="pricing__item__title">
+                        <p>🧮</p>
+                        <h3>교육 수당 계산기<span>(출석일수 기준)</span></h3>
+                    </div>
+                    <ul>
+                        <li>
+                            <form action="calcpage" method="post">
+
+                                {% csrf_token %}
+
+                                하루 4시간 이상 20일 기준<br>
+                                출석한 일 수를 입력하세요.<br><br>
+                                <input type="text" name="num1" placeholder="ex) 19">
+                                <input type="submit">
+                            </form>
+                        </li>
+                    </ul>
+                    <!-- <a href="#" class="primary-btn">Book now</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Pricing Section End -->
+{% endblock %}
