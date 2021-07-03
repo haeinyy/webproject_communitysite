@@ -11,6 +11,6 @@ class BoardAllContentList(models.Model):
     like = models.IntegerField()
     board_kind = models.CharField(max_length=20)
 
-# 모든 게시판 댓굴 db
+# 모든 게시판 댓글 db
 # class Board_comment(models.Model):
 #     comment_content = models.ForeignKey(re)
