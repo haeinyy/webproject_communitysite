@@ -8,7 +8,7 @@ app_name = 'restaurant'
 urlpatterns = [
     path('', views.restaurant),
     path('restaurant_list/', views.restaurant_list),
-    path('restaurant_detail/', views.restaurant_detail, name = 'detail'),
-        #'<str:rest_name>/',
-    path('restaurant_search/', views.restaurant_search),
+    path('restaurant_detail/', views.restaurant_detail),
+        #'<str:rest_url>/',
+    # path('restaurant_search/', views.restaurant_search),
 ]

@@ -1,11 +1,11 @@
-{% include 'load-box.html' %}
+{% include 'mainpage/load-box.html' %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/restaurant_list.css">
 </head>
 
 <body>
     <!-- HEADER-BOX START -->
-    {% include 'header-box.html' %} 
+    {% include 'mainpage/header-box.html' %} 
     <!-- HEADER-BOX END -->
 
     <!-- Breadcrumb Section Begin -->
@@ -42,6 +42,25 @@
     <section class="blog spad">
         <div class="container">
             <div class="row">
+
+                {% for rest in rest_list %}
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="blog__item">
+                            <div class="blog__item__pic">
+                                <img src="{{rest.rest_img1}}" alt="">
+                            </div>
+                            <div class="blog__item__text">
+                                <h5><a href="#">{{rest.rest_name}}</a></h5>
+                                <ul>
+                                    <li><img src="img/blog/blog-author.jpg" alt="사진"> 종류</li>
+                                    <li>별점</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>        
+                {% endfor %}
+
+
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
@@ -184,11 +203,11 @@
     <!-- MIDDLE-BOX END -->
     
      <!-- FOOTER-BOX START -->
-    {% include 'footer-box.html' %} 
+    {% include 'mainpage/footer-box.html' %} 
      <!-- FOOTER-BOX END -->
 
     <!-- JS부분 -->
-    {% include 'js-script.html' %}
+    {% include 'mainpage/js-script.html' %}
     {% comment %} 추가하고싶은 js추가하면됨. -> <script src="/static/js/main.js"></script> {% endcomment %}
     
 

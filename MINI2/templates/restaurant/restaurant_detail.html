@@ -1,11 +1,11 @@
-{% include 'load-box.html' %}
+{% include 'mainpage/load-box.html' %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="/static/css/restaurant.css">
 </head>
 
 <body>
     <!-- HEADER-BOX START -->
-    {% include 'header-box.html' %}
+    {% include 'mainpage/header-box.html' %}
     <!-- HEADER-BOX END -->
 
     <!-- Breadcrumb Section Begin -->
@@ -44,23 +44,26 @@
                             <div class="carousel-inner">
                             <div class="item active">
                                 <div class="carousel-col">
-                                <img src={{rest.rest_url}} class="block">
+                                <img src="{{rest.rest_img1}}" class="block">
                                 {% comment %} <div class="block red img-responsive"></div> {% endcomment %}
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="carousel-col">
-                                <div class="block green img-responsive"></div>
+                                <img src="{{rest.rest_img2}}" class="block">
+                                {% comment %} <div class="block green img-responsive"></div> {% endcomment %}
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="carousel-col">
-                                <img src=/static/img/dogie.jpg class="block">
+                                <img src="{{rest.rest_img3}}" class="block">
+                                {% comment %} <img src=/static/img/dogie.jpg class="block"> {% endcomment %}
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="carousel-col">
-                                <div class="block yellow img-responsive"></div>
+                                <img src="{{rest.rest_img4}}" class="block">
+                                {% comment %} <div class="block yellow img-responsive"></div> {% endcomment %}
                                 </div>
                             </div>
                         </div>
@@ -87,9 +90,9 @@
 
                 {% comment %} ########################################## {% endcomment %}
 
-                <div>{{ rest.rest_name }}</div>
+                <h1>가게이름 : {{ rest.rest_name }}</h1>
                 <br>
-                <div>{{ rest.rest_score }}</div>
+                <h1>{{ rest.rest_score }}</h1>
                 <br>
                 <div>{{ rest.rest_seenum }}</div>
                 <br>
@@ -114,11 +117,11 @@
     <!-- MIDDLE-BOX END -->
 
     <!-- FOOTER-BOX START -->
-    {% include 'footer-box.html' %}
+    {% include 'mainpage/footer-box.html' %}
     <!-- FOOTER-BOX END -->
 
     <!-- JS부분 -->
-    {% include 'js-script.html' %}
+    {% include 'mainpage/js-script.html' %}
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
     <script defer src='/static/js/restaurant.js'></script>

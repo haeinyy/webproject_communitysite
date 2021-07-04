@@ -7,7 +7,10 @@ class Rest(models.Model):
     rest_address = models.TextField(default='') # 주소
     rest_kind = models.CharField(max_length=100, default='') # 음식종류
     rest_seenum = models.IntegerField(default=1) #조회수
-    rest_img = models.URLField(default=None) #망고플레이트 첫번째 사진 주소
+    rest_img1 = models.CharField(max_length=200, default=None) #망고플레이트 첫번째 사진 주소
+    rest_img2 = models.CharField(max_length=200, default=None) #망고플레이트 두번째 사진 주소
+    rest_img3 = models.CharField(max_length=200, default=None) #망고플레이트 세번째 사진 주소
+    rest_img4 = models.CharField(max_length=200, default=None) #망고플레이트 네번째 사진 주소
     rest_url = models.URLField() #망고플레이트 가게주소
     rest_rmd = models.CharField(max_length=100, default='') #추천명 : 공무원(offi)/연구원(kfq)
     rest_update = models.DateTimeField() #등록 날짜

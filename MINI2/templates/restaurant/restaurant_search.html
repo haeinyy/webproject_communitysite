@@ -13,7 +13,7 @@ restaurant_detail 불러오기
 
 <div class="col-lg-4 col-md-8">
     <div class="footer__newslatter">
-        <form action="/restaurant/restaurant_search/", method="POST">
+        <form action="/restaurant/restaurant_detail/", method="POST">
         {% csrf_token %}
             <input type="text" placeholder="음식점 이름" autocomplete="on" name='search'>
             <button type="submit" class="site-btn">검색</button>
