@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
- # pk = user_phone
+# pk = user_phone
 class Member(models.Model):
     user_name = models.CharField(max_length=15,
                                 verbose_name="사용자이름")

@@ -1,8 +1,6 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.utils import timezone
-
-
 from django.contrib import messages
 
 from .models import Member
@@ -13,7 +11,7 @@ from .models import Member
 # Create your views here.
 def register(request):
     if request.method == 'GET':
-        return render(request, 'member/reg  ister.html')
+        return render(request, 'member/register.html')
      #"POST"
     else: 
         # HTML로부터 받은 정보 확인
@@ -67,7 +65,6 @@ def login(request):
         else:
             # 1. DB와 확인해서 로그인 -> db에 아이디가 있다면 로그인 성공
 
-            
             # 세션에 로그인 관련 정보 저장
             request.session['user_phone'] = user_phone
             
@@ -81,4 +78,5 @@ def logout(request):
     if request.session['user_phone']:
         del request.session['user_phone']
         return redirect('mainpage:mainhome')
+
     

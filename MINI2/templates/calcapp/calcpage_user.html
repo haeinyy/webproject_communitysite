@@ -1,0 +1,104 @@
+{% extends 'mainpage/mainpage.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'calcapp/calcpage_common.html' %}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>마이페이지</h2>
+                    <div class="breadcrumb__links">
+                        <a href="{% url 'mainhome' %}">Home</a>
+                        <a href="{% url 'calcapp:calcpage_info' %}">교육정보</a>
+                        <a href="{% url 'calcapp:calcpage_result' %}">계산기</a>
+                        <span>내정보</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- User Section Begin -->
+<section class="doctor spad">
+    <div class="container">
+        <div class="doctor__item">
+            <div class="row">
+                <div class="col-lg-6 order-lg-1">
+                    <div class="doctor__item__pic">
+                        <img src="{% static 'img/doctor/doctor-1.jpg' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-2">
+                    <div class="doctor__item__text">
+                        <span>Welcome,</span>
+                        <h2>{{user}}</h2>
+                        <p>
+                            수고했어 오늘도~
+                            <br>
+                            {% if age > 27 %}
+                            {{user}} older than 27
+                            {% elif age == 27 %}
+                            {{user}} is 27
+                            {% else %}
+                            {{user}} is UNDER 27
+                            {% endif %}
+                        </p>
+                        <ul>
+                            <li><i class="fa fa-check-circle"></i> 출석체크</li>
+                            <li><i class="fa fa-check-circle"></i> 교육일정</li>
+                            <li><i class="fa fa-check-circle"></i> 자격증일정</li>
+                            <li><i class="fa fa-check-circle"></i> 퇴실체크</li>
+                        </ul>
+                        <div class="doctor__item__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Doctor Section End -->
+
+ <!-- Contact Section Begin -->
+ <section class="contact spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="contact__widget">
+                    <div class="contact__widget__icon">
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <div class="contact__widget__text">
+                        <h5>알림</h5>
+                        <p>공지사항 확인하세요.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="contact__widget">
+                    <div class="contact__widget__icon">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="contact__widget__text">
+                        <h5>채팅</h5>
+                        <p>채팅을 시작하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->
+
+{% endblock content %}

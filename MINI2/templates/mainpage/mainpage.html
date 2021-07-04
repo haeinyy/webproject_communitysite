@@ -1,0 +1,35 @@
+{% include 'mainpage/load-box.html' %}
+</head>
+
+<body>
+    <!-- HEADER-BOX START -->
+    {% include 'mainpage/header-box.html' %}
+    <!-- HEADER-BOX END -->
+
+    {% block content %}
+
+    <!-- MIDDLE-BOX -->
+
+    {% endblock content %}
+
+     <!-- FOOTER-BOX START -->
+    {% include 'mainpage/footer-box.html' %} 
+     <!-- FOOTER-BOX END -->
+</body>
+    <!-- JS부분 -->
+    {% include 'mainpage/js-script.html' %}
+    <script>
+        // header-box기능 - 로그인, 회원가입, 로그아웃 버튼을 숨기고 보이는 부분
+        var u_phone = '<%=(String)session.getAttribute("user_phone")%>';
+        alert(u_phone)
+        $("#header-box-login__btn").show();
+        $("#header-box-login_register__btn").show();
+        $("#header-box-logout__btn").hide();
+        if (u_phone != "null"){
+            $("#header-box-login_login__btn").hide();
+            $("#header-box-login_register__btn").hide();
+            $("#header-box-logout__btn").show();
+        }
+        
+    </script>
+</html>
