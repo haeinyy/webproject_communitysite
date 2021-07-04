@@ -18,3 +18,15 @@ class Member(models.Model):
     # 별도로 테이블명을 지정하고 싶을 때
     class Meta:
         db_table = 'member_member' # SQLite에 보이는 테이블이름
+
+
+### 추가된부분 ### 
+# 프로필 추가
+class Profile(models.Model):
+    user_name = models.OneToOneField(Member, on_delete=models.CASCADE)
+    # User - Profile을 1:1로 연결 ;; phone으로 해야되나
+    description = models.TextField(blank=True)
+    nickname = models.CharField(max_length=40, blank=True)
+    image = models.ImageField(blank=True) #,upload_to="profile/%Y/%m" 
+    # imagefield 이용하려면 pip install pillow 패키지 설치
+    # blank=True 값 채워넣지 않아도 되는 속성

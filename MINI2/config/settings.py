@@ -129,5 +129,7 @@ STATICFILES_DIRS = [
 ]
 
 # MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# media file을 저장하기 위해서는 이 파일이 어떤 url을 타고 들어와 어디에 모일지 지정해줘야함
+# 이를 settings.py와 urls.py에서 설정
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
