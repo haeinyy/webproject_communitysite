@@ -49,6 +49,7 @@ def comment_write(request, pk):
     content.content.create(comment_content = request.POST.get('comment'), comment_date = timezone.now())
     return redirect('/boardapp/'+str(content.pk))
 
+
 # 게시글 좋아요
 def like_post(request, pk):
     content = get_object_or_404(BoardAllContentList, pk = pk)
@@ -56,3 +57,27 @@ def like_post(request, pk):
         content.like.remove(request.user)
     else:
         content.like.add(request.user)
+
+
+#### 추가 ####
+from django.views.generic.base import View
+from django.http import HttpResponseForbidden
+from urllib.parse import urlparse
+
+class Like(View):
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        else:
+            if 'id' in kwargs:
+                board_id = kwargs['id']
+                board = BoardAllContentList.objects.get(pk=id)
+                user_id = request.user
+                if user_id in board.like.remove(user_id):
+                    board.like.remove(user_id)
+                else:
+                    board.like.add(user_id)
+
+            referer_url = request.META.get('HTTP_REFERER')
+            path = urlparse(referer_url).path
+            return HttpResponseRedirect(path)

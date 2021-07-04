@@ -1,8 +1,9 @@
 from django.db import models
 from django.db.models.base import Model
 from django.db.models.deletion import CASCADE
-
-# Create your models here.
+#### 추가 ####
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 #  모든 게신판 게시물 db
 class BoardAllContentList(models.Model):
@@ -13,6 +14,8 @@ class BoardAllContentList(models.Model):
     seenum = models.IntegerField(null=True)
     like = models.IntegerField(null=True)
     board_kind = models.CharField(max_length=20)
+    #### 추가 ####
+    likes = models.ManyToManyField(User, related_name="like_post", blank=True)
 
     def __str__(self):
         return self.title
