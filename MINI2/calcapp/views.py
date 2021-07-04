@@ -9,16 +9,17 @@ def index(request, pk):
     # for attendance in attendances:
     #     str += "<p> name: {} attend: {}".format(attendance.name, attendance.attend)
     # return HttpResponse(str)
-    a = '0219'
+    
     attendancesList = AttendHistroy.objects.all()
+    # a = '0219'
     # memberList = Member.objects.all()
-    attenda = []
-    for i in attendancesList:
-        if i.user_phone == a:
-            attenda.append(i)
+    # attenda = []
+    # for i in attendancesList:
+    #     if i.user_phone == a:
+    #         attenda.append(i)
 
     context = {
-        'attnedances': attenda
+        'attnedances': attendancesList
     }
     return render(request, 'calcapp/calcpage_info.html', context)
     # return render(request, 'calcapp/index.html', context)
