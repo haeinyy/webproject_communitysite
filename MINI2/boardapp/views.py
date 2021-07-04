@@ -43,9 +43,16 @@ def content_view(request, pk):
 
 # 게시글 댓글
 def comment_write(request, pk):
-    if request.method == 'POST':
-        content = get_object_or_404(BoardAllContentList, pk = pk)
-        comment_content = request.POST.get('comment')
+    # if request.method == 'POST':
+    content = get_object_or_404(BoardAllContentList, pk = pk)
 
-    BoardAllContentList.Board_comment_set.create(comment_content = comment_content, comment_date = timezone.now())
-    return redirect('/boardapp/' + str(content.pk), content_pk = content.pk)
+    content.content.create(comment_content = request.POST.get('comment'), comment_date = timezone.now())
+    return redirect('/boardapp/'+str(content.pk))
+
+# 게시글 좋아요
+def like_post(request, pk):
+    content = get_object_or_404(BoardAllContentList, pk = pk)
+    if request.user in content.like_users.all():
+        content.like.remove(request.user)
+    else:
+        content.like.add(request.user)
