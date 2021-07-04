@@ -1,6 +1,6 @@
-from django.http.response import HttpResponse
-from django.shortcuts import redirect, render
-from .models import BoardAllContentList, Image
+from django.http.response import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
+from .models import BoardAllContentList, Board_comment, Image
 from django.utils import timezone
 
 # 자유게시판 메인 목록
@@ -11,11 +11,10 @@ def freeboard(request):
 
 # 글쓰기 양식
 def writetext(request):
-    
+    content = BoardAllContentList()
     # content_list = BoardAllContentList.objects.all()
 
-    if(request.method == 'POST'): # 내용 입력후, 전달 할때
-        content = BoardAllContentList()
+    if request.method == 'POST': # 내용 입력후, 전달 할때
         content.title = request.POST['title']
         content.text = request.POST['text']
         content.date = timezone.datetime.now()
@@ -41,3 +40,12 @@ def writetext(request):
 def content_view(request, pk):
     content = BoardAllContentList.objects.get(pk=pk)
     return render(request, 'boardapp/content_view.html', {'content':content})
+
+# 게시글 댓글
+def comment_write(request, pk):
+    if request.method == 'POST':
+        content = get_object_or_404(BoardAllContentList, pk = pk)
+        comment_content = request.POST.get('comment')
+
+    BoardAllContentList.Board_comment_set.create(comment_content = comment_content, comment_date = timezone.now())
+    return redirect('/boardapp/' + str(content.pk), content_pk = content.pk)c

@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.base import Model
+from django.db.models.deletion import CASCADE
 
 # Create your models here.
 
@@ -24,5 +25,12 @@ class Image(models.Model):
 
 
 # 모든 게시판 댓글 db
-# class Board_comment(models.Model):
-#     comment_content = models.ForeignKey(re)
+class Board_comment(models.Model):
+    content = models.ForeignKey(BoardAllContentList, on_delete=models.CASCADE, null=True, related_name='content')
+    comment_date = models.DateTimeField(auto_now_add=True)
+    # comment_writer = models.ForeignKey(,on_delete=models.CASCADE, null=True)
+    comment_content = models.TextField(null=True)
+    # comment_board_kind = models.CharField(max_length=20)
+
+    # class Meta:
+    #     orerding  = ['-id']
