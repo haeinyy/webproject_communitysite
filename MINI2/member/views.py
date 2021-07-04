@@ -67,11 +67,8 @@ def login(request):
 
             # 세션에 로그인 관련 정보 저장
             request.session['user_phone'] = user_phone
-            
             a = request.session['user_phone']
-            # -------del request.session['user_id'] 로그아웃-------
-            # code
-            # -----------------------------------
+            
             return redirect('mainpage:mainhome')
 
 def logout(request):
