@@ -14,11 +14,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>가디맛집</h2>
+                        <h2>맛집 게시판</h2>
                         <div class="breadcrumb__links">
                             <a href="{% url 'mainpage:mainhome' %}">Home</a>
-                            <a href="{% url 'restaurant:rest' %}">추천별</a>
-                            <span>리스트</span>
+                            <span>News</span>
                         </div>
                     </div>
                 </div>
@@ -28,41 +27,49 @@
     <!-- Breadcrumb Section End -->
 
     <!-- MIDDLE-BOX START -->
-    <section class="breadcrumb-option spad set-bg" data-setbg="static/img/breadcrumb-bg.jpg">
+    <section class="breadcrumb-option spad set-bg">
         <div class="container">
             <div class="row">
                 <!-- 실제 페이지 내용 쓰기 START-->
-                <!-- Breadcrumb Section Begin -->
-                <section class="breadcrumb-option spad set-bg" data-setbg="static/img/breadcrumb-bg.jpg">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <div class="breadcrumb__text">
-                                    <h2>News</h2>
-                                    <div class="breadcrumb__links">
-                                        <a href="{% url 'mainpage:mainhome' %}">Home</a>
-                                        <span>News</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Breadcrumb Section End -->
+                <!-- 검색창 시작 -->
+                {% include 'restaurant/restaurant_search.html' %}
+                <!-- 검색창 끝-->
+                <br>
+                <br>
+
 
                 <!-- Blog Section Begin -->
                 <section class="blog spad">
                     <div class="container">
                         <div class="row">
+
+                            {% for rest in rest_list %}
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="static/img/blog/blog-1.jpg" alt="">
+                                        <img src="{{rest.rest_img1}}" alt="">
+                                    </div>
+                                    <div class="blog__item__text">
+                                        <h5><a href="#">{{rest.rest_name}}</a></h5>
+                                        <ul>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt="사진"> 종류</li>
+                                            <li>별점</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="blog__item">
+                                    <div class="blog__item__pic">
+                                        <img src="/static/img/blog/blog-1.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <h5><a href="#">가게1</a></h5>
                                         <ul>
-                                            <li><img src="static/img/blog/blog-author.jpg" alt="사진"> 종류</li>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt="사진"> 종류</li>
                                             <li>별점</li>
                                         </ul>
                                     </div>
@@ -71,12 +78,12 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="static/img/blog/blog-2.jpg" alt="">
+                                        <img src="/static/img/blog/blog-2.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <h5><a href="#">가게2</a></h5>
                                         <ul>
-                                            <li><img src="static/img/blog/blog-author.jpg" alt=""> 한식</li>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt=""> 한식</li>
                                             <li>별점</li>
                                         </ul>
                                     </div>
@@ -85,12 +92,12 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="static/img/blog/blog-3.jpg" alt="">
+                                        <img src="/static/img/blog/blog-3.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <h5><a href="#">가게3</a></h5>
                                         <ul>
-                                            <li><img src="static/img/blog/blog-author.jpg" alt=""> 한식</li>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt=""> 한식</li>
                                             <li>별점</li>
                                         </ul>
                                     </div>
@@ -99,12 +106,12 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="static/img/blog/blog-4.jpg" alt="">
+                                        <img src="/static/img/blog/blog-4.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <h5><a href="#">가게4</a></h5>
                                         <ul>
-                                            <li><img src="static/img/blog/blog-author.jpg" alt=""> 분식</li>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt=""> 분식</li>
                                             <li>별점</li>
                                         </ul>
                                     </div>
@@ -113,12 +120,12 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="static/img/blog/blog-5.jpg" alt="">
+                                        <img src="/static/img/blog/blog-5.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <h5><a href="#">가게5</a></h5>
                                         <ul>
-                                            <li><img src="static/img/blog/blog-author.jpg" alt=""> 양식</li>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt=""> 양식</li>
                                             <li>별점</li>
                                         </ul>
                                     </div>
@@ -127,13 +134,13 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="static/img/blog/blog-6.jpg" alt="">
+                                        <img src="/static/img/blog/blog-6.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <h5><a href="#">8 Ways to Save Your Skin if You Exercise Outside This Winter</a>
                                         </h5>
                                         <ul>
-                                            <li><img src="static/img/blog/blog-author.jpg" alt=""> John Doe</li>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt=""> John Doe</li>
                                             <li>Dec 06, 2019</li>
                                         </ul>
                                     </div>
@@ -142,12 +149,12 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="static/img/blog/blog-7.jpg" alt="">
+                                        <img src="/static/img/blog/blog-7.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <h5><a href="#">Here’s how you can get a natural glow this party season</a></h5>
                                         <ul>
-                                            <li><img src="static/img/blog/blog-author.jpg" alt=""> John Doe</li>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt=""> John Doe</li>
                                             <li>Dec 06, 2019</li>
                                         </ul>
                                     </div>
@@ -156,12 +163,12 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="static/img/blog/blog-8.jpg" alt="">
+                                        <img src="/static/img/blog/blog-8.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <h5><a href="#">Get better skin with these top 10 tips for skin care</a></h5>
                                         <ul>
-                                            <li><img src="static/img/blog/blog-author.jpg" alt=""> John Doe</li>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt=""> John Doe</li>
                                             <li>Dec 06, 2019</li>
                                         </ul>
                                     </div>
@@ -170,13 +177,13 @@
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="static/img/blog/blog-9.jpg" alt="">
+                                        <img src="/static/img/blog/blog-9.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <h5><a href="#">8 Ways to Save Your Skin if You Exercise Outside This Winter</a>
                                         </h5>
                                         <ul>
-                                            <li><img src="static/img/blog/blog-author.jpg" alt=""> John Doe</li>
+                                            <li><img src="/static/img/blog/blog-author.jpg" alt=""> John Doe</li>
                                             <li>Dec 06, 2019</li>
                                         </ul>
                                     </div>
