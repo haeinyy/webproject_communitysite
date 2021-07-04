@@ -124,3 +124,7 @@ STATICFILES_DIRS = [
 #BASE_DIR / 'static'           #django ver 3
     os.path.join(BASE_DIR, 'static')#django ver 2
 ]
+
+# MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
