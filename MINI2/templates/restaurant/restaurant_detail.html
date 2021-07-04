@@ -44,7 +44,7 @@
                             <div class="carousel-inner">
                             <div class="item active">
                                 <div class="carousel-col">
-                                <img src=/static/img/dogie.jpg class="block">
+                                <img src={{rest.rest_url}} class="block">
                                 {% comment %} <div class="block red img-responsive"></div> {% endcomment %}
                                 </div>
                             </div>
@@ -87,17 +87,24 @@
 
                 {% comment %} ########################################## {% endcomment %}
 
-                <div>가게명</div>
-                <div>평점</div>
-                <div>조회수, 리뷰수 </div>
+                <div>{{ rest.rest_name }}</div>
+                <br>
+                <div>{{ rest.rest_score }}</div>
+                <br>
+                <div>{{ rest.rest_seenum }}</div>
+                <br>
                 <div>가게지도 API</div>
-                <div>가게주소</div>
-
-                <div> 망고플레이트 가산디지털단지역에서 가게 정보가져와서 데이터베이스에 입력
-                    가게명 평점 주소 전화번호 음식종류 가격대 </div>
-
+                <br>
+                <div>{{rest.rest_address }}</div>
+                <br>
+                <div>업데이트날짜 {{ rest.rest_update }}</div>
+                <br>
+                <div>{{ rest.rest_kind }}</div>
+                <br>
+                <div>{{ rest.rmd }}</div>
+                <br>
                 <div>지도 api pin 찍어줄것</div>
-
+                <br>
                 <div>리뷰란</div>
 
                 <!-- 실제 페이지 내용 쓰기 END-->
