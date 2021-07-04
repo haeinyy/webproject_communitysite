@@ -1,0 +1,205 @@
+{% extends 'mainpage/mainpage.html' %}
+{% block content %}
+
+<!-- css/js -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+{% include 'calcapp/calcpage_common.html' %}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>마이페이지</h2>
+                    <div class="breadcrumb__links">
+                        <a href="{% url 'mainhome' %}">Home</a>
+                        <a href="{% url 'calcapp:calcpage_user' %}">내정보</a>
+                        <a href="{% url 'calcapp:calcpage_result' %}">계산기</a>
+                        <span>교육정보</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Pricing Section Begin -->
+<section class="pricing spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="pricing__item">
+                    <div class="pricing__item__title">
+                        <p>🎓</p>
+                        <h3>수료현황</h3>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <ul>
+                        <li>
+                            <span>
+                                지금 까지 45/960시간 완료 했습니다.<br>
+                            </span>
+                        </li>
+                        <li>
+                            <span>현재 수료 '불가' or '가능'합니다.</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="primary-btn">상세현황</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="pricing__item">
+                    <div class="pricing__item__title">
+                        <p>👑</p>
+                        <h3>수당현황
+                        </h3>
+                    </div>
+                    <ul>
+                        <li>
+                            <span>내가 받을 수 있는 교육수당은?</span>
+                        </li>
+                        <li>
+                            <span>'3'회차, 오늘 기준 '45,000'원</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="primary-btn">지난달 내역</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="pricing__item">
+                    <div class="pricing__item__title">
+                        <p>🎓</p>
+                        <h3>상세현황</h3>
+                    </div>
+                    <ul>
+                        <li>
+                            <h6> before db, test</h6>
+                        </li>
+                    </ul>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">출석일수</th>
+                                <th scope="col">출석시간</th>
+                                <th scope="col">남은일수</th>
+                                <th scope="col">남은시간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for userinfo in userinfos %}
+                            <tr>
+                                <td>{{userinfo.id}}</td>
+                                <td>{{userinfo.title}}
+                                    {% if userinfo.topRated %}
+                                    <strong>TOP RATED</strong>
+                                    {% endif %}
+                                </td>
+                                <td>{{userinfo.description}}</td>
+                            </tr>
+                            {% endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="pricing__item">
+                    <div class="pricing__item__title">
+                        <p>👑</p>
+                        <h3>지난달 내역</h3>
+                    </div>
+                    <ul>
+                        <li>
+                            <h6> before db, test</h6>
+                        </li>
+                    </ul>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">회차</th>
+                                <th scope="col">수당</th>
+                                <th scope="col">누적</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>11</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>11</td>
+                                <td>22</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>11</td>
+                                <td>33</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <th scope="row">총액</th>
+                            <td colspan="2">66</td>
+                        </tfoot>
+                    </table>
+                    <button type="button" class="btn btn-primary" data-toggle="popover" data-placement="top"
+                        title="지급 기준" data-content="
+                📌단위기간*출석률이 80% 이상일 경우에 한하여 교육수당 지급<br>
+                📌교육수당 지급금액은 월 최대 300,000원<br>
+                (단위기간: 교육 시작일을 기준으로 1개월 단위로 나눈 기간)
+                "> 지급 기준
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Pricing Section End -->
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    });
+</script>
+
+{% endblock content %}

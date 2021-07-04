@@ -1,17 +1,10 @@
-{% include 'load-box.html' %}
-{% comment %} 추가하고싶은 css추가 ->
-<link rel="stylesheet" href="/static/css/slicknav.min.css" type="text/css"> {% endcomment %}
-</head>
+{% extends 'mainpage/mainpage.html' %}
 
-<body>
-    <!-- HEADER-BOX START -->
-    {% include 'header-box.html' %}
-    <!-- HEADER-BOX END -->
+{% block content %}
 
-    <!-- 해인수정 - 페이지경로 -->
+<!-- 해인수정 - 페이지경로 -->
     <!-- 위에 그림 및 페이지 경로 Url -->
     <!-- Breadcrumb Section Begin -->
-    <!-- 오류해결 -->
     <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
         <div class="container">
             <div class="row">
@@ -291,18 +284,4 @@
         </div>
     </section>
     <!-- Testimonials Section End -->
-
-
-    <!-- FOOTER-BOX START -->
-    {% include 'footer-box.html' %}
-    <!-- FOOTER-BOX END -->
-
-    <!-- JS부분 -->
-    {% include 'js-script.html' %}\
-    {% comment %} 추가하고싶은 js추가하면됨. ->
-    <script src="/static/js/main.js"></script> {% endcomment %}
-
-
-</body>
-
-</html>
+{% endblock content %}

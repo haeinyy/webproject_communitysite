@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BoardAllContentList, Image
+from .models import BoardAllContentList, Board_comment, Image
 
 
 # Image 클래스를 inline으로 나타낸다.
@@ -15,3 +15,4 @@ class Boardadmin(admin.ModelAdmin):
 
 admin.site.register(Image, Boardadmin)
 admin.site.register(BoardAllContentList, Boardadmin)
+admin.site.register(Board_comment,Boardadmin)

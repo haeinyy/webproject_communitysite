@@ -1,34 +1,22 @@
-{% include 'load-box.html' %}
-{% comment %} 추가하고싶은 css추가 -> <link rel="stylesheet" href="/static/css/slicknav.min.css" type="text/css"> {% endcomment %}
-</head>
+{% extends 'mainpage/mainpage.html' %}
+{% block content %}
 
-<body>
-    <!-- HEADER-BOX START -->
-    {% include 'header-box.html' %} 
-    <!-- HEADER-BOX END -->
+{% include 'calcapp/calcpage_common.html' %}
 
-    <!-- MIDDLE-BOX START -->
-    <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
-        <div class="container">
-            <div class="row">
-    <!-- 실제 페이지 내용 쓰기 START-->
-                <div style="height:600px; background-color: violet;">
-                    <h1>내용넣어요</h1>
+<!-- Hero Section Begin -->
+<section class="hero spad set-bg" data-setbg="/static/img/hero-door.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="hero__text">
+                    <span>🔎 원하는 방을 찾아가세요 </span>
+                    <h2>FIND AND DESIGN YOUR FUTURE!</h2>
+                    <a href="#" class="primary-btn normal-btn">WHTCH MORE</a>
                 </div>
-    <!-- 실제 페이지 내용 쓰기 END-->
             </div>
         </div>
-    </section>
-    <!-- MIDDLE-BOX END -->
-    
-     <!-- FOOTER-BOX START -->
-    {% include 'footer-box.html' %} 
-     <!-- FOOTER-BOX END -->
+    </div>
+</section>
+<!-- Hero Section End -->
+{% endblock %}
 
-    <!-- JS부분 -->
-    {% include 'js-script.html' %}
-    {% comment %} 추가하고싶은 js추가하면됨. -> <script src="/static/js/main.js"></script> {% endcomment %}
-    
-
-</body>
-</html>

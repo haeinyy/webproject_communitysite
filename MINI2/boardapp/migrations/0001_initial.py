@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100)),
                 ('text', models.TextField()),
                 ('date', models.DateTimeField(auto_now_add=True)),
+
                 ('seenum', models.IntegerField()),
                 ('like', models.IntegerField()),
                 ('board_kind', models.CharField(max_length=20)),

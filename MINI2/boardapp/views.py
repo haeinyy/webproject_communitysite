@@ -52,7 +52,7 @@ def comment_write(request, pk):
 # 게시글 좋아요
 def like_post(request, pk):
     content = get_object_or_404(BoardAllContentList, pk = pk)
-    if request.user in content.like_users.all():
+    if request.user in content.like.all():
         content.like.remove(request.user)
     else:
         content.like.add(request.user)
