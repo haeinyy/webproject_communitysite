@@ -11,7 +11,13 @@
         <p>{{content.title}}</p>
         <p>{{content.text}}</p>
         <p>{{content.time}}</p>
-        <img src="{{ content.image.url }}" alt="" width=50%%>
-        {% comment %} <a href="{% url boardapp:freeboard%}">목록</a> {% endcomment %}
+        {% comment %} {% for image in content.image_set.all %}
+            <img src="{{ content.image.url }}" alt="이미지" width="50%"><br>
+        {% endfor %} {% endcomment %}
+
+        {% if content.image %}
+            <img src="{{ content.image.url }}" alt="이미지" width="50%"><br>
+        {% endif %}
+        {% comment %} <a href="{% url boardapp:freeboard %}">목록</a> {% endcomment %}
     </body>
 </html>

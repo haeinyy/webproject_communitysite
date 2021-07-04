@@ -19,7 +19,7 @@
                         <div class="breadcrumb__links">
                             <a href="/mainpage/">Home</a>
                             <a href="#">게시판</a>
-                            <a href="{% url 'boardapp:freeboard' %}">자유게시판</a>
+                            <!-- <a href="{% url 'boardapp:freeboard' %}">자유게시판</a> -->
                             <span>글쓰기</span>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
     <!-- MIDDLE-BOX START -->
     <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
         <div class="container">
-            <form action="{% url 'boardapp:writetext' %}" method="POST">
+            <form action="{% url 'boardapp:writetext' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <!-- 개시판분류 -->
                 <div class="input-group mb-3">
@@ -42,9 +42,9 @@
                     <select class="custom-select" id="inputGroupSelect02" name="board_kind">
                         <!-- 게시판이름 자동으로 들어오게 해야함 -->
                         <option selected>자유게시판</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="1">동아리/스터디</option>
+                        <option value="2">취업/진로</option>
+                        <option value="3">물물교환/무료나눔</option>
                     </select>
                 </div>
 
@@ -69,10 +69,10 @@
                         <label class="custom-file-label" for="inputGroupFile02"
                             aria-describedby="inputGroupFileAddon02">파일을 첨부해주세요</label>
                     </div>
-                    <div class="input-group-append">
-                        <input type="submit" class="btn btn-secondary" value="업로드">
-                        <!-- <button class="btn btn-secondary" id="button-addon2">업로드</button> -->
-                    </div>
+                    {% comment %} <div class="input-group-append">
+                        <!-- <input type="submit" class="btn btn-secondary" value="업로드"> -->
+                        <button class="btn btn-secondary" id="button-addon2">업로드</button>
+                    </div> {% endcomment %}
                 </div>
                 <!-- </form> -->
 
@@ -88,12 +88,12 @@
                 <!-- 임시저장 / 등록 버튼 -->
                 <br><br>
                 <div class="row justify-content-md-center">
-                    <div class="col col-lg-2"></div>
-                    <button type="submit" class="btn btn-secondary">임시저장</button>
-                    <button type="submit" class="btn btn-secondary">등록</button>
+                    <div class="col col-lg-2">
+                        <button type="submit" class="btn btn-secondary">임시저장</button>
+                        <button type="submit" class="btn btn-secondary">등록</button>
+                    </div>
                 </div>
-        </div>
-        </form>
+            </form>
         </div>
     </section>
     <!-- MIDDLE-BOX END -->

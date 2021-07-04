@@ -8,4 +8,4 @@ urlpatterns = [
      # App
     path('mainpage/', include('mainpage.urls')),
     path('boardapp/', include('boardapp.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

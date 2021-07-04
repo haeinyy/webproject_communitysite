@@ -11,10 +11,11 @@ def freeboard(request):
 
 # 글쓰기 양식
 def writetext(request):
-    content = BoardAllContentList()
-    content_list = BoardAllContentList.objects.all()
+    
+    # content_list = BoardAllContentList.objects.all()
 
     if(request.method == 'POST'): # 내용 입력후, 전달 할때
+        content = BoardAllContentList()
         content.title = request.POST['title']
         content.text = request.POST['text']
         content.date = timezone.datetime.now()
@@ -26,13 +27,12 @@ def writetext(request):
             # image 객체 생성
             image = Image()
             # 현재 게시물의 기본키 참조
-            image.content = content
+            image.content = content.id
             # images로부터 가져온 이미지파일 하나씩 저장
             image.image = img
             # db에 저장
             image.save()
         return redirect('/boardapp/' + str(content.pk))
-        
     # 내용 입력 없을 떄
     return render(request, 'boardapp/board_write.html',{})
 
