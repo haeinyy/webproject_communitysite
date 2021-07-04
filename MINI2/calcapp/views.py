@@ -1,26 +1,30 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, request
+from . models import AttendHistroy
+from . models import Member
 
-userinfoList = [
-    {
-        'id': '1',
-        'title': 'A',
-        'description': 'a',
-        'topRated': True
-    },
-    {
-        'id': '2',
-        'title': 'B',
-        'description': 'b',
-        'topRated': False
-    },
-    {
-        'id': '3',
-        'title': 'C',
-        'description': 'c',
-        'topRated': True
+def index(request, pk):
+    # attendances = AttendHistroy.objects.all()
+    # str =''
+    # for attendance in attendances:
+    #     str += "<p> name: {} attend: {}".format(attendance.name, attendance.attend)
+    # return HttpResponse(str)
+    a = '0219'
+    attendancesList = AttendHistroy.objects.all()
+    # memberList = Member.objects.all()
+    attenda = []
+    for i in attendancesList:
+        if i.user_phone == a:
+            attenda.append(i)
+
+    context = {
+        'attnedances': attenda
     }
-]
+    return render(request, 'calcapp/calcpage_info.html', context)
+    # return render(request, 'calcapp/index.html', context)
+
+    ## 메모
+    # a = request.session['user_phone']
 
 def calcpage(request):
     pay = int(15000)
@@ -30,24 +34,11 @@ def calcpage(request):
 
 def calcpage_result(request):
     return render(request, 'calcapp/calcpage_result.html', {'name':'name'})
-
-# def calcpage1(request, pk):
-#     userinfoObject = None
-
-#     for i in userinfoList:
-#         if i['id'] == str(pk):
-#             userinfoObject = i
-
-# return HttpResponse('Calc page:' + str(pk))
-#     return render(request, 'calcapp/calcpage1.html', {'userinfo':userinfoObject})
-    
+ 
 def calcpage_info(request):
-    context = {'userinfos': userinfoList}
-    
-    return render(request, 'calcapp/calcpage_info.html', context)
+    return render(request, 'calcapp/calcpage_info.html')
 
 def calcpage_user(request):
-    user = 'Kim Sohee'
-    age = 25
-    context = {'user': user, 'age':age}
-    return render(request, 'calcapp/calcpage_user.html', context)
+    attendancesList = AttendHistroy.objects.all()    
+    context = {'attnedances': attendancesList}
+    return render(request, 'calcapp/calcpage_user.html', context) 

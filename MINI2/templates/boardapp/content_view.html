@@ -1,0 +1,371 @@
+{% include 'mainpage/load-box.html' %}
+
+</head>
+
+<body>
+    <!-- HEADER-BOX START -->
+    {% include 'mainpage/header-box.html' %}
+    <!-- HEADER-BOX END -->
+
+    <!-- 페이지경로 -->
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2> {{ content.board_kind }}</h2>
+                        <div class="breadcrumb__links">
+                            <a href="/mainpage/">Home</a>
+                            <a href="#">게시판</a>
+                            {% if content.board_kind == '자유게시판' %}
+                            <a href="/boardapp/freeboard">{{ content.board_kind }}</a>
+                            {% comment %} {% elif content.board_kind == '동아리/스터디'%}
+                            {% elif content.board_kind == '취업/진로'%}
+                            {% elif content.board_kind == '물물교환/무료나눔'%} {% endcomment %}
+                            {% endif %}
+                            <span>게시물</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- MIDDLE-BOX START -->
+    <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
+        <div class="container">
+            <!-- 게시물 목록 리스트 / 페이지 번호-->
+            {% comment %} <div class="container">
+                <!-- 목록 -->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일</th>
+                            <th scope="col">조회</th>
+                            <th scope="col">좋아요</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for list in content_list %}
+                        <tr>
+                            <th scope="row">{{ list.id }}</th>
+                            <td><a href="{% url 'boardapp:content_view' list.pk %}">{{ list.title }}</a></td>
+                            <td>민식</td>
+                            <td>{{ list.date }}</td>
+                            <td>{{ list.seenum }}</td>
+                            <td>{{ list.like }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- 글쓰기 버튼 -->
+                <br>
+                <a href="{% url 'boardapp:writetext' %}"><button type="submit"
+                        class="btn btn-secondary pull-right">글쓰기</button></a>
+                <br><br>
+
+                <!-- 페이지번호 -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <hr>
+            </div> {% endcomment %}
+            <!-- 게시물 목록 리스트 / 페이지번호 끝 -->
+
+            <!-- 게시물 -->
+            <div class="card">
+                <!-- 게시물 제목 -->
+                <div class="card-header">
+                    {% if content.board_kind == '자유게시판' %}
+                    <a href="/boardapp/freeboard">{{ content.board_kind }}</a>
+                    {% comment %} {% elif content.board_kind == '동아리/스터디'%}
+                    {% elif content.board_kind == '취업/진로'%}
+                    {% elif content.board_kind == '물물교환/무료나눔'%} {% endcomment %}
+                    {% endif %}
+                    <br><br>
+                    <h3>{{ content.title }}</h3>
+                    <h6>작성자 : {{ content.user_id}}</h6>
+                    <h6></h6>
+                    <p>{{ content.date }}</p>
+                </div></span>
+                <!-- 게시물 내용 -->
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Special title treatment</h5> -->
+                    <p class="card-text">{{ content.text }}</p>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+            </div>
+            <hr>
+
+            <!-- 댓글 -->
+            <div class="container">
+                <h5>댓글</h5>
+                {% for comment in cotent.comments.all %}
+                <p>{{ comment.comment_date }}</p>
+                <p>{{ comment.comment_writer }}</p>
+                <p>{{ comment.comment_contents }}</p>
+                {% empty %}
+                <p>댓글이 없습니다ㅠㅠ 새로운 댓글을 달아주세요^^</p>
+                {% endfor %}
+
+                <form method="POST" action="{% url 'comment_write' content_id = content.id %}">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="댓글을 입력해주세요" aria-label="댓글을 입력해주세요"
+                            name='comment'>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-secondary">등록</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- 맨아래 글쓰기, Top 목록 버튼 -->
+            <div>
+                <br>
+                <a href="{% url 'boardapp:writetext' %}"><button type="submit"
+                        class="btn btn-secondary pull-left">글쓰기</button></a>
+                <a href="#" class="top"><button type="submit" class="btn btn-secondary pull-right">TOP</button></a>
+
+                {% if content.board_kind == '자유게시판' %}
+                <a href="/boardapp/freeboard"><button type="submit" class="btn btn-secondary pull-right">목록</button></a>
+                {% comment %} {% elif content.board_kind == '동아리/스터디'%}
+                {% elif content.board_kind == '취업/진로'%}
+                {% elif content.board_kind == '물물교환/무료나눔'%} {% endcomment %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- 실제 페이지 내용 쓰기 END-->
+    </section>
+    <!-- MIDDLE-BOX END -->
+
+
+    <!-- 밑에 이미지 애니메이션 -->
+    <!-- Testimonials Section Begin -->
+    <section class="testimonials spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <span>실시간급상승</span>
+                        <h2>Today's HOT</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="testimonial__slider owl-carousel">
+                    <div class="col-lg-6">
+                        <div class="testimonial__item">
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__icon">
+                                    <i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Catanis Greimar</h5>
+                                    <span>Businesswoman</span>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
+                                accumsan lacus
+                                vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="testimonial__item">
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__icon">
+                                    <i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Catanis Greimar</h5>
+                                    <span>Businesswoman</span>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
+                                accumsan lacus
+                                vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="testimonial__item">
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__icon">
+                                    <i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Catanis Greimar</h5>
+                                    <span>Businesswoman</span>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
+                                accumsan lacus
+                                vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="testimonial__item">
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__icon">
+                                    <i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Catanis Greimar</h5>
+                                    <span>Businesswoman</span>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
+                                accumsan lacus
+                                vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="testimonial__item">
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__icon">
+                                    <i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Catanis Greimar</h5>
+                                    <span>Businesswoman</span>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
+                                accumsan lacus
+                                vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="testimonial__item">
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__icon">
+                                    <i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Catanis Greimar</h5>
+                                    <span>Businesswoman</span>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
+                                accumsan lacus
+                                vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section End -->
+
+
+    <!-- FOOTER-BOX START -->
+    {% include 'footer-box.html' %}
+    <!-- FOOTER-BOX END -->
+
+    <!-- JS부분 -->
+    {% include 'js-script.html' %}\
+    {% comment %} 추가하고싶은 js추가하면됨. ->
+    <script src="/static/js/main.js"></script> {% endcomment %}
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+<html>
+
+<head>
+    <title>Posting!</title>
+</head>
+
+<body>
+    <h1>게시글 개별 페이지입니다</h1>
+    <p>{{content.title}}</p>ㄴ
+    <p>{{content.text}}</p>
+    <p>{{content.time}}</p>
+    {% comment %} {% for image in content.image_set.all %}
+    <img src="{{ content.image.url }}" alt="이미지" width="50%"><br>
+    {% endfor %} {% endcomment %}
+
+    {% if content.image %}
+    <img src="{{ content.image.url }}" alt="이미지" width="50%"><br>
+    {% endif %}
+    {% comment %} <a href="{% url boardapp:freeboard %}">목록</a> {% endcomment %}
+</body>
+
+</html>

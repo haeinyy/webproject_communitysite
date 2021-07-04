@@ -1,3 +1,4 @@
+from calcapp.models import AttendHistroy
 from django.contrib import admin
 
-# Register your models here.
+admin.site.register(AttendHistroy)

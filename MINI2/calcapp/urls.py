@@ -3,6 +3,10 @@ from . import views
 
 app_name = 'calcapp'
 urlpatterns = [
+    
+    # 테스트
+    # path('index/', views.index2),
+    
     # 연산하는애
     path('calcpage', views.calcpage, name="calcpage"),
     # 연산받는애 : 마이페이지 - 계산기
@@ -11,4 +15,6 @@ urlpatterns = [
     path('calcpage_user/', views.calcpage_user, name="calcpage_user"),
     # 마이페이지 - 수료/수당 현황
     path('calcpage_info/', views.calcpage_info, name='calcpage_info'),
+    path('calcpage_info/<str:pk>', views.index),
+
 ]
