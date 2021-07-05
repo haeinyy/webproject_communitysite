@@ -22,14 +22,9 @@ class BoardAllContentList(models.Model):
     # )
     like_count = models.PositiveIntegerField(default=0)
     board_kind = models.CharField(max_length=20)
-<<<<<<< HEAD
-    # #### 추가 ####
-    # likes = models.ManyToManyField(User, related_name="like_post", blank=True)
-=======
 
     # def count_likes_user(self): # total likes_user
     #     return self.like.count()
->>>>>>> 4c459b79fa2e74abb1044bafedaed4a4107ccf59
 
     def __str__(self):
         return self.title
