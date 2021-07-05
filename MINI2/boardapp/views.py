@@ -2,6 +2,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import BoardAllContentList, Board_comment, Image
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 # 자유게시판 메인 목록
 def freeboard(request):
@@ -56,3 +57,19 @@ def like_post(request, pk):
         content.like.remove(request.user)
     else:
         content.like.add(request.user)
+
+# 페이지네이션
+def index(request):
+    # 입력 파라미터
+    page = request.GET.get('page', '1')  # 페이지
+    # content_list = BoardAllContentList.objects.all()
+    # content_list = list(reversed(content_list)) # 최근순부터 출력하기 위해
+
+    # 조회
+    content_list = BoardAllContentList.objects.order_by('-create_date')
+
+    # 페이징처리
+    paginator = Paginator(content_list, 10)  # 페이지당 10개씩 보여주기
+    page_obj = paginator.get_page(page)
+
+    return render(request, 'boardapp/board_free.html', {'content_list': page_obj})
