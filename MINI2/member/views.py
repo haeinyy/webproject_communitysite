@@ -12,7 +12,7 @@ from .models import Member, Profile
 def register(request):
     if request.method == 'GET':
         return render(request, 'member/register.html')
-     #"POST"
+    #"POST"
     else: 
         # HTML로부터 받은 정보 확인
         user_name = request.POST['user_name']
@@ -58,8 +58,8 @@ def login(request):
         user_pw = request.POST['user_pw']
         
         try:
-            m = Member.objects.get(user_phone=user_phone, 
-                                        user_pw=user_pw)
+            pass
+            
         except:            
             return HttpResponse('로그인 실패')
         else:
@@ -67,13 +67,19 @@ def login(request):
 
             # 세션에 로그인 관련 정보 저장
             request.session['user_phone'] = user_phone
-            a = request.session['user_phone']
-            
+
+            # 해인
+            session_value = request.session['user_phone'] 
+            m = Member.objects.get(user_phone=session_value)
+            request.session['user_name'] = m.user_name
+
+            # 
             return redirect('mainpage:mainhome')
 
 def logout(request):
     if request.session['user_phone']:
         del request.session['user_phone']
+        del request.session['user_name']
         return redirect('mainpage:mainhome')
 
 
