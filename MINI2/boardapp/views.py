@@ -1,4 +1,4 @@
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import BoardAllContentList, Board_comment, Image
 from django.utils import timezone
@@ -57,27 +57,3 @@ def like_post(request, pk):
         content.like.remove(request.user)
     else:
         content.like.add(request.user)
-
-
-#### 추가 ####
-from django.views.generic.base import View
-from django.http import HttpResponseForbidden
-from urllib.parse import urlparse
-
-class Like(View):
-    def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden()
-        else:
-            if 'id' in kwargs:
-                board_id = kwargs['id']
-                board = BoardAllContentList.objects.get(pk=id)
-                user_id = request.user
-                if user_id in board.like.remove(user_id):
-                    board.like.remove(user_id)
-                else:
-                    board.like.add(user_id)
-
-            referer_url = request.META.get('HTTP_REFERER')
-            path = urlparse(referer_url).path
-            return HttpResponseRedirect(path)

@@ -6,7 +6,9 @@ urlpatterns = [
     
     # 테스트
     # path('index/', views.index2),
-    
+    # path('home/', views.home, name='home'),
+    # path('detail/<int:blog_id>', views.detail, name='detail'),
+        
     # 연산하는애
     path('calcpage', views.calcpage, name="calcpage"),
     # 연산받는애 : 마이페이지 - 계산기
