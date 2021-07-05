@@ -12,7 +12,7 @@ from .models import Member, Profile
 def register(request):
     if request.method == 'GET':
         return render(request, 'member/register.html')
-    #"POST"
+     #"POST"
     else: 
         # HTML로부터 받은 정보 확인
         user_name = request.POST['user_name']
@@ -22,23 +22,23 @@ def register(request):
 
         message_dict = {} # html에 던져줄 dictionary
         
-        # --------비밀번호 == 비밀번호확인 인지 체크 -------
-        # code
-        if user_pw != user_pwchk:
-            message_dict['error_pw'] = '설정한 비밀번호가 일치하지 않습니다.'
-            return render(request, 'member/register.html', {'error_pw':message_dict['error_pw'],
-                                                            'user_pw':user_pw,
-                                                            'user_name':user_name})
+        # # --------비밀번호 == 비밀번호확인 인지 체크 -------
+        # # code
+        # if user_pw != user_pwchk:
+        #     message_dict['error_pw'] = '설정한 비밀번호가 일치하지 않습니다.'
+        #     return render(request, 'member/register.html', {'error_pw':message_dict['error_pw'],
+        #                                                     'user_pw':user_pw,
+        #                                                     'user_name':user_name})
         
-        # --------같은 전화번호가 없는지 확인하고 회원가입-------
-        # code
-        # ---------------
-        if user_pw != user_pwchk:
-            message_dict['error_pw'] = '설정한 전화번호이미 존재합니다.'
-            return render(request, 'member/register.html', {'error_pw':message_dict['error_pw'],
-                                                            'user_pw':user_pw,
-                                                            'user_pwchk':user_pwchk,
-                                                            'user_name':user_name})
+        # # --------같은 전화번호가 없는지 확인하고 회원가입-------
+        # # code
+        # # ---------------
+        # if user_pw != user_pwchk:
+        #     message_dict['error_pw'] = '설정한 전화번호이미 존재합니다.'
+        #     return render(request, 'member/register.html', {'error_pw':message_dict['error_pw'],
+        #                                                     'user_pw':user_pw,
+        #                                                     'user_pwchk':user_pwchk,
+        #                                                     'user_name':user_name})
         # ---
         m = Member(
             user_name = user_name, user_pw=user_pw,
@@ -54,27 +54,36 @@ def login(request):
      # POST
     else:
         # 받은 정보 확인
-        user_phone = request.POST['user_phone']
-        user_pw = request.POST['user_pw']
+        u_id = request.POST['user_phone']
+        u_pw = request.POST['user_pw']
         
         try:
-            pass
-            
-        except:            
-            return HttpResponse('로그인 실패')
+            m = Member.objects.get(user_phone=u_id)
+        
+        except:
+            return HttpResponse('등록된 회원이 없습니다.')
         else:
+            if m.user_pw != u_pw:
+                error_messages = '로그인 실패'   
+                return render(request, 'member/register.html', 
+                        {'error_messages':error_messages})
+            else:
+                error_messages = ''
+                request.session['user_phone'] = u_id
+                request.session['user_name'] = m.user_name
+                return redirect('mainpage:mainhome')
+
+        m = Member.objects.get(user_phone=u_id)
+        error_messages = '로그인 실패'   
+        if m.user_pw == u_pw:
             # 1. DB와 확인해서 로그인 -> db에 아이디가 있다면 로그인 성공
-
-            # 세션에 로그인 관련 정보 저장
-            request.session['user_phone'] = user_phone
-
-            # 해인
-            session_value = request.session['user_phone'] 
-            m = Member.objects.get(user_phone=session_value)
+            # 세션에 로그인 관련 정보 저장 - 휴대폰번호, 이름
+            request.session['user_phone'] = m.user_phone
             request.session['user_name'] = m.user_name
-
-            # 
             return redirect('mainpage:mainhome')
+        else:
+            return render(request, 'member/register.html', 
+                        {'error_messages':error_messages})
 
 def logout(request):
     if request.session['user_phone']:

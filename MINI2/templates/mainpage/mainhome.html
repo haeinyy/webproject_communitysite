@@ -4,6 +4,18 @@
 {% include 'calcapp/calcpage_common.html' %}
 
 <!-- Hero Section Begin -->
+<h1 id="session_user_name" style="font-size:70px; display:none;">{{request.session.user_name}}</h1>
+<h1 id="session_user_phone" style="font-size:70px; display:none;">{{request.session.user_phone}}</h1>
+<script>
+    var session_user_name = document.getElementById('session_user_name').textContent;
+    var session_user_phone = document.getElementById('session_user_phone').textContent;
+    if (session_user_phone != '') {
+        alert('환영합니다 '+session_user_name+'님')
+    }
+    else {
+        alert('로그인 후 사용가능합니다.')
+    }
+</script>
 <section class="hero spad set-bg" data-setbg="/static/img/hero-door.jpg">
     <div class="container">
         <div class="row">

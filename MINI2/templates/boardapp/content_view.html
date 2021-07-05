@@ -61,7 +61,7 @@
                     <h6></h6>
                     <p>{{ content.date }}</p>
                     <div class='heart_poisition'>
-                        <a href="{% url  'boardapp:like_post' content.id%}">
+                        <a href = "{% url  'boardapp:like_post' content.id%}">
                             {% if user in content.like.all%}
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-heart" viewBox="0 0 16 16">
