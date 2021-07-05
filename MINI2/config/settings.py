@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'boardapp',
     'calcapp',
     'member',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
