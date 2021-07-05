@@ -30,8 +30,12 @@ def restaurant_list(request):    #,rest_rmd): #rest_rmd : 어떤 추천(offi,kfq
     ######################################
     return render(request, 'restaurant/restaurant_list.html',{})   #context)
 
-def restaurant_detail(request): # = None):
-    #rest = get_object_or_404(Rest, rest_name=rest_name)
+def restaurant_detail(request, pk):
+    rest = Rest.objects.get(pk=pk)
+    context = { 'rest' : rest}
+    return render(request, 'restaurant/restaurant_detail.html', context)
+
+def restaurant_search(request): 
     search = request.POST.get('search')
 
     if not Rest.objects.filter(rest_name__contains=search).exists() :  #해당 가게명이 데이터 베이스에 없다.
@@ -142,6 +146,5 @@ def restaurant_detail(request): # = None):
     else :
         rest = Rest.objects.get(rest_name__contains=search)
 
-    
     context = { 'rest' : rest } 
     return render(request, 'restaurant/restaurant_detail.html', context)
