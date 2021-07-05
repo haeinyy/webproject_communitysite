@@ -1,8 +1,8 @@
 from django.http import HttpResponse, request
-from . models import Member
+from member.models import Member, Profile
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from . models import AttendHistroy, Blog
+from . models import Attendences, Blog
 from calcapp.forms import BlogUpdate
 from django.core.paginator import Paginator
 
@@ -71,13 +71,13 @@ def search(request):
 
 # 계산기
 def index(request, pk):
-    # attendances = AttendHistroy.objects.all()
+    # attendances = Attendences.objects.all()
     # str =''
     # for attendance in attendances:
     #     str += "<p> name: {} attend: {}".format(attendance.name, attendance.attend)
     # return HttpResponse(str)
     
-    attendancesList = AttendHistroy.objects.all()
+    attendancesList = Attendences.objects.all()
     # a = '0219'
     # memberList = Member.objects.all()
     # attenda = []
@@ -88,8 +88,7 @@ def index(request, pk):
     context = {
         'attnedances': attendancesList
     }
-    return render(request, 'calcapp/calcpage_info.html', context)
-    # return render(request, 'calcapp/index.html', context)
+    return render(request, 'calcapp/calcpage_result.html', context)
 
     ## 메모
     # a = request.session['user_phone']
@@ -102,11 +101,23 @@ def calcpage(request):
 
 def calcpage_result(request):
     return render(request, 'calcapp/calcpage_result.html', {'name':'name'})
- 
-def calcpage_info(request):
-    return render(request, 'calcapp/calcpage_info.html')
 
 def calcpage_user(request):
-    attendancesList = AttendHistroy.objects.all()    
+    attendancesList = Attendences.objects.all()    
     context = {'attnedances': attendancesList}
     return render(request, 'calcapp/calcpage_user.html', context) 
+
+def ProfileView(request, pk):
+    profiles = Profile.objects.get(pk=pk)
+    if profiles:
+        # user = profiles.user_name
+        profiles.images = request.FILES['images']
+        context = {
+            'username': profiles.user_name,
+            'nickname': profiles.nickname,
+            'description': profiles.description,
+            'image': profiles.image,            
+            }
+        return render(request, 'calcapp/calcpage_result.html', context)
+    else:
+        return redirect('member/login/', profiles.pk)

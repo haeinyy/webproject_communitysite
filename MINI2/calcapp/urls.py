@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'calcapp'
 urlpatterns = [
@@ -20,10 +22,8 @@ urlpatterns = [
     path('calcpage', views.calcpage, name="calcpage"),
     # 연산받는애 : 마이페이지 - 계산기
     path('calcpage_result', views.calcpage_result, name="calcpage_result"),
-    # 마이페이지 - 유저정보
+    # 마이페이지 - 유저정보(수료/수당 현황)
+    path('calcpage_result/<str:pk>', views.index),
+    # 삭제예정
     path('calcpage_user/', views.calcpage_user, name="calcpage_user"),
-    # 마이페이지 - 수료/수당 현황
-    path('calcpage_info/', views.calcpage_info, name='calcpage_info'),
-    path('calcpage_info/<str:pk>', views.index),
-
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
