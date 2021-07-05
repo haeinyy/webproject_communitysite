@@ -43,7 +43,6 @@ def calcpage_result(request):
     
 def calcpage_info(request):
     context = {'userinfos': userinfoList}
-    
     return render(request, 'calcapp/calcpage_info.html', context)
 
 def calcpage_user(request):

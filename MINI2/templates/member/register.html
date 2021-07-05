@@ -124,9 +124,9 @@
                     {% csrf_token %}
                     <table>
                         <input type="text" class="input-field" placeholder="이름" name="user_name" id="uid" required>
-                        <input type="password" class="input-field" placeholder="비밀번호" name="user_pw" maxlength="15" id="pwd" required>
-                        <input type="password" class="input-field" placeholder="비밀번호확인" name="user_pwchk" maxlength="15" id="pwdchk" required>
-                        <input type="text" class="input-field" placeholder="휴대폰번호" name="user_phone" maxlength="11" id="phone" required>
+                        <input type="password" class="input-field" placeholder="비밀번호" name="user_pw" minlength="4" maxlength="15" id="pwd" required>
+                        <input type="password" class="input-field" placeholder="비밀번호확인" name="user_pwchk" minlength="4" maxlength="15" id="pwdchk" required>
+                        <input type="text" class="input-field" placeholder="휴대폰번호" name="user_phone" minlength="11" maxlength="11" id="phone" required>
                         <input type="checkbox" class="checkbox"><span>개인정보이용동의</span>
                         <button>회원가입</button>
                     </table>
@@ -186,7 +186,7 @@
                 // 체크 - 비밀번호 영문자+숫자+특수조합(4~25자리 입력) 정규식
                 var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,15}$/;
                 if (!pwdCheck.test(pwd.value)) {
-                    alert("비밀번호는 영문자+숫자+특수문자 조합으로 4~15자리 사용해야 합니다.");
+                    alert("비밀번호는 영문자+숫자+특수조합(4~25자리 입력)");
                     pwd.focus();
                     return false;
                 }

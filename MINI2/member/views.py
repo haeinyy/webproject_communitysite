@@ -75,5 +75,3 @@ def logout(request):
     if request.session['user_phone']:
         del request.session['user_phone']
         return redirect('mainpage:mainhome')
-
-    

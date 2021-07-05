@@ -34,8 +34,25 @@
             $("#header-box-register__btn").show();
             $("#header-box-logout__btn").hide();
         }
+        // ajax로 연습
+        $('#ajax_button').click(() => {
+            $.ajax(
+                {
+                    type: "POST", // 전송방식
+                    url: "",
+                    data: {},
+                    success: ()=>{
+                        
+                    },
+                    error: ()=>{
+
+                    }
+                }
+            )
+        })
+
         // 게시판 클릭하면 검사하게하기
-        
+        //function session_ischeck()
 
     </script>
 </html>
