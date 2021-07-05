@@ -13,7 +13,7 @@
                         <div class="breadcrumb__links">
                             <a href="/mainpage/">Home</a>
                             <a href="#">게시판</a>
-                            <a href="{% url 'boardapp:freeboard' %}">자유게시판</a>
+                            <!-- <a href="{% url 'boardapp:freeboard' %}">자유게시판</a> -->
                             <span>글쓰기</span>
                         </div>
                     </div>
@@ -26,61 +26,70 @@
     <!-- MIDDLE-BOX START -->
     <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
         <div class="container">
-            <!-- 개시판분류 -->
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">분류</span>
+            <form action="{% url 'boardapp:writetext' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- 개시판분류 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">분류</span>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect02" name="board_kind">
+                        <!-- 게시판이름 자동으로 들어오게 해야함 -->
+                        <option selected>자유게시판</option>
+                        <option value="1">동아리/스터디</option>
+                        <option value="2">취업/진로</option>
+                        <option value="3">물물교환/무료나눔</option>
+                    </select>
                 </div>
-                <select class="custom-select" id="inputGroupSelect02">
-                    <!-- 게시판이름 자동으로 들어오게 해야함 -->
-                    <option selected>게시판</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
 
-            <!-- 제목 -->
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">제목</span>
+                <!-- 제목 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">제목</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="제목을 입력해주세요" aria-label="제목을 입력해주세요"
+                        name='title'>
                 </div>
-                <input type="text" class="form-control" placeholder="제목을 입력해주세요" aria-label="제목을 입력해주세요">
-            </div>
 
-            <!-- 파일첨부 -->
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">파일</span>
+                <!-- 파일첨부 -->
+                <!-- <form method='POST' action="{% url 'boardapp:writetext' %}" , enctype="multipart/form-data"> -->
+                <!-- {% csrf_token %} -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">파일</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile02" name='images' multiple>
+                        <label class="custom-file-label" for="inputGroupFile02"
+                            aria-describedby="inputGroupFileAddon02">파일을 첨부해주세요</label>
+                    </div>
+                    {% comment %} <div class="input-group-append">
+                        <!-- <input type="submit" class="btn btn-secondary" value="업로드"> -->
+                        <button class="btn btn-secondary" id="button-addon2">업로드</button>
+                    </div> {% endcomment %}
                 </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile02">
-                    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">파일을
-                        첨부해주세요</label>
-                </div>
-                <div class="input-group-append">
-                    <button class="btn btn-secondary" id="button-addon2">업로드</button>
-                </div>
-            </div>
+                <!-- </form> -->
 
-            <!-- 텍스트 -->
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">내용</span>
+                <!-- 텍스트 -->
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">내용</span>
+                    </div>
+                    <!-- <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"> -->
+                    <textarea class="form-control" aria-label="With textarea" name='text'></textarea>
                 </div>
-                <!-- <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"> -->
-                <textarea class="form-control" aria-label="With textarea"></textarea>
-            </div>
 
-            <!-- 임시저장 / 검색 버튼 -->
-            <br><br>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    <button type="submit" class="btn btn-secondary">임시저장</button>
-                    <button type="submit" class="btn btn-secondary">등록</button>
+                <!-- 임시저장 / 등록 버튼 -->
+                <br><br>
+                <div class="row justify-content-md-center">
+                    <div class="col col-lg-2">
+                        <button type="submit" class="btn btn-secondary">임시저장</button>
+                        <button type="submit" class="btn btn-secondary">등록</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
     <!-- MIDDLE-BOX END -->
+
 {% endblock content %}

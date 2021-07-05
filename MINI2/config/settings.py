@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'boardapp',
     'calcapp',
     'member',
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,5 +126,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
     # os.path.join(BASE_DIR, 'static')
 ]
- # 아직작업중 - 로그인 안하고 버튼 클릭시 아래URL로 이동 
-# LOGIN_REDIRECT_URL = '/'
+
+# MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

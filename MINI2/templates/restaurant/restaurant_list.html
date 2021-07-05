@@ -1,7 +1,14 @@
-{% extends 'mainpage/mainpage.html' %}
+{% include 'mainpage/load-box.html' %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/restaurant_list.css">
+</head>
 
-{% block content %}
+<body>
+    <!-- HEADER-BOX START -->
+    {% include 'mainpage/header-box.html' %} 
+    <!-- HEADER-BOX END -->
 
+    <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
         <div class="container">
             <div class="row">
@@ -193,5 +200,28 @@
             </div>
         </div>
     </section>
+    <!-- MIDDLE-BOX END -->
+    
+     <!-- FOOTER-BOX START -->
+    {% include 'footer-box.html' %} 
+     <!-- FOOTER-BOX END -->
 
-{% endblock content %}
+    <!-- JS부분 -->
+    {% include 'js-script.html' %}
+    {% comment %} 추가하고싶은 js추가하면됨. -> <script src="/static/js/main.js"></script> {% endcomment %}
+    
+    <!-- FOOTER-BOX START -->
+    {% include 'mainpage/footer-box.html' %}
+    <!-- FOOTER-BOX END -->
+    
+     <!-- FOOTER-BOX START -->
+    {% include 'mainpage/footer-box.html' %} 
+     <!-- FOOTER-BOX END -->
+
+    <!-- JS부분 -->
+    {% include 'mainpage/js-script.html' %}
+    {% comment %} 추가하고싶은 js추가하면됨. -> <script src="/static/js/main.js"></script> {% endcomment %}
+    
+
+</body>
+</html>
