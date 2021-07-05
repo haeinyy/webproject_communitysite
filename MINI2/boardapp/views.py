@@ -10,7 +10,6 @@ def freeboard(request):
     content_list = list(reversed(content_list)) # 최근순부터 출력하기 위해
     return render(request, 'boardapp/board_free.html', {'content_list':content_list})
 
-
 # 글쓰기 양식
 def writetext(request):
     content = BoardAllContentList()
@@ -42,7 +41,6 @@ def writetext(request):
 def content_view(request, pk):
     content = BoardAllContentList.objects.get(pk=pk)
     return render(request, 'boardapp/content_view.html', {'content':content})
-
 
 # 게시글 댓글
 def comment_write(request, pk):

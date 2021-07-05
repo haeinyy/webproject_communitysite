@@ -1,3 +1,5 @@
+from calcapp.models import AttendHistroy, Blog
 from django.contrib import admin
 
-# Register your models here.
+admin.site.register(AttendHistroy)
+admin.site.register(Blog)

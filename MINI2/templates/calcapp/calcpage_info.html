@@ -16,7 +16,7 @@
                 <div class="breadcrumb__text">
                     <h2>마이페이지</h2>
                     <div class="breadcrumb__links">
-                        <a href="{% url 'mainhome' %}">Home</a>
+                        <a href="{% url 'mainpage:mainhome' %}">Home</a>
                         <a href="{% url 'calcapp:calcpage_user' %}">내정보</a>
                         <a href="{% url 'calcapp:calcpage_result' %}">계산기</a>
                         <span>교육정보</span>
@@ -38,24 +38,38 @@
                         <p>🎓</p>
                         <h3>수료현황</h3>
                     </div>
+                    <!-- progress -->
                     <div class="progress">
                         <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
+                    <!-- progress -->
                     <ul>
+                        {% for attendance in attnedances %}
                         <li>
+                            <h1>{{attendance}}</h1>
+                            <h1>rberbet</h1>
+
+                            <!-- {% if attendance.name == "김소희" %} -->
                             <span>
-                                지금 까지 45/960시간 완료 했습니다.<br>
+                                지금 까지 {{attendance.time}} / 960 시간 완료 했습니다.
+
+                                {% if attendance.time < 800 %} 
+                                수료 '불가' 합니다. 
+                                {% elif attendance.time >= 800 %}
+                                수료 '가능' 합니다.
+                                {% endif %}
                             </span>
+                            
+                            <!-- {% endif %} -->
+
                         </li>
-                        <li>
-                            <span>현재 수료 '불가' or '가능'합니다.</span>
-                        </li>
+                        {% endfor %}
                     </ul>
-                    <a href="#" class="primary-btn">상세현황</a>
+                    <!-- <a href="#" class="primary-btn">상세현황</a> -->
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <!-- <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="pricing__item">
                     <div class="pricing__item__title">
                         <p>👑</p>
@@ -72,7 +86,7 @@
                     </ul>
                     <a href="#" class="primary-btn">지난달 내역</a>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-6">
@@ -81,42 +95,36 @@
                         <p>🎓</p>
                         <h3>상세현황</h3>
                     </div>
-                    <ul>
-                        <li>
-                            <h6> before db, test</h6>
-                        </li>
-                    </ul>
                     <table class="table">
                         <thead>
                             <tr>
+                                <th scope="col">이름</th>
                                 <th scope="col">출석일수</th>
+                                <th scope="col">결석일수</th>
                                 <th scope="col">출석시간</th>
-                                <th scope="col">남은일수</th>
-                                <th scope="col">남은시간</th>
+                                <th scope="col">출석률</th>
+                                <th scope="col">dat_rate</th>
+                                <th scope="col">누적출석률</th>
+                                <th scope="col">day_cum_rate</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for attendance in attnedances %}
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <th scope="row">{{attendance.name}}</th>
+                                <td>{{attendance.attend}}</td>
+                                <td>{{attendance.absent}}</td>
+                                <td>{{attendance.time}}</td>
+                                <td>{{attendance.time_rate}}%</td>
+                                <td>{{attendance.day_rate}}%</td>
+                                <td>{{attendance.time_cum_rate}}%</td>
+                                <td>{{attendance.day_cum_rate}}%</td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
+                            {% endfor %}
+                        <tbody>
                     </table>
-
-                    <table>
+                    <!-- test -->
+                    <!-- <table>
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -138,20 +146,16 @@
                             </tr>
                             {% endfor%}
                         </tbody>
-                    </table>
+                    </table> -->
+                    <!-- test -->
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <!-- <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="pricing__item">
                     <div class="pricing__item__title">
                         <p>👑</p>
                         <h3>지난달 내역</h3>
                     </div>
-                    <ul>
-                        <li>
-                            <h6> before db, test</h6>
-                        </li>
-                    </ul>
                     <table class="table">
                         <thead>
                             <tr>
@@ -190,7 +194,7 @@
                 "> 지급 기준
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>

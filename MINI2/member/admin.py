@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Member
+from .models import Member, Profile
 
 # Define the admin calss
 class MemberAdmin(admin.ModelAdmin): #admin의 ModelAdmin 클래스 상속
@@ -8,3 +8,15 @@ class MemberAdmin(admin.ModelAdmin): #admin의 ModelAdmin 클래스 상속
 
 # Register the admin class with associated model
 admin.site.register(Member, MemberAdmin)
+
+### 추가된부분 ###
+# 프로필 
+class ProfileAdmin(admin.StackedInline):
+    model = Profile
+    con_delete = False
+
+class CustomUserAdmin(MemberAdmin):
+    inlines = (ProfileAdmin,)
+
+admin.site.unregister(Member)
+admin.site.register(Member, CustomUserAdmin)

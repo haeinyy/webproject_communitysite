@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.contrib import messages
 
-from .models import Member
+from .models import Member, Profile
 # redierct - url을 이동. name으로 접근. render처럼 context값을 넘기지는 못함.
 # render - 화면에 html파일을 띄우기때문에 url이안변함. context값 넘길 수 있음.
 # reverse - 
@@ -75,3 +75,25 @@ def logout(request):
     if request.session['user_phone']:
         del request.session['user_phone']
         return redirect('mainpage:mainhome')
+
+
+### 추가된부분 ###
+# 프로필
+# from django.views.generic.detail import DetailView
+# class ProfileView(DetailView):
+#     context_object_name = 'profile_user'
+#     model = Profile
+#     template_name = 'member/profile.html'
+
+def ProfileView(request, pk):
+    profiles = Profile.objects.get(pk=pk)
+    if profiles:
+        # user = profiles.user_name
+        context = {
+            'nickname': profiles.nickname,
+            'description': profiles.description,
+            'image': profiles.image,            
+            }
+        return render(request, 'member/profile.html', context)
+    else:
+        return redirect('mainpage:mainhome', profiles.pk)

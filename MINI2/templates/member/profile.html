@@ -1,3 +1,5 @@
+<!-- calcapp/calcpage_user.html, 해당 pk 프로필 -->
+
 {% extends 'mainpage/mainpage.html' %}
 {% load static %}
 {% block content %}
@@ -6,6 +8,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+    .round {
+    border-radius: 50%;
+    }
+</style>
 
 {% include 'calcapp/calcpage_common.html' %}
 
@@ -35,6 +42,26 @@
         <div class="doctor__item">
             <div class="row">
                 <div class="col-lg-6 order-lg-1">
+                    <div class="row">
+                        <!-- 프로필 -->
+                        <div class="col-xs-6 col-md-3">
+                            {% if image %}
+                            <img class="round" src="{{image.url}}" width="200"> <br>
+                            {% else %}
+                            <img class="round" src="https://i.stack.imgur.com/34AD2.jpg" width="200"> <br>
+                            {% endif %}
+                        </div>
+                    
+                        <div class="col-xs-6 col-md-3">
+                            {% if nickname %}
+                            <h2>{{nickname}}</h2>
+                            {% endif %}
+                            <!-- {% if user == profile_user %}   로그인한 사용자와 프로필 소유자가 일치할 때만 프로필 편집이 가능하도록 -->
+                            <a href="#"><button type="button" class="btn btn-default">프로필 편집</button></a></h2>
+                            <!-- {% endif %} -->
+                        </div>
+                        <!-- 프로필 여기까지 -->
+                    </div>                   
                     <div class="doctor__item__pic">
                         <!-- 이미지 크기 수정  -->
                     </div>
@@ -141,24 +168,6 @@
                     <!-- <a href="#" class="primary-btn">상세현황</a> -->
                 </div>
             </div>
-            <!-- <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <div class="pricing__item__title">
-                        <p>👑</p>
-                        <h3>수당현황
-                        </h3>
-                    </div>
-                    <ul>
-                        <li>
-                            <span>내가 받을 수 있는 교육수당은?</span>
-                        </li>
-                        <li>
-                            <span>'3'회차, 오늘 기준 '45,000'원</span>
-                        </li>
-                    </ul>
-                    <a href="#" class="primary-btn">지난달 내역</a>
-                </div>
-            </div> -->
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-6">
@@ -195,78 +204,8 @@
                             {% endfor %}
                         <tbody>
                     </table>
-                    <!-- test -->
-                    <!-- <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {% for userinfo in userinfos %}
-                            <tr>
-                                <td>{{userinfo.id}}</td>
-                                <td>{{userinfo.title}}
-                                    {% if userinfo.topRated %}
-                                    <strong>TOP RATED</strong>
-                                    {% endif %}
-                                </td>
-                                <td>{{userinfo.description}}</td>
-                            </tr>
-                            {% endfor%}
-                        </tbody>
-                    </table> -->
-                    <!-- test -->
                 </div>
             </div>
-            <!-- <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <div class="pricing__item__title">
-                        <p>👑</p>
-                        <h3>지난달 내역</h3>
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">회차</th>
-                                <th scope="col">수당</th>
-                                <th scope="col">누적</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>11</td>
-                                <td>11</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>11</td>
-                                <td>22</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>11</td>
-                                <td>33</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <th scope="row">총액</th>
-                            <td colspan="2">66</td>
-                        </tfoot>
-                    </table>
-                    <button type="button" class="btn btn-primary" data-toggle="popover" data-placement="top"
-                        title="지급 기준" data-content="
-                📌단위기간*출석률이 80% 이상일 경우에 한하여 교육수당 지급<br>
-                📌교육수당 지급금액은 월 최대 300,000원<br>
-                (단위기간: 교육 시작일을 기준으로 1개월 단위로 나눈 기간)
-                "> 지급 기준
-                    </button>
-                </div>
-            </div> -->
         </div>
     </div>
 </section>
@@ -279,3 +218,24 @@
 </script>
 
 {% endblock content %}
+
+<!-- 
+<div class="row">
+    <div class="col-xs-6 col-md-3">
+        {% if profile_user.profile.image %}
+        <img class="round" src="{{profile_user.profile.image.url}}" width="200"> <br>
+        {% else %}
+        <img class="round" src="https://i.stack.imgur.com/34AD2.jpg" width="200"> <br>
+        {% endif %}
+    </div>
+
+    <div class="col-xs-6 col-md-3">
+        {% if profile_user.profile.nickname %}
+        <h2>{{profile_user.profile.nickname}}</h2>
+        {% endif %}
+        {% if user == profile_user %}           
+        <a href="#">
+            <button type="button" class="btn btn-default">프로필 편집</button></a></h2>
+        {% endif %}
+    </div>
+</div> -->

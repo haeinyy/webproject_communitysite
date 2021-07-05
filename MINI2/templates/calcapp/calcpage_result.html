@@ -1,6 +1,12 @@
 {% extends 'mainpage/mainpage.html' %}
 {% block content %}
 
+<!-- css/js -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
 {% include 'calcapp/calcpage_common.html' %}
 
 <!-- Breadcrumb Section Begin -->
@@ -11,7 +17,7 @@
                 <div class="breadcrumb__text">
                     <h2>마이페이지</h2>
                     <div class="breadcrumb__links">
-                        <a href="{% url 'mainhome' %}">Home</a>
+                        <a href="{% url 'mainpage:mainhome' %}">Home</a>
                         <a href="{% url 'calcapp:calcpage_user' %}">내정보</a>
                         <a href="{% url 'calcapp:calcpage_info' %}">교육정보</a>
                         <span>계산기</span>
@@ -50,7 +56,21 @@
                 </div>
             </div>
         </div>
+        <button type="button" class="btn btn-primary" data-toggle="popover" data-placement="top"
+        title="지급 기준" data-content="
+📌단위기간*출석률이 80% 이상일 경우에 한하여 교육수당 지급<br>
+📌교육수당 지급금액은 월 최대 300,000원<br>
+(단위기간: 교육 시작일을 기준으로 1개월 단위로 나눈 기간)
+"> 지급 기준
+    </button>
     </div>
 </section>
 <!-- Pricing Section End -->
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    });
+</script>
+
 {% endblock %}
