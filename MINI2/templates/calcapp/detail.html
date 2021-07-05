@@ -13,6 +13,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
@@ -38,9 +40,21 @@
             <h2>{{ blog.title }}</h2>
             <p>{{ blog.pub_date }}</p>
             <p>{{ blog.body }}</p>
-            <a href="{% url 'home' %}">돌아가기</a>
+            <br>
+            {% if blog.images %}
+            <img src="{{ blog.images.url }}" width="500" height="500">
+            {% endif %}
+            <br>
+            <br>
+            <!-- 돌아가기 -->
+            <a href="{% url 'calcapp:home' %}"><i class="fas fa-directions"></i></a>
+            <!-- 수정하기 -->
+            <a href="{% url 'calcapp:update' blog.id %}"><i class="fas fa-edit"></i></a>
+            <!-- 삭제하기 -->
+            <a href="{% url 'calcapp:delete' blog.id %}"><i class="fas fa-trash-alt"></i></a>
         </div>
     </div>
 </div>
 <br>
+
 {% endblock content %}

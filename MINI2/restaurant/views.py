@@ -132,7 +132,11 @@ def restaurant_detail(request): # = None):
                 rest_starscore = starscore
                 #입력 안된 것 : seenum, rmd
             )
+<<<<<<< HEAD
             if 'rest_img' in locals() :
+=======
+            if 'rest_img1' in locals() :
+>>>>>>> 4c459b79fa2e74abb1044bafedaed4a4107ccf59
                 rest.rest_img1 = rest_img1
             if 'rest_img2' in locals() :
                 rest.rest_img2 = rest_img2
