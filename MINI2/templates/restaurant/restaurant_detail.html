@@ -1,0 +1,183 @@
+{% include 'mainpage/load-box.html' %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/restaurant.css">
+</head>
+
+<body>
+    <!-- HEADER-BOX START -->
+    {% include 'mainpage/header-box.html' %}
+    <!-- HEADER-BOX END -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/dogie.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>맛집 게시판</h2>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <span>News</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- MIDDLE-BOX START -->
+    <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <!-- 실제 페이지 내용 쓰기 START-->
+<<<<<<< HEAD
+                <!-- 검색창 시작 -->
+                {% include 'restaurant/restaurant_search.html' %}
+                <!-- 검색창 끝-->
+                <br>
+                <br>
+=======
+
+                <!-- 검색창 시작 -->
+                {% include 'restaurant/restaurant_search.html' %}
+                <!-- 검색창 끝-->
+
+>>>>>>> e66c8b76f931ca746953a258c8dd77d6292f917b
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-11 col-md-10 col-centered">
+
+                            <div id="carousel1" class="carousel slide" data-ride="carousel" data-type="multi"
+                                data-interval="2500">
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <div class="carousel-col">
+                                            <img src="{{rest.rest_img1}}" class="block">
+                                            {% comment %} <div class="block red img-responsive"></div> {% endcomment %}
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="carousel-col">
+                                            <img src="{{rest.rest_img2}}" class="block">
+                                            {% comment %} <div class="block green img-responsive"></div> {% endcomment
+                                            %}
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="carousel-col">
+                                            <img src="{{rest.rest_img3}}" class="block">
+                                            {% comment %} <img src=/static/img/dogie.jpg class="block"> {% endcomment %}
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="carousel-col">
+                                            <img src="{{rest.rest_img4}}" class="block">
+<<<<<<< HEAD
+                                            {% comment %} <div class="block yellow img-responsive"></div> {% endcomment %}
+=======
+                                            {% comment %} <div class="block yellow img-responsive"></div> {% endcomment
+                                            %}
+>>>>>>> e66c8b76f931ca746953a258c8dd77d6292f917b
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Controls -->
+                                <div class="left carousel-control">
+                                    <a href="#carousel1" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </div>
+                                <div class="right carousel-control">
+                                    <a href="#carousel1" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% comment %} ########################################## {% endcomment %}
+
+<<<<<<< HEAD
+                <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
+                    <div class="testimonial__item">
+                        <h1>{{ rest.rest_name }}</h1>
+                        <div class="rating">
+                            <h3>{{ rest.rest_score }}</h3>
+                            {% for x in rest.rest_starscore %}
+                                <i class="fa fa-star"></i>
+                            {% endfor %}
+                        </div>
+                        <br>
+                        <br>
+                        <div>가게 주소 : {{ rest.rest_address }}</div>
+                        <div>음식 종류 : {{ rest.rest_kind }}</div>
+                    </div>
+                    <br>
+                    <br>
+                    <div>
+                        <div>지도 api pin 찍어줄것</div>
+                    </div>
+                    <div>{{ rest.rest_seenum }}</div>
+                    <br>
+                    <div>가게지도 API</div>
+                    <br>
+
+                    <br>
+                    <div>업데이트날짜 {{ rest.rest_update }}</div>
+                    <br>
+
+                    <br>
+                    <div>{{ rest.rmd }}</div>
+                    <br>
+
+                    <br>
+                    <div>리뷰란</div>
+=======
+                <h1>가게이름 : {{ rest.rest_name }}</h1>
+                <br>
+                <h1>{{ rest.rest_score }}</h1>
+                <br>
+                <div>{{ rest.rest_seenum }}</div>
+                <br>
+                <div>가게지도 API</div>
+                <br>
+                <div>{{rest.rest_address }}</div>
+                <br>
+                <div>업데이트날짜 {{ rest.rest_update }}</div>
+                <br>
+                <div>{{ rest.rest_kind }}</div>
+                <br>
+                <div>{{ rest.rmd }}</div>
+                <br>
+                <div>지도 api pin 찍어줄것</div>
+                <br>
+                <div>리뷰란</div>
+>>>>>>> e66c8b76f931ca746953a258c8dd77d6292f917b
+
+                    <!-- 실제 페이지 내용 쓰기 END-->
+            </div>
+        </div>
+    </section>
+    <!-- MIDDLE-BOX END -->
+
+    <!-- FOOTER-BOX START -->
+    {% include 'mainpage/footer-box.html' %}
+    <!-- FOOTER-BOX END -->
+
+    <!-- JS부분 -->
+    {% include 'mainpage/js-script.html' %}
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+    <script defer src='/static/js/restaurant.js'></script>
+
+
+</body>
+
+</html>
