@@ -76,23 +76,34 @@ def restaurant_detail(request): # = None):
                 rest_photo_url = img.attrs['src']
                 img_url_list.append(rest_photo_url)    
 
-            name = soup.select('.title h1')
+            name = soup.select('.restaurant_name')
             rest_name = name[0].text #가게명
+            try :
+                score = soup.select('.rate-point')
+                rest_score = score[0].text #점수
+            except :
+                rest_score = 0
 
-            td = soup.select('.only-desktop td')
-            td
-            rest_address = td[0].text #가게 주소 도로명, 지번주소
+            starscore = 0
+            starscore = int(float(rest_score))
+            starscore = '*' * starscore
 
-            #rest_tel = td[1].text #가게 전화번호
+            td = soup.select('section.restaurant-detail > ul > li:nth-child(1) > div.Restaurant__InfoItemLabel > div.Restaurant__InfoItemLabel--RoadAddressText')
+            rest_address = td[0].text #가게 주소 도로명
+
+            tel = soup.select('section.restaurant-detail > table > tbody > tr:nth-child(2) > td')
+            rest_tel = tel[0].text #가게 전화번호
 
             td = soup.select('body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(3) > td')
             rest_kind = td[0].text #가게음식종류
 
-            #td = soup.select('body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(4) > td')
-            #rest_price = td[0].text #가격대
+            td = soup.select('body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(4) > td')
+            rest_price = td[0].text #가격대
 
             rest = Rest(
                 rest_update = timezone.now(),
+                rest_tel = rest_tel,
+                rest_price = rest_price,
                 rest_name = rest_name,
                 rest_address = rest_address,
                 rest_kind = rest_kind,
@@ -100,8 +111,10 @@ def restaurant_detail(request): # = None):
                 rest_img2 = img_url_list[1],
                 rest_img3 = img_url_list[2],
                 rest_img4 = img_url_list[3],
-                #입력 안된 것 : score, seenum, rmd
-                rest_url = rest_url
+                rest_score = rest_score,
+                rest_url = rest_url,
+                rest_starscore = starscore
+                #입력 안된 것 : seenum, rmd
             )
             rest.save()
         else :
@@ -109,6 +122,7 @@ def restaurant_detail(request): # = None):
     else :
         rest = Rest.objects.get(rest_name__contains=search)
 
+    
     context = { 'rest' : rest }
     return render(request, 'restaurant/restaurant_detail.html', context)
 
