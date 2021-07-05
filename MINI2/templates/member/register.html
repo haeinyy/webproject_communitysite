@@ -97,6 +97,10 @@
             #register {
                 left: 450px;
             }
+            #error-login__span{
+                color:red;
+                padding-left: 90px;
+            }
             </style>
 
     </head>
@@ -118,6 +122,7 @@
                     <input type="text" class="input-field" placeholder="휴대폰번호" minlength="11" maxlength="11" name="user_phone" required>
                     <input type="password" class="input-field" placeholder="비밀번호" minlength="4" maxlength="15" name="user_pw" required>
                     <input type="checkbox" class="checkbox"><span>비밀번호 저장</span>
+                    <span id="error-login__span">{{error_messages}}</span>
                     <button class="submit">로그인</button> 
                 </form>
                 <form id="register" action="/member/register/" method="POST" class="input-group" onsubmit="return joinform_check();">
@@ -130,10 +135,10 @@
                         <input type="checkbox" class="checkbox"><span>개인정보이용동의</span>
                         <button>회원가입</button>
                     </table>
-                    
                 </form>
+                
             </div>
-            {{ error_pw }}
+            <!--{{ error_pw }}-->
         </div>
         <script>
             var x = document.getElementById("login");
@@ -186,24 +191,19 @@
                 // 체크 - 비밀번호 영문자+숫자+특수조합(4~25자리 입력) 정규식
                 var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,15}$/;
                 if (!pwdCheck.test(pwd.value)) {
-<<<<<<< HEAD
-                    alert("비밀번호는 영문자+숫자+특수조합(4~25자리 입력)");
-=======
                     alert("비밀번호는 영문자+숫자+특수문자 조합으로 4~15자리 사용해야 합니다.");
->>>>>>> e66c8b76f931ca746953a258c8dd77d6292f917b
                     pwd.focus();
                     return false;
                 }
                 
                 // 체크 - 휴대폰번호
-                var reg = /^[0-9]+/g; //숫자만 입력하는 정규식
-                if (!reg.test(phone.value)) {
+                // var reg = /^[0-9]+/g; //숫자만 입력하는 정규식
+                var reg = /^[0-9]{11}/g; //숫자만 입력하는 정규식
+                if ( !reg.test(phone.value)) {
                     alert("전화번호 11자리를 입력해주세요.");
                     phone.focus();
                     return false;
                 }
-                
-
                 // document.join_form.submit(); //유효성 검사의 포인트  
             }
 

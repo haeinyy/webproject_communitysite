@@ -1,10 +1,6 @@
-{% include 'mainpage/load-box.html' %}
-</head>
+{% extends 'mainpage/mainpage.html' %}
 
-<body>
-    <!-- HEADER-BOX START -->
-    {% include 'mainpage/header-box.html' %}
-    <!-- HEADER-BOX END -->
+{% block content %}
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
@@ -504,20 +500,4 @@
             </div>
         </div>
     </section>
-    <!-- Testimonials Section End -->
-        <!-- MIDDLE-BOX END -->
-
-
-
-        <!-- FOOTER-BOX START -->
-        {% include 'mainpage/footer-box.html' %}
-        <!-- FOOTER-BOX END -->
-
-        <!-- JS부분 -->
-        {% include 'mainpage/js-script.html' %}
-
-
-
-</body>
-
-</html>
+{% endblock content %}
