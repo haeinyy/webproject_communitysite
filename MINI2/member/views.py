@@ -73,17 +73,17 @@ def login(request):
                 request.session['user_name'] = m.user_name
                 return redirect('mainpage:mainhome')
 
-        m = Member.objects.get(user_phone=u_id)
-        error_messages = '로그인 실패'   
-        if m.user_pw == u_pw:
-            # 1. DB와 확인해서 로그인 -> db에 아이디가 있다면 로그인 성공
-            # 세션에 로그인 관련 정보 저장 - 휴대폰번호, 이름
-            request.session['user_phone'] = m.user_phone
-            request.session['user_name'] = m.user_name
-            return redirect('mainpage:mainhome')
-        else:
-            return render(request, 'member/register.html', 
-                        {'error_messages':error_messages})
+        # m = Member.objects.get(user_phone=u_id)
+        # error_messages = '로그인 실패'   
+        # if m.user_pw == u_pw:
+        #     # 1. DB와 확인해서 로그인 -> db에 아이디가 있다면 로그인 성공
+        #     # 세션에 로그인 관련 정보 저장 - 휴대폰번호, 이름
+        #     request.session['user_phone'] = m.user_phone
+        #     request.session['user_name'] = m.user_name
+        #     return redirect('mainpage:mainhome')
+        # else:
+        #     return render(request, 'member/register.html', 
+        #                 {'error_messages':error_messages})
 
 def logout(request):
     if request.session['user_phone']:
