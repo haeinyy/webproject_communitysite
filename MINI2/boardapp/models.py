@@ -14,8 +14,8 @@ class BoardAllContentList(models.Model):
     seenum = models.IntegerField(null=True)
     like = models.IntegerField(null=True)
     board_kind = models.CharField(max_length=20)
-    #### 추가 ####
-    likes = models.ManyToManyField(User, related_name="like_post", blank=True)
+    # #### 추가 ####
+    # likes = models.ManyToManyField(User, related_name="like_post", blank=True)
 
     def __str__(self):
         return self.title
