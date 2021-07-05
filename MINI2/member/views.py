@@ -58,17 +58,10 @@ def login(request):
         u_pw = request.POST['user_pw']
         
         try:
-<<<<<<< HEAD
-            pass
-            
-        except:            
-            return HttpResponse('로그인 실패')
-=======
             m = Member.objects.get(user_phone=u_id)
         
         except:
             return HttpResponse('등록된 회원이 없습니다.')
->>>>>>> 4c459b79fa2e74abb1044bafedaed4a4107ccf59
         else:
             if m.user_pw != u_pw:
                 error_messages = '로그인 실패'   
@@ -80,29 +73,17 @@ def login(request):
                 request.session['user_name'] = m.user_name
                 return redirect('mainpage:mainhome')
 
-<<<<<<< HEAD
-            # 세션에 로그인 관련 정보 저장
-            request.session['user_phone'] = user_phone
-
-            # 해인
-            session_value = request.session['user_phone'] 
-            m = Member.objects.get(user_phone=session_value)
-            request.session['user_name'] = m.user_name
-
-            # 
-=======
-        m = Member.objects.get(user_phone=u_id)
-        error_messages = '로그인 실패'   
-        if m.user_pw == u_pw:
-            # 1. DB와 확인해서 로그인 -> db에 아이디가 있다면 로그인 성공
-            # 세션에 로그인 관련 정보 저장 - 휴대폰번호, 이름
-            request.session['user_phone'] = m.user_phone
-            request.session['user_name'] = m.user_name
->>>>>>> 4c459b79fa2e74abb1044bafedaed4a4107ccf59
-            return redirect('mainpage:mainhome')
-        else:
-            return render(request, 'member/register.html', 
-                        {'error_messages':error_messages})
+        # m = Member.objects.get(user_phone=u_id)
+        # error_messages = '로그인 실패'   
+        # if m.user_pw == u_pw:
+        #     # 1. DB와 확인해서 로그인 -> db에 아이디가 있다면 로그인 성공
+        #     # 세션에 로그인 관련 정보 저장 - 휴대폰번호, 이름
+        #     request.session['user_phone'] = m.user_phone
+        #     request.session['user_name'] = m.user_name
+        #     return redirect('mainpage:mainhome')
+        # else:
+        #     return render(request, 'member/register.html', 
+        #                 {'error_messages':error_messages})
 
 def logout(request):
     if request.session['user_phone']:
