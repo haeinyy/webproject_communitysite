@@ -51,6 +51,9 @@
             </div>
             <div class="row">
                 <div class="testimonial__slider owl-carousel">
+
+
+                    {% for rest in rest_list_score %}
                     <div class="col-lg-6">
                         <div class="testimonial__item">
                             <div class="testimonial__author">
@@ -58,22 +61,22 @@
                                     <i class="fa fa-quote-left"></i>
                                 </div>
                                 <div class="testimonial__author__text">
-                                    <h5>Catanis Greimar</h5>
-                                    <span>Businesswoman</span>
+                                    <h5>{{rest.rest_name}}</h5>
+                                    <span>{{rest.rest_kind}}</span>
                                 </div>
                             </div>
                             <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                <h3>{{ rest.rest_score }}</h3>
+                                {% for x in rest.rest_starscore %}
+                                    <i class="fa fa-star"></i>
+                                {% endfor %}
                             </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                            vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
+                            <p>{{rest.rest_address}}</p>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    {% endfor %}
+
+                    {% comment %} <div class="col-lg-6">
                         <div class="testimonial__item">
                             <div class="testimonial__author">
                                 <div class="testimonial__author__icon">
@@ -94,28 +97,6 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
-                            </div>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                            vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="testimonial__item">
-                            <div class="testimonial__author">
-                                <div class="testimonial__author__icon">
-                                    <i class="fa fa-quote-left"></i>
-                                </div>
-                                <div class="testimonial__author__text">
-                                    <h5>Catanis Greimar</h5>
-                                    <span>Businesswoman</span>
-                                </div>
                             </div>
                             <div class="rating">
                                 <i class="fa fa-star"></i>
@@ -194,6 +175,28 @@
                             vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="testimonial__item">
+                            <div class="testimonial__author">
+                                <div class="testimonial__author__icon">
+                                    <i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial__author__text">
+                                    <h5>Catanis Greimar</h5>
+                                    <span>Businesswoman</span>
+                                </div>
+                            </div>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
+                            vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
+                        </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </div>
@@ -364,138 +367,31 @@
             </div>
             <div class="row">
                 <div class="testimonial__slider owl-carousel">
+
+
+                    {% for rest in rest_list_score %}
                     <div class="col-lg-6">
                         <div class="testimonial__item">
                             <div class="testimonial__author">
+                                <img src="{{ rest.rest_img1 | default:'/static/img/dogie.jpg'}}" class="block">
                                 <div class="testimonial__author__icon">
                                     <i class="fa fa-quote-left"></i>
                                 </div>
                                 <div class="testimonial__author__text">
-                                    <h5>Catanis Greimar</h5>
-                                    <span>Businesswoman</span>
+                                    <h5>{{rest.rest_name}}</h5>
+                                    <span>{{rest.rest_kind}}</span>
                                 </div>
                             </div>
                             <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                <h3>{{ rest.rest_score }}</h3>
+                                {% for x in rest.rest_starscore %}
+                                    <i class="fa fa-star"></i>
+                                {% endfor %}
                             </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                            vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
+                            <p>{{rest.rest_address}}</p>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="testimonial__item">
-                            <div class="testimonial__author">
-                                <div class="testimonial__author__icon">
-                                    <i class="fa fa-quote-left"></i>
-                                </div>
-                                <div class="testimonial__author__text">
-                                    <h5>Catanis Greimar</h5>
-                                    <span>Businesswoman</span>
-                                </div>
-                            </div>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                            vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="testimonial__item">
-                            <div class="testimonial__author">
-                                <div class="testimonial__author__icon">
-                                    <i class="fa fa-quote-left"></i>
-                                </div>
-                                <div class="testimonial__author__text">
-                                    <h5>Catanis Greimar</h5>
-                                    <span>Businesswoman</span>
-                                </div>
-                            </div>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                            vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="testimonial__item">
-                            <div class="testimonial__author">
-                                <div class="testimonial__author__icon">
-                                    <i class="fa fa-quote-left"></i>
-                                </div>
-                                <div class="testimonial__author__text">
-                                    <h5>Catanis Greimar</h5>
-                                    <span>Businesswoman</span>
-                                </div>
-                            </div>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                            vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="testimonial__item">
-                            <div class="testimonial__author">
-                                <div class="testimonial__author__icon">
-                                    <i class="fa fa-quote-left"></i>
-                                </div>
-                                <div class="testimonial__author__text">
-                                    <h5>Catanis Greimar</h5>
-                                    <span>Businesswoman</span>
-                                </div>
-                            </div>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                            vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="testimonial__item">
-                            <div class="testimonial__author">
-                                <div class="testimonial__author__icon">
-                                    <i class="fa fa-quote-left"></i>
-                                </div>
-                                <div class="testimonial__author__text">
-                                    <h5>Catanis Greimar</h5>
-                                    <span>Businesswoman</span>
-                                </div>
-                            </div>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                            vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

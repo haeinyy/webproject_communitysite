@@ -6,8 +6,15 @@ urlpatterns = [
     
     # 테스트
     # path('index/', views.index2),
-    # path('home/', views.home, name='home'),
-    # path('detail/<int:blog_id>', views.detail, name='detail'),
+
+    # 공지사항
+    path('home/', views.home, name='home'),
+    path('detail/<int:blog_id>/', views.detail, name='detail'),
+    path('create/', views.create, name='create'),
+    path('postcreate/', views.postcreate, name='postcreate'),
+    path('update/<int:blog_id>/', views.update, name='update'),
+    path('delete/<int:blog_id>/', views.delete, name='delete'),
+    path('search', views.search, name='search'),
         
     # 연산하는애
     path('calcpage', views.calcpage, name="calcpage"),

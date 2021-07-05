@@ -1,6 +1,6 @@
 from django.http.response import HttpResponse
 from restaurant.models import Rest
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import render
 from django.utils import timezone
 
 
@@ -13,11 +13,11 @@ import time
 # Create your views here.
 
 def restaurant(request):
-    # rest_list_offi = Rest.objects.filter(Rest_rmd='offi')
-    # rest_list_kfq = Rest.objects.filter(Rest_rmd='kfq')
-    # rest_list_score = Rest.objects.order_by('-Rest_score')
-    # context = { 'rest_list_offi' : rest_list_offi, 'rest_list_kfq' : rest_list_kfq , 'rest_list_score' : rest_list_score }
-    return render(request, 'restaurant/restaurant.html') #,context)
+    rest_list_offi = Rest.objects.filter(rest_rmd='offi')
+    rest_list_kfq = Rest.objects.filter(rest_rmd='kfq')
+    rest_list_score = Rest.objects.order_by('-rest_score')
+    context = { 'rest_list_offi' : rest_list_offi, 'rest_list_kfq' : rest_list_kfq , 'rest_list_score' : rest_list_score }
+    return render(request, 'restaurant/restaurant.html',context)
     
 
 def restaurant_list(request):    #,rest_rmd): #rest_rmd : 어떤 추천(offi,kfq,starscore) 리스트인지
@@ -56,8 +56,16 @@ def restaurant_detail(request): # = None):
 
         ser_btn=driver.find_element_by_class_name("btn-search")# 검색찾기
         ser_btn.click()
-
-        elem2 = driver.find_element_by_class_name('thumb')
+        #################################################################
+        # html = driver.page_source
+        # soup = BeautifulSoup(html, 'html.parser')
+        # if soup.select('body > main > article > div.column-wrapper > div > div > section > div.search_result_empty_message > div > p') == '검색한 식당이 망고플레이트에 보이지 않을 땐??':
+        #     return HttpResponse('검색어가 존재하지 않습니다.')
+        #################################################################
+        try :
+            elem2 = driver.find_element_by_class_name('thumb')
+        except :
+            return HttpResponse('검색어가 존재하지 않습니다.')
         action_chains = ActionChains(driver)
         action_chains.move_to_element_with_offset(elem2, 0, 0).perform()
         action_chains.click().perform()
@@ -74,7 +82,19 @@ def restaurant_detail(request): # = None):
             img_url_list = [] #이미지 주소 리스트
             for img in img_list: 
                 rest_photo_url = img.attrs['src']
-                img_url_list.append(rest_photo_url)    
+                img_url_list.append(rest_photo_url)
+
+            if len(img_url_list) > 0 :
+                rest_img1 = img_url_list[0]
+            if len(img_url_list) > 1 :
+                rest_img2 = str()
+                for i in img_url_list[1:] :
+                    rest_img2 += i + '@@'
+                rest_img2 = rest_img2[:-2]
+
+
+            # for i in range(1,len(img_url_list)+1):
+            #     globals()['rest_img{}'.format(i)] = [x for x in img_url_list]
 
             name = soup.select('.restaurant_name')
             rest_name = name[0].text #가게명
@@ -107,15 +127,15 @@ def restaurant_detail(request): # = None):
                 rest_name = rest_name,
                 rest_address = rest_address,
                 rest_kind = rest_kind,
-                rest_img1 = img_url_list[0],
-                rest_img2 = img_url_list[1],
-                rest_img3 = img_url_list[2],
-                rest_img4 = img_url_list[3],
                 rest_score = rest_score,
                 rest_url = rest_url,
                 rest_starscore = starscore
                 #입력 안된 것 : seenum, rmd
             )
+            if 'rest_img1' in locals() :
+                rest.rest_img1 = rest_img1
+            if 'rest_img2' in locals() :
+                rest.rest_img2 = rest_img2
             rest.save()
         else :
             rest = Rest.objects.get(rest_url = rest_url)
@@ -123,81 +143,5 @@ def restaurant_detail(request): # = None):
         rest = Rest.objects.get(rest_name__contains=search)
 
     
-    context = { 'rest' : rest }
+    context = { 'rest' : rest } 
     return render(request, 'restaurant/restaurant_detail.html', context)
-
-# def restaurant_search(request):
-#     search = request.POST.get('search') #검색어를 단축어로 했을 때 있는지 없는지 확인해야함...
-#     if not Rest.objects.filter(rest_name__contains=search).exists() :  #해당 가게명이 데이터 베이스에 없다.
-#         ##########################      크롤링     #######################################
-#         url = 'https://www.mangoplate.com/'
-
-#         driver =  webdriver.Chrome(executable_path='C:/pr2/webproject_communitysite/MINI2/static/chromedriver.exe')
-#         #("/static/chromedriver.exe")
-#         driver.get(url)
-#         time.sleep(0.5)
-#         elem = driver.find_element_by_class_name('Header__LogoIcon')
-#         action_chains = ActionChains(driver)
-#         action_chains.move_to_element_with_offset(elem, 0, 0).perform()
-#         action_chains.click().perform()
-
-#         element=driver.find_element_by_name('main-search') #검색란 찾기
-#         element.send_keys(search) #검색어 입력
-
-#         ser_btn=driver.find_element_by_class_name("btn-search")# 검색찾기
-#         ser_btn.click()
-
-#         elem2 = driver.find_element_by_class_name('thumb')
-#         action_chains = ActionChains(driver)
-#         action_chains.move_to_element_with_offset(elem2, 0, 0).perform()
-#         action_chains.click().perform()
-#         html = driver.page_source
-#         rest_url = driver.current_url.split('/')[-1]
-#         soup = BeautifulSoup(html, 'html.parser')
-
-        
-
-#         name = soup.select('.title h1')
-#         rest_name = name[0].text #가게명
-
-#         td = soup.select('.only-desktop td')
-#         td
-#         rest_address = td[0].text #가게 주소 도로명, 지번주소
-
-#         #rest_tel = td[1].text #가게 전화번호
-
-#         td = soup.select('body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(3) > td')
-#         rest_kind = td[0].text #가게음식종류
-
-#         #td = soup.select('body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(4) > td')
-#         #rest_price = td[0].text #가격대
-
-#         img_list = soup.select('.restaurant-photos-item img')
-#         img_list #이미지 주소
-#         img_url_list = [] #이미지 주소 리스트
-#         for img in img_list: 
-#             rest_photo_url = img.attrs['src']
-#             img_url_list.append(rest_photo_url)
-
-
-#         r = Rest(
-#             rest_update = timezone.now(),
-#             rest_name = rest_name,
-#             rest_address = rest_address,
-#             rest_kind = rest_kind,
-#             rest_img = img_url_list, #리스트로 저장됨
-#             #입력 안된 것 : score, seenum, rmd
-#             rest_url = rest_url
-#         )
-#         r.save()
-
-#         ##################################################################################
-#         # 데이터베이스에 저장
-
-    
-#     r = Rest.objects.filter(rest_name__contains=search)
-    
-        
-#     restaurant_detail(request, r[0].rest_url)
-#     # return render('restaurant/restaurant_detail', { 'rest_url' : rest.rest_url})
-#     #             #'restaurant:detail'
