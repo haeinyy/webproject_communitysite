@@ -1,4 +1,4 @@
-{% include 'mainpage/load-box.html' %}
+ {% include 'mainpage/load-box.html' %}
 <style>
     .heart_poisition {
         position: absolute;
@@ -57,10 +57,12 @@
                     {% endif %}
                     <br><br>
                     <h3>{{ content.title }}</h3>
-                    <h6>작성자 : {{ content.user_id}}</h6>
+                    <h6>작성자 : {{ content.user }}</h6>
                     <h6></h6>
                     <p>{{ content.date }}</p>
-                    <div class='heart_poisition'>
+                    <p>조회수 : {{ content.seenum }}</p>
+                    <!-- 좋아요 -->
+                    {% comment %} <div class='heart_poisition'>
                         <a href = "{% url  'boardapp:like_post' content.id%}">
                             {% if user in content.like.all%}
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -76,7 +78,7 @@
                             </svg>
                             {% endif %}
                         </a>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
                 <!-- 게시물 내용 -->
                 <div class="card-body">
@@ -92,7 +94,7 @@
                 <h5>댓글</h5>
                 {% for comment in content.content.all %}
                 <p>{{ comment.comment_date }}</p>
-                <p>{{ comment.comment_writer }}</p>
+                <p><b>{{ comment.comment_writer }}</b></p>
                 <p>{{ comment.comment_content }}</p>
                 {% empty %}
                 <p>댓글이 없습니다ㅠㅠ 새로운 댓글을 달아주세요^^</p>
@@ -115,6 +117,7 @@
                 <br>
                 <a href="{% url 'boardapp:writetext' %}"><button type="submit"
                         class="btn btn-secondary pull-left">글쓰기</button></a>
+                <a href="/boardapp/{{content.id}}/content_delete/"><button type="submit" class="btn btn-secondary">삭제</button></a>
                 <a href="#" class="top"><button type="submit" class="btn btn-secondary pull-right">TOP</button></a>
 
                 {% if content.board_kind == '자유게시판' %}

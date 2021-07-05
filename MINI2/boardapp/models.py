@@ -14,7 +14,7 @@ class BoardAllContentList(models.Model):
     user = models.CharField(max_length=20) # main user db랑 연결 해야함
     text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    seenum = models.IntegerField(null=True)
+    seenum = models.PositiveIntegerField(default=0)
     # like = models.ManyToManyField(
     #     settings.AUTH_USER_MODEL, # this is preferred than just 'User'
     #     blank=True, # blank is allowed
