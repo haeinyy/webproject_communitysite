@@ -10,6 +10,7 @@ def freeboard(request):
     content_list = list(reversed(content_list)) # 최근순부터 출력하기 위해
     return render(request, 'boardapp/board_free.html', {'content_list':content_list})
 
+
 # 글쓰기 양식
 def writetext(request):
     content = BoardAllContentList()
@@ -42,6 +43,7 @@ def content_view(request, pk):
     content = BoardAllContentList.objects.get(pk=pk)
     return render(request, 'boardapp/content_view.html', {'content':content})
 
+
 # 게시글 댓글
 def comment_write(request, pk):
     # if request.method == 'POST':
@@ -58,18 +60,22 @@ def like_post(request, pk):
     else:
         content.like.add(request.user)
 
+
 # 페이지네이션
 def index(request):
-    # 입력 파라미터
-    page = request.GET.get('page', '1')  # 페이지
-    # content_list = BoardAllContentList.objects.all()
-    # content_list = list(reversed(content_list)) # 최근순부터 출력하기 위해
+    
+    content_list = BoardAllContentList.objects.all()
+    content_list = list(reversed(content_list)) # 최근순부터 출력하기 위해
+    print(content_list)
 
     # 조회
-    content_list = BoardAllContentList.objects.order_by('-create_date')
+    # content_list = BoardAllContentList.objects.order_by('-date')
 
     # 페이징처리
     paginator = Paginator(content_list, 10)  # 페이지당 10개씩 보여주기
+    
+    # 입력 파라미터
+    page = request.GET.get('page', '1')  # 페이지
     page_obj = paginator.get_page(page)
 
-    return render(request, 'boardapp/board_free.html', {'content_list': page_obj})
+    return render(request, 'boardapp/board_free.html', {'page_obj': page_obj})
