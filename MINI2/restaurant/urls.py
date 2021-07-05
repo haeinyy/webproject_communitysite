@@ -6,7 +6,7 @@ from restaurant import views
 app_name = 'restaurant'
 
 urlpatterns = [
-    path('', views.restaurant, name='resta'),
+    path('', views.restaurant, name='rest'),
     path('restaurant_list/', views.restaurant_list, name='list'),
     path('restaurant_detail/', views.restaurant_detail, name='detail'),
         #'<str:rest_url>/',
