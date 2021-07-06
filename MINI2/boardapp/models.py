@@ -4,7 +4,7 @@ from django.db.models.deletion import CASCADE
 from member.models import Member
 from django.conf import settings
 
-#  모든 게시판 게시물 db
+#  모든 자유게시판 게시물 db
 class BoardAllContentList(models.Model):
     title = models.CharField(max_length=100)
     # user = models.ForeignKey(Member, on_delete=models.CASCADE) # main user db랑 연결 해야함
@@ -19,20 +19,13 @@ class BoardAllContentList(models.Model):
     def __str__(self):
         return self.title
 
-# 좋아요 개수
-# class Board_like(models.Model):
-#     user_name = models.ForeignKey(Member, on_delete=models.CASCADE, null=True) # 이용
-#     id = models.ForeignKey(BoardAllContentList, on_delete=models.CASCADE, null=True)
-#     like = models.ManyToManyField(Member, blank=True,related_name='likes') # 좋아요
-    
-
-# 게시물 별 이미지 db
+# # 게시물 별 이미지 db
 class Image(models.Model):
     content = models.ForeignKey(BoardAllContentList, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
 
 
-# 모든 게시판 댓글 db
+# 모든 자유게시판 댓글 db
 class Board_comment(models.Model):
     content = models.ForeignKey(BoardAllContentList, on_delete=models.CASCADE, null=True, related_name='content')
     comment_date = models.DateTimeField(auto_now_add=True)
@@ -43,4 +36,3 @@ class Board_comment(models.Model):
 
     def __str__(self):
         return self.title
-
