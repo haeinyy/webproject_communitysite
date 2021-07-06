@@ -3,7 +3,6 @@ from restaurant.models import Rest
 from django.shortcuts import render
 from django.utils import timezone
 
-
 from selenium import  webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.keys import Keys
@@ -43,7 +42,7 @@ def restaurant_detail(request): # = None):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
 
-        driver =  webdriver.Chrome(executable_path='C:/pr2/webproject_communitysite/MINI2/static/chromedriver.exe', chrome_options=options)
+        driver =  webdriver.Chrome(executable_path='static/chromedriver.exe', chrome_options=options)
         driver.get(url)
         time.sleep(0.5)
         elem = driver.find_element_by_class_name('Header__LogoIcon')
