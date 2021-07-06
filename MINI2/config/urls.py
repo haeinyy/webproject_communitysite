@@ -12,8 +12,5 @@ urlpatterns = [
     path('calcapp/', include('calcapp.urls')),
     path('member/', include('member.urls')),
     path('restaurant/', include('restaurant.urls')),
-
-    # 공지사항
-    # path('home/', calcapp.views.home, name='home'),
-    # path('detail/<int:blog_id>/', calcapp.views.detail, name='detail'),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

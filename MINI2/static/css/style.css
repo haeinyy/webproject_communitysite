@@ -1254,10 +1254,16 @@ ol {
 	padding: 40px 40px 30px 40px;
 }
 
-.testimonial__item .rating {
+/* .testimonial__item .rating {
 	position: absolute;
 	right: 40px;
 	top: 52px;
+} */
+.testimonial__item .rating {
+	position: relative;
+    right: 0;
+    top: 0;
+    margin-bottom: 15px;
 }
 
 .testimonial__item .rating i {
@@ -2396,7 +2402,12 @@ ol {
 		padding: 14px 15px 12px;
 	}
 }
-
+/* .justify-content-md-center:first-child(){
+	float: right !important;
+} */
+#board-free-bottom__btn {
+	float: right !important;
+}
 /* Tablet Device = 768px */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2852,3 +2863,4 @@ ol {
 		padding: 14px 30px 12px;
 	}
 }
+

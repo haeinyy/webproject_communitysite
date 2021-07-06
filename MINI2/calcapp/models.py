@@ -2,7 +2,7 @@ from django.db import models
 from member.models import Member
 from django.utils import timezone
 
-class AttendHistory(models.Model):
+class Attendences(models.Model):
     # name = models.ForeignKey(Member, on_delete=models.DO_NOTHING) # cascade 종류 어떻게 해야할지
     user_phone = models.ForeignKey(Member, on_delete=models.DO_NOTHING) 
     name = models.CharField(max_length=50)
@@ -15,7 +15,7 @@ class AttendHistory(models.Model):
     day_cum_rate = models.FloatField()  
 
     def __str__(self):
-        return f'{self.name}-{self.time}'
+        return f'{self.name}-{self.user_phone}'
 
 class Blog(models.Model):
     title = models.CharField(max_length=200)

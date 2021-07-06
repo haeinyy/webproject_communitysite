@@ -1,8 +1,8 @@
 from django.http import HttpResponse, request
-from . models import Member
+from member.models import Member, Profile
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from . models import AttendHistory, Blog
+from . models import Attendences, Blog
 from calcapp.forms import BlogUpdate
 from django.core.paginator import Paginator
 
@@ -13,8 +13,6 @@ from django.core.paginator import Paginator
 # ---------------------------------------------------------------------------------------
 def donation(request):
     return render(request,'calcapp/donation.html', {} )
-
-
 
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
@@ -78,11 +76,10 @@ def create(request):
     return render(request, 'calcapp/create.html')
 
 def postcreate(request):
-    
     blog = Blog()
-    blog.title = request.GET['title']
-    blog.body = request.GET['body']
-    blog.images = request.FILES['images']
+    blog.title = request.POST.get('title')
+    blog.body = request.POST.get('body')
+    blog.images = request.FILES.get('images')
     blog.pub_date = timezone.datetime.now()
     blog.save()
     return redirect('/calcapp/detail/' + str(blog.id))
@@ -123,43 +120,67 @@ def search(request):
 
 
 # 계산기
-def index(request, pk):
-    # attendances = AttendHistory.objects.all()
-    # str =''
-    # for attendance in attendances:
-    #     str += "<p> name: {} attend: {}".format(attendance.name, attendance.attend)
-    # return HttpResponse(str)
-    
-    attendancesList = AttendHistory.objects.all()
-    # a = '0219'
-    # memberList = Member.objects.all()
-    # attenda = []
-    # for i in attendancesList:
-    #     if i.user_phone == a:
-    #         attenda.append(i)
-
-    context = {
-        'attnedances': attendancesList
-    }
-    return render(request, 'calcapp/calcpage_info.html', context)
-    # return render(request, 'calcapp/index.html', context)
-
-    ## 메모
-    # a = request.session['user_phone']
-
 def calcpage(request):
     pay = int(15000)
     day1 = int(request.POST['num1'])
     result = day1 * pay
     return render(request, 'calcapp/calcpage.html', {'result':result})
 
+# 상세현황 및 수료현황
 def calcpage_result(request):
-    return render(request, 'calcapp/calcpage_result.html', {'name':'name'})
- 
-def calcpage_info(request):
-    return render(request, 'calcapp/calcpage_info.html')
+    attendancesList = Attendences.objects.all()
+    u_phone = request.session['user_phone']
+    
+    try: # 나는 학생이니까 정보가 있찌.
+        user_info_list = Attendences.objects.get(user_phone_id=u_phone)
+        user_profile = Profile.objects.get(user_name_id=u_phone)
+        context = {
+            'u_phone': u_phone,
+            'name': user_info_list.name,
+            'attend': user_info_list.attend,
+            'absent': user_info_list.absent,
+            'time': user_info_list.time,
+            'time_rate': user_info_list.time_rate,
+            'day_rate': user_info_list.day_rate,
+            'time_cum_rate': user_info_list.time_cum_rate,
+            'day_cum_rate': user_info_list.day_cum_rate,
 
-def calcpage_user(request):
-    attendancesList = AttendHistory.objects.all()    
-    context = {'attnedances': attendancesList}
-    return render(request, 'calcapp/calcpage_user.html', context) 
+            'nickname': user_profile.nickname,
+            'description': user_profile.description,
+            'image': user_profile.image,            
+            }
+        return render(request, 'calcapp/calcpage_result.html', context)
+    
+    except: # 나는 관리자니까 정보가 없지.
+        context = {
+            'u_phone': u_phone,
+            'attendances': attendancesList
+        }
+        return render(request, 'calcapp/calcpage_result.html', context)
+        # return HttpResponse('등록된 정보가 없습니다.')
+
+# 프로필
+def ProfileView(request):
+    profiles = Profile.objects.all()
+    u_phone = request.session['user_phone']
+    try:
+        user_profile = Profile.objects.get(user_name_id=u_phone)
+        # user_profile.images = request.FILES.get('images')
+        context = {
+            'u_phone': u_phone,
+            'username': user_profile.user_name,
+            'nickname': user_profile.nickname,
+            'description': user_profile.description,
+            'images': user_profile.images,            
+        }
+        return render(request, 'calcapp/calcpage_result.html', context)
+    
+    except:
+        context = {
+            'u_phone': u_phone,
+            'username': profiles.user_name,
+            'nickname': profiles.nickname,
+            'description': profiles.description,
+            'images': profiles.images,
+        }
+        return render(request, 'calcapp/calcpage_result.html', context)

@@ -37,36 +37,14 @@
             $("#header-box-register__btn").show();
             $("#header-box-logout__btn").hide();
         }
-        
-        // 관리자 아이디만 보이는 기능 - 공지사항, FAQ
+
+        // #admin__btn 인 애들은 session user_phone == '99999999999'이면 보이게하기
         if (session_user_phone=="99999999999") {
-            if (document.getElementById('admin__btn') != null){
+            if (document.getElementById('admin__btn') != null ){
                 var admin__btn = document.getElementById('admin__btn').textContent;
                 $("#admin__btn").show();
             }
-                
         }
-        
-
-        // ajax로 연습
-        $('#ajax_button').click(() => {
-            $.ajax(
-                {
-                    type: "POST", // 전송방식
-                    url: "",
-                    data: {},
-                    success: ()=>{
-                        
-                    },
-                    error: ()=>{
-
-                    }
-                }
-            )
-        })
-
-        // 게시판 클릭하면 검사하게하기
-        //function session_ischeck()
         
 
     </script>
