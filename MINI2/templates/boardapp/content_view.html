@@ -42,7 +42,7 @@
     <!-- Breadcrumb Section End -->
 
     <!-- MIDDLE-BOX START -->
-    <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
+    <section class="breadcrumb-option spad set-bg" data-setbg="">
         <div class="container">
             <!-- 게시물 -->
             <div class="card">
@@ -79,6 +79,30 @@
                             {% endif %}
                         </a>
                     </div> {% endcomment %}
+
+                    <!-- 좋아요 -->
+                    <button id='{{content.id}}' onclick='post_like(content.id)'>좋아요
+                        <span id='like_count'>{{content.like.count}}</span>
+                    </button>
+
+                    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+                    <script type="text/javascript">
+                        function post_like(id){
+                            console.log('hi')
+                            $.ajax({
+                                url : "/boardapp/likes",
+                                data : {
+                                    'content_id' : id
+                                },
+                                dataType : 'json',
+                                success: function(response){
+                                    $('#like_count').html(response.like_count)
+                                    $('#message').html(response.message)
+                                }
+                            })
+                        }
+                    </script>
                 </div>
                 <!-- 게시물 내용 -->
                 <div class="card-body">

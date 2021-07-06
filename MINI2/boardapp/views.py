@@ -1,7 +1,7 @@
 # from django.core.checks import messages
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import BoardAllContentList, Board_comment, Image, Member, Profile
+from .models import BoardAllContentList, Board_comment, Image, Member
 from django.utils import timezone
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -29,7 +29,7 @@ def freeboard(request):
 
     # 현재페이지
     now_page = info.number
-    print(now_page)
+    # print(now_page)
 
 
     # now_page = boards.number # 현재페이지
@@ -149,7 +149,6 @@ def comment_write(request, pk):
     # if request.method == 'POST':
     content = get_object_or_404(BoardAllContentList, pk = pk)
     
-
     # session_phone = request.session['user_phone']
     # user = Member.objects.get(user_phone = session_phone)
     session_value = request.session['user_name']
@@ -179,18 +178,29 @@ def post_like_toggle(request, pk):
 
     return redirect('/boardapp/'+str(content.pk), pk)
 
+
+
 # 게시글 좋아요
-def like_post(request):
-    pk = request.POST.get('pk', None)
-    content = get_object_or_404(BoardAllContentList, pk=pk)
+def likes(request):
+    now_login = request.session['user_name'] # 현재 로그인한 유저
     user = request.user
 
-    if content.like.filter(id=user.id).exits():
-        content.like.remove(user)
-        message = "좋아요 취소"
-    else:
-        content.like.add(user)
-        message = "좋아요"
+    if request.is_ajax():
+        content_id = request.GET['content_id'] # 좋아요 누른 게시물 id
+        content = BoardAllContentList.objects.get(id=content_id)
+        print(id)
+        like_user_list = content.likes.all() # 좋아요 누른 유저 리스트
+        print('리스트',like_user_list)
 
-    context = {'likes_count':content.count_likes_user(), 'message': message}
-    return HttpResponse(json.dumps(context), content_type="application/json")
+        # 현재 게시물에 좋아요한 사람 중 로그인한사람이 있으면 (이미 좋아요 누른경우이면)
+        if now_login in like_user_list:
+            content.like.remove(now_login) # 현재 로그인한 사람지워
+            message ='좋아요취소'
+        else:
+            content.like.add(now_login)
+            message ='좋아요'
+        
+        like_count = content.like.count() # 게시물이 받은 좋아요수
+        context={'like_count':like_count, 'message':message}
+    
+    return HttpResponse(json.dumps(context), context_type='application/json')
