@@ -40,8 +40,11 @@
         
         // 관리자 아이디만 보이는 기능 - 공지사항, FAQ
         if (session_user_phone=="99999999999") {
-            var admin__btn = document.getElementById('admin__btn').textContent;
-            $("#admin__btn").show();
+            if (document.getElementById('admin__btn') != null){
+                var admin__btn = document.getElementById('admin__btn').textContent;
+                $("#admin__btn").show();
+            }
+                
         }
         
 
