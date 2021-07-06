@@ -3,7 +3,6 @@ from member.models import Member
 from django.utils import timezone
 
 class AttendHistroy(models.Model):
-
     # name = models.ForeignKey(Member, on_delete=models.DO_NOTHING) # cascade 종류 어떻게 해야할지
     user_phone = models.ForeignKey(Member, on_delete=models.DO_NOTHING) 
     name = models.CharField(max_length=50)
@@ -30,6 +29,8 @@ class Blog(models.Model):
     
     def summary(self):
         return self.body[:100]
+
+
 
 # class Notices(models.Model):
 #     object = models.Manager()
