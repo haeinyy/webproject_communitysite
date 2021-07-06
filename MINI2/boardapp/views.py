@@ -1,8 +1,6 @@
-# from django.core.checks import messages
-from boardapp.forms import PostSearchForm
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import BoardAllContentList, Board_comment, Image, Member
+from .models import BoardAllContentList, Board_comment, Member
 from django.utils import timezone
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -13,7 +11,56 @@ from django.views.generic import View, ListView, DetailView, FormView, CreateVie
 
 # 자유게시판 메인 목록
 def freeboard(request):
-    content_list = BoardAllContentList.objects.order_by('-id')
+    content_list = BoardAllContentList.objects.filter(board_kind='자유게시판').order_by('-id')
+    
+    #################### 검색 ########################
+    serach_key = request.GET.get('search_key')
+    search_type = request.GET.get('type')
+    if serach_key:
+        if search_type == 'all':
+            content_list = content_list.filter(title__icontains=serach_key)
+        elif search_type == 'title':
+            content_list = content_list.filter(title__icontains=serach_key)
+        elif search_type == 'text':
+            content_list = content_list.filter(text__icontains=serach_key)
+        elif search_type == 'writer':
+            content_list = content_list.filter(user__icontains=serach_key)
+        else:
+            messages.error(request, '검색어는 2글자 이상 입력해주세요.')
+
+    ####################################################
+
+    ################### 페이지 번호 ####################
+    p = Paginator(content_list,10)
+    page = request.GET.get('page')
+
+    if not page:
+        page = 1
+
+    info = p.get_page(page)
+
+    # 시작페이지
+    start_page = (int(page)-1) // 10 * 10 +1
+    end_page = start_page + 9
+
+    # 현재페이지
+    now_page = info.number
+    # print(now_page)
+
+    if end_page > p.num_pages:
+        end_page = p.num_pages
+    ####################################################
+    context = {
+        'content_list':info,
+        'pagination' : range(start_page,end_page+1),
+        'end_page' : end_page,
+        'now_page' : now_page,
+    }
+    return render(request, 'boardapp/board_free.html', context)
+
+# 동아리/스터디 메인 목록
+def studyboard(request):
+    content_list = BoardAllContentList.objects.filter(board_kind='동아리/스터디').order_by('-id')
     
     #################### 검색 ########################
     serach_key = request.GET.get('search_key')
@@ -53,6 +100,56 @@ def freeboard(request):
         end_page = p.num_pages
     ####################################################
 
+    context = {
+        'content_list':info,
+        'pagination' : range(start_page,end_page+1),
+        'end_page' : end_page,
+        'now_page' : now_page,
+    }
+    
+    return render(request, 'boardapp/board_study.html', context)
+
+# 취업/진로 메인 목록
+def jobboard(request):
+    content_list = BoardAllContentList.objects.filter(board_kind='취업/진로').order_by('-id')
+    
+    #################### 검색 ########################
+    serach_key = request.GET.get('search_key')
+    search_type = request.GET.get('type')
+    if serach_key:
+        if search_type == 'all':
+            content_list = content_list.filter(title__icontains=serach_key)
+        elif search_type == 'title':
+            content_list = content_list.filter(title__icontains=serach_key)
+        elif search_type == 'text':
+            content_list = content_list.filter(text__icontains=serach_key)
+        elif search_type == 'writer':
+            content_list = content_list.filter(user__icontains=serach_key)
+        else:
+            messages.error(request, '검색어는 2글자 이상 입력해주세요.')
+
+    ####################################################
+
+    ################### 페이지 번호 ####################
+    p = Paginator(content_list,10)
+    page = request.GET.get('page')
+
+    if not page:
+        page = 1
+
+    info = p.get_page(page)
+
+    # 시작페이지
+    start_page = (int(page)-1) // 10 * 10 +1
+    end_page = start_page + 9
+
+    # 현재페이지
+    now_page = info.number
+    # print(now_page)
+
+    if end_page > p.num_pages:
+        end_page = p.num_pages
+    ####################################################
 
     context = {
         'content_list':info,
@@ -61,19 +158,65 @@ def freeboard(request):
         'now_page' : now_page,
     }
     
-    return render(request, 'boardapp/board_free.html', context)
+    return render(request, 'boardapp/board_job.html', context)
+
+# 물물교환/무료나눔 메인 목록
+def tradeboard(request):
+    content_list = BoardAllContentList.objects.filter(board_kind='물물교환/무료나눔').order_by('-id')
+    
+    #################### 검색 ########################
+    serach_key = request.GET.get('search_key')
+    search_type = request.GET.get('type')
+    if serach_key:
+        if search_type == 'all':
+            content_list = content_list.filter(title__icontains=serach_key)
+        elif search_type == 'title':
+            content_list = content_list.filter(title__icontains=serach_key)
+        elif search_type == 'text':
+            content_list = content_list.filter(text__icontains=serach_key)
+        elif search_type == 'writer':
+            content_list = content_list.filter(user__icontains=serach_key)
+        else:
+            messages.error(request, '검색어는 2글자 이상 입력해주세요.')
+
+    ####################################################
+
+    ################### 페이지 번호 ####################
+    p = Paginator(content_list,10)
+    page = request.GET.get('page')
+
+    if not page:
+        page = 1
+
+    info = p.get_page(page)
+
+    # 시작페이지
+    start_page = (int(page)-1) // 10 * 10 +1
+    end_page = start_page + 9
+
+    # 현재페이지
+    now_page = info.number
+    # print(now_page)
+
+    if end_page > p.num_pages:
+        end_page = p.num_pages
+    ####################################################
+
+    context = {
+        'content_list':info,
+        'pagination' : range(start_page,end_page+1),
+        'end_page' : end_page,
+        'now_page' : now_page,
+    }
+    return render(request, 'boardapp/board_trade.html', context)
 
 
 # 글쓰기 양식
 def writetext(request):
     content = BoardAllContentList()
-
     # 세션에 로그인 관련 정보 저장
     # 해인
-    # request.session['user_phone'] = user_phone
     session_value = request.session['user_name']
-    # m = Member.objects.get(user_phone=session_value)
-    # request.session['user_name'] = m.user_name
 
     if request.method == 'POST': # 내용 입력후, 전달 할때
         content.title = request.POST['title']
@@ -83,6 +226,7 @@ def writetext(request):
         content.board_kind = request.POST['board_kind']
         content.save()
         
+        '''
         for img in request.FILES.getlist('images'):
             # image 객체 생성
             image = Image()
@@ -92,6 +236,8 @@ def writetext(request):
             image.image = img
             # db에 저장
             image.save()
+        '''
+        
         return redirect('/boardapp/' + str(content.pk))
     # 내용 입력 없을 떄
     return render(request, 'boardapp/board_write.html',{})
@@ -118,55 +264,10 @@ def content_delete(request, pk):
     else:
         return redirect('/boardapp/' + str(content.pk))
 
-# class NoticeListView(ListView):
-# # 게시물 리스트 검색
-    model = BoardAllContentList
-    paginate_by = 10
-    template_name = 'boardapp/board_free.html'
-    context_object_name = 'search_content'
-
-    def get_queryset(self):
-        search_keyword = self.request.GET.get('q', '')
-        search_type = self.request.GET.get('type', '')
-        search_content = BoardAllContentList.objects.order_by('-id') 
-
-        if search_keyword :
-            if len(search_keyword) > 1 :
-                if search_type == 'all':
-                    search_notice_list = search_content.filter(Q (title__icontains=search_keyword) | Q (text__icontains=search_keyword) | Q (user__icontains=search_keyword))
-                elif search_type == 'title_content':
-                    search_notice_list = search_content.filter(Q (title__icontains=search_keyword) | Q (text__icontains=search_keyword))
-                elif search_type == 'title':
-                    search_notice_list = search_content.filter(title__icontains=search_keyword)    
-                elif search_type == 'content':
-                    search_notice_list = search_content.filter(text__icontains=search_keyword)    
-                elif search_type == 'writer':
-                    search_notice_list = search_content.filter(user__icontains=search_keyword)
-
-                return search_notice_list
-            else:
-                messages.error(self.request, '검색어는 2글자 이상 입력해주세요.')
-        return search_content
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        search_keyword = self.request.GET.get('q', '')
-        search_type = self.request.GET.get('type', '')
-        
-        if len(search_keyword) > 1 :
-            context['q'] = search_keyword
-            context['type'] = search_type
-
-        return context
-
 
 # 게시글 댓글
 def comment_write(request, pk):
-    # if request.method == 'POST':
     content = get_object_or_404(BoardAllContentList, pk = pk)
-    
-    # session_phone = request.session['user_phone']
-    # user = Member.objects.get(user_phone = session_phone)
     session_value = request.session['user_name']
     
     content.content.create(comment_content = request.POST.get('comment'), comment_date = timezone.now(), comment_writer=session_value)
@@ -175,9 +276,8 @@ def comment_write(request, pk):
 
 # 게시글 좋아요
 def likes(request):
-    # now_login = request.session['user_name'] # 현재 로그인한 유저
-    # print(now_login)
-    user = Member.objects.get(user_phone=request.session['user_phone']) # 현재 로그인한 유저
+    # 현재 로그인한 유저
+    user = Member.objects.get(user_phone=request.session['user_phone']) 
 
     if request.is_ajax():
         content_id = request.GET['content_id'] # 좋아요 누른 게시물 id
@@ -198,22 +298,3 @@ def likes(request):
         context={'like_count':like_count, 'message':message}
     
     return HttpResponse(json.dumps(context), content_type='application/json')
-
-
-# 검색창
-class SearchFormView(FormView):
-    form_class = PostSearchForm
-
-    def form_vaild(self,form):
-        searchWord = form.cleaned_data['search_word']
-        content_list = BoardAllContentList.objects.filter(
-            Q(title__icontains=searchWord) | 
-            Q(text__icontains=searchWord) | 
-            Q(user__icontains=searchWord)).distinct()
-
-        context = {}
-        context['form'] = form
-        context['search_term'] = searchWord
-        context['content_list'] = content_list
-
-        return render(self.request, 'boardapp/board_free.html',context)

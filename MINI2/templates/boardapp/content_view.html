@@ -17,7 +17,7 @@
 
     <!-- 페이지경로 -->
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
+    <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/2.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -51,9 +51,12 @@
                     <div>
                         {% if content.board_kind == '자유게시판' %}
                         <a href="/boardapp/freeboard">{{ content.board_kind }}</a>
-                        {% comment %} {% elif content.board_kind == '동아리/스터디'%}
+                        {% elif content.board_kind == '동아리/스터디'%}
+                        <a href="/boardapp/studyboard">{{ content.board_kind }}</a>
                         {% elif content.board_kind == '취업/진로'%}
-                        {% elif content.board_kind == '물물교환/무료나눔'%} {% endcomment %}
+                        <a href="/boardapp/jobboard">{{ content.board_kind }}</a>
+                        {% elif content.board_kind == '물물교환/무료나눔'%}
+                        <a href="/boardapp/tradeboard">{{ content.board_kind }}</a>
                         {% endif %}
                         <br><br>
                         <h3>{{ content.title }}</h3>
@@ -65,7 +68,6 @@
 
                     <!-- 좋아요 -->
                     <div>
-                        <!-- 좋아요 -->
                         <button id='{{content.id}}' onclick='post_like("{{content.id}}")'>좋아요
                             <span id='like_count'>{{content.like.count}}</span>
                         </button>
@@ -92,9 +94,7 @@
                 </div>
                 <!-- 게시물 내용 -->
                 <div class="card-body">
-                    <!-- <h5 class="card-title">Special title treatment</h5> -->
                     <p class="card-text">{{ content.text }}</p>
-                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
             </div>
             <hr size="5">
@@ -134,9 +134,12 @@
 
                 {% if content.board_kind == '자유게시판' %}
                 <a href="/boardapp/freeboard"><button type="submit" class="btn btn-secondary pull-right">목록</button></a>
-                {% comment %} {% elif content.board_kind == '동아리/스터디'%}
+                {% elif content.board_kind == '동아리/스터디'%}
+                <a href="/boardapp/studyboard"><button type="submit" class="btn btn-secondary pull-right">목록</button></a>
                 {% elif content.board_kind == '취업/진로'%}
-                {% elif content.board_kind == '물물교환/무료나눔'%} {% endcomment %}
+                <a href="/boardapp/jobboard"><button type="submit" class="btn btn-secondary pull-right">목록</button></a>
+                {% elif content.board_kind == '물물교환/무료나눔'%}
+                <a href="/boardapp/tradeboard"><button type="submit" class="btn btn-secondary pull-right">목록</button></a>
                 {% endif %}
             </div>
         </div>

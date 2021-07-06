@@ -20,12 +20,17 @@
             </div>
         </div>
     </div>
+    <style>
+    .header__logo {
+        padding: 15px;
+    }
+    </style>
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
                 <div class="header__logo">
                     <a href="{% url 'mainpage:mainhome' %}">
-                        KFQ 로고
+                        <img src='/static/img/log.png' width="100" height="auto" style="float: none; margin:0 auto;">
                     </a>
                 </div>
             </div>
@@ -42,9 +47,9 @@
                             <li><a href="{% url 'boardapp:freeboard' %}">게시판</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'boardapp:freeboard' %}">자유게시판</a></li>
-                                    <li><a href="#">공모전/스터디</a></li>
-                                    <li><a href="#">취업/진로</a></li>
-                                    <li><a href="#">물물교환/무료나눔</a></li>
+                                    <li><a href="{% url 'boardapp:studyboard' %}">동아리/스터디</a></li>
+                                    <li><a href="{% url 'boardapp:jobboard' %}">취업/진로</a></li>
+                                    <li><a href="{% url 'boardapp:tradeboard' %}">물물교환/무료나눔</a></li>
                                 </ul>
                             </li>
                             <li><a href="{% url 'restaurant:rest' %}">가디맛집</a>
