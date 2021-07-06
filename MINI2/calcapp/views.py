@@ -11,8 +11,8 @@ from django.core.paginator import Paginator
 # ## ajax테스트 start
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
-def test(request):
-    return render(request,'calcapp/test.html', {} )
+def donation(request):
+    return render(request,'calcapp/donation.html', {} )
 
 
 

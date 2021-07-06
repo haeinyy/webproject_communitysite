@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'config.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -130,3 +131,12 @@ STATICFILES_DIRS = [
 # MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# login middleware
+LOGIN_URL = '/member/register/'
+LOGIN_REDIRECT_URL = '/member/register/'
+LOGIN_EXEMPT_URLS = (
+    r'^member/logout/$',
+    r'^member/register/$',
+    r'^member/login/$',
+)
