@@ -6,9 +6,6 @@ from django.conf.urls.static import static
 app_name = 'calcapp'
 urlpatterns = [
     
-    # 테스트
-    # path('index/', views.index2),
-
     # 공지사항
     path('notice/', views.notice, name='notice'),
     path('detail/<int:blog_id>/', views.detail, name='detail'),
@@ -22,7 +19,9 @@ urlpatterns = [
     path('qna/', views.qna, name='qna'),
 
     # 계산기
-    path('calcpage', views.calcpage, name="calcpage"),
+    path('calcpage/', views.calcpage, name="calcpage"),
     path('calcpage_result/', views.calcpage_result, name="calcpage_result"),
     
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# calcapp/calcpage/

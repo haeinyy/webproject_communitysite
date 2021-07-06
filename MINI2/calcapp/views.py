@@ -69,9 +69,9 @@ def create(request):
 
 def postcreate(request):
     blog = Blog()
-    blog.title = request.GET['title']
-    blog.body = request.GET['body']
-    blog.images = request.FILES['images']
+    blog.title = request.POST.get('title')
+    blog.body = request.POST.get('body')
+    blog.images = request.FILES.get('images')
     blog.pub_date = timezone.datetime.now()
     blog.save()
     return redirect('/calcapp/detail/' + str(blog.id))
@@ -122,9 +122,10 @@ def calcpage(request):
 def calcpage_result(request):
     attendancesList = Attendences.objects.all()
     u_phone = request.session['user_phone']
-
+    
     try: # 나는 학생이니까 정보가 있찌.
         user_info_list = Attendences.objects.get(user_phone_id=u_phone)
+        user_profile = Profile.objects.get(user_name_id=u_phone)
         context = {
             'u_phone': u_phone,
             'name': user_info_list.name,
@@ -135,6 +136,10 @@ def calcpage_result(request):
             'day_rate': user_info_list.day_rate,
             'time_cum_rate': user_info_list.time_cum_rate,
             'day_cum_rate': user_info_list.day_cum_rate,
+
+            'nickname': user_profile.nickname,
+            'description': user_profile.description,
+            'image': user_profile.image,            
             }
         return render(request, 'calcapp/calcpage_result.html', context)
     
@@ -147,17 +152,27 @@ def calcpage_result(request):
         # return HttpResponse('등록된 정보가 없습니다.')
 
 # 프로필
-def ProfileView(request, pk):
-    profiles = Profile.objects.get(pk=pk)
-    if profiles:
-        # user = profiles.user_name
-        profiles.images = request.FILES['images']
+def ProfileView(request):
+    profiles = Profile.objects.all()
+    u_phone = request.session['user_phone']
+    try:
+        user_profile = Profile.objects.get(user_name_id=u_phone)
+        # user_profile.images = request.FILES.get('images')
         context = {
+            'u_phone': u_phone,
+            'username': user_profile.user_name,
+            'nickname': user_profile.nickname,
+            'description': user_profile.description,
+            'images': user_profile.images,            
+        }
+        return render(request, 'calcapp/calcpage_result.html', context)
+    
+    except:
+        context = {
+            'u_phone': u_phone,
             'username': profiles.user_name,
             'nickname': profiles.nickname,
             'description': profiles.description,
-            'image': profiles.image,            
-            }
+            'images': profiles.images,
+        }
         return render(request, 'calcapp/calcpage_result.html', context)
-    else:
-        return redirect('member/login/', profiles.pk)

@@ -12,5 +12,4 @@ urlpatterns = [
 
     ### 추가된부분 ###
     # 프로필
-    path('profile/<int:pk>', views.ProfileView, name='profile'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
