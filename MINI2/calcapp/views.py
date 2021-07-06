@@ -6,6 +6,7 @@ from . models import Attendences, Blog
 from calcapp.forms import BlogUpdate
 from django.core.paginator import Paginator
 
+
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
 # ## FAQ START
