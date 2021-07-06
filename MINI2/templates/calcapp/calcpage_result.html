@@ -1,164 +1,13 @@
 {% extends 'mainpage/mainpage.html' %}
-{% block content %}
 
+{% block content %}
+{% include 'calcapp/calcpage_common.html' %}
 <!-- css/js -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- progressbar scss -->
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-<script src="/static/progressbar.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
-
-<script>
-
-    $(document).ready(function(){
-        var $pline = $('.progressbar.line');
-        var $pcircle = $('.progressbar.circle');
-        $pline.each(function(i){
-            var line = new ProgressBar.Line(this, {
-                strokeWidth:6,
-                trailWidth:6,
-                duration:3000,
-                easing:'easeInOut',
-                text:{
-                    style:{
-                        color:'inherit',
-                        position:'absolute',
-                        right:'0',
-                        top:'-30px',
-                        padding:0,
-                        margin:0,
-                        transform: null
-                    },
-                    autoStyleContainer: false
-                },
-                step: function(state, line, attachment){
-                    line.setText(Math.round(line.value()*100)+'%');
-                }
-            });
-            var value = ($(this).attr('data-value')/100);
-            $pline.waypoint(function(){
-                line.animate(value);
-            }, {
-                offset: '100%'
-            })
-        });
-
-        $pcircle.each(function(i){
-            var circle = new ProgressBar.SemiCircle(this,{
-                strokeWidth:9,
-                trailWidth:5,
-                duration:2000,
-                easing: 'easeInOut',
-                step: function(state, circle, attachment){
-                    circle.setText(Math.round(circle.value()*100));
-                }
-            });
-
-            var value = ($(this).attr('data-value')/100);
-            $pcircle.waypoint(function(){
-                circle.animate(value);
-            },{
-                offset: "100%"
-            })
-        });
-    });
-
-</script>
-
-<style>
-    :root{
-        --color-red:#d75959;
-        --color-yellow: #f5c463;
-        --color-green: #9ccd7e;
-        --color-blue: #5ca7db;
-        --rgb-black:0,0,0;
-    }
-
-    /* .wrapper{
-        margin-top: 150px;
-    }   */
-
-    .progressbar:not(.circle) svg,
-    .progressbar:not(.circle) svg path{
-        border-radius: 20px;
-    }
-
-    .progressbar svg path:first-child{
-        stroke: rgba(var(--rgb-black), 0.09);
-    }
-
-    .progressbar.border{
-        border: 1px solid transparent;
-        box-sizing: border-box;
-    }
-
-    .progressbar.border svg path:first-child{
-        stroke: transparent;
-    }
-
-    .progressbar.line svg{
-        height: 10px;
-    }
-
-    .progressbar.line.border svg{
-        height: 8px;
-    }
-
-    .progressbar.circle{
-        position: relative;
-        margin: 0 auto 30px;
-        width: 170px;
-        height: 85px;
-    }
-
-    .progressbar.circle .progressbar-text{
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        margin: 0;
-        font-size: 40px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        color: white !important;
-        font-weight: bold;
-    }
-
-    .progressbar.circle .progressbar-text:after{
-        content: "%";
-        display: block;
-        font-size: 20px;
-        padding-left: 2px;
-    }
-
-    .progressbar .red svg path:last-child{
-        stroke: var(--color-red)
-    }
-
-    .progressbar .red svg path:last-child{
-        stroke: var(--color-blue)
-    }
-
-    .progressbar .red svg path:last-child{
-        stroke: var(--color-green)
-    }
-
-    .progressbar .red svg path:last-child{
-        stroke: var(--color-yellow)
-    }
-
-h5{
-
-}
-</style>
-
-{% include 'calcapp/calcpage_common.html' %}
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/breadcrumb-bg.jpg">
@@ -169,7 +18,6 @@ h5{
                     <h2>마이페이지</h2>
                     <div class="breadcrumb__links">
                         <a href="{% url 'mainpage:mainhome' %}">Home</a>
-                        <a href="{% url 'calcapp:calcpage_user' %}">내정보</a>
                         <span>계산기</span>
                     </div>
                 </div>
@@ -179,7 +27,7 @@ h5{
 </section>
 <!-- Breadcrumb Section End -->
 
-<!-- 계산기, 유저정보 Start-->
+<!-- 계산기, 상세, 수료현황 Start-->
 <section class="pricing spad">
     <div class="container">
         <div class="row">
@@ -214,7 +62,6 @@ h5{
                     </div>
                 </div>
             </div>
-
             <div class="col-6 col-md-4">
                 <div class="card" style="width: 30rem;">
                     <div class="col-xs-6 col-md-3">
@@ -295,59 +142,30 @@ h5{
         </div>
     </div>
 </section>
-<!-- 계산기, 유저정보 End-->
+<!-- 계산기, 상세, 수료현황 End-->
 
-<!-- 출석률 현황 graph Start -->
-<div class="wrapper image-wrapper">
-    <div class="container inner">
-        <div class="row">
-            <div class="col-md-10 offset-md-1">
-                <h2 class="title-color text-center">Our Progress</h2>
-                <div class="row text-center">
-                    <div class="col-lg-3">
-                        <div class="progressbar circle blue" data-value="75"></div>
-                        <h5>attendance</h5>
-                        <p>
-                            ㅇㅇ
-                        </p>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="progressbar circle green" data-value="75"></div>
-                        <h5>attendance</h5>
-                        <p>
-                            ㅇㅇ
-                        </p>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="progressbar circle red" data-value="75"></div>
-                        <h5>attendance</h5>
-                        <p>
-                            ㅇㅇ
-                        </p>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="progressbar circle yellow" data-value="75"></div>
-                        <h5>attendance</h5>
-                        <p>
-                            ㅇㅇ
-                        </p>
-                    </div>
-
-                </div>
-            </div>
+{% comment %} <div class="col-lg-6 order-lg-2">
+    <div class="doctor__item__text">
+        <ul>
+            <li> -- 리마인드 -- </li>
+            <li><i class="fa fa-check-circle"></i> 출석체크</li>
+            <li><i class="fa fa-check-circle"></i> 교육일정</li>
+            <li><i class="fa fa-check-circle"></i> 자격증일정</li>
+            <li><i class="fa fa-check-circle"></i> 퇴실체크</li>
+        </ul>
+        <div class="doctor__item__social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-dribbble"></i></a>
         </div>
     </div>
-</div>
-<!-- 출석률 현황 graph End -->
+</div> {% endcomment %}
 
 <section class="pricing spad">
     <div class="container">
         <div class="card">
             <div class="card-body">
-                graph
                 <h3>🎓상세현황</h3>
                 <table class="table">
                     <thead>
@@ -363,42 +181,62 @@ h5{
                         </tr>
                     </thead>
                     <tbody>
-                        {% for attendance in attnedances %}
+                        {% if u_phone == '99999999999' %}
+                        {% for u in attendances %}
                         <tr>
-                            <th scope="row">{{attendance.name}}</th>
-                            <td>{{attendance.attend}}</td>
-                            <td>{{attendance.absent}}</td>
-                            <td>{{attendance.time}}</td>
-                            <td>{{attendance.time_rate}}%</td>
-                            <td>{{attendance.day_rate}}%</td>
-                            <td>{{attendance.time_cum_rate}}%</td>
-                            <td>{{attendance.day_cum_rate}}%</td>
+                            <th scope="row">
+                                {{u.name}}
+                            </th>
+                            <td>{{u.attend}}</td>
+                            <td>{{u.absent}}</td>
+                            <td>{{u.time}}</td>
+                            <td>{{u.time_rate}}%</td>
+                            <td>{{u.day_rate}}%</td>
+                            <td>{{u.time_cum_rate}}%</td>
+                            <td>{{u.day_cum_rate}}%</td>
                         </tr>
                         {% endfor %}
+                        {% else %}
+                        <tr>
+                            <th scope="row">
+                                {{name}}
+                            </th>
+                            <td>{{attend}}</td>
+                            <td>{{absent}}</td>
+                            <td>{{time}}</td>
+                            <td>{{time_rate}}%</td>
+                            <td>{{day_rate}}%</td>
+                            <td>{{time_cum_rate}}%</td>
+                            <td>{{day_cum_rate}}%</td>
+                        </tr>
+                        {% endif %}
                     <tbody>
                 </table>
 
                 <h3>🎓수료현황</h3>
                 <!-- progress -->
+                {% if u_phone == '99999999999' %}
+                {% for u in attendances %}
                 <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{u.time_cum_rate}}%"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    </div>
                 </div>
+                {% endfor %}
+                {% endif %}
                 <!-- progress -->
-                    {% for attendance in attnedances %}
+                {% comment %} {% for attendance in attnedances %}
 
-                        {% if attendance.name == "김소희" %}
-                        <span>
-                            지금 까지 {{attendance.time}} / 960 시간 완료 했습니다.
-                            <br>
-                            {% if attendance.time < 800 %} 
-                            {{attendance.time}} 수료 '불가' 합니다. 
-                            {% elif attendance.time >= 800 %}
-                            {{attendance.time}} 수료 '가능' 합니다.
-                        </span>
-                        {% endif %}
-                        {% endif %}
-                    {% endfor %}
+                {% if attendance.name == "김소희" %}
+                <span>
+                    지금 까지 {{attendance.time}} / 960 시간 완료 했습니다.
+                    <br>
+                    {% if attendance.time < 800 %} {{attendance.time}} 수료 '불가' 합니다. {% elif attendance.time>= 800 %}
+                        {{attendance.time}} 수료 '가능' 합니다.
+                </span>
+                {% endif %}
+                {% endif %}
+                {% endfor %} {% endcomment %}
             </div>
         </div>
     </div>

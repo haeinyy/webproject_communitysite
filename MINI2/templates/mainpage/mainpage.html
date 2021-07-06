@@ -39,9 +39,11 @@
         }
 
         // #admin__btn 인 애들은 session user_phone == '99999999999'이면 보이게하기
-        var admin__btn = document.getElementById('admin__btn').textContent;
         if (session_user_phone=="99999999999") {
-            $("#admin__btn").show();
+            if (document.getElementById('admin__btn') != null ){
+                var admin__btn = document.getElementById('admin__btn').textContent;
+                $("#admin__btn").show();
+            }
         }
         
 

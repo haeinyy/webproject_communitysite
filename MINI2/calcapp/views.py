@@ -112,43 +112,41 @@ def search(request):
 
 
 # 계산기
-def index(request, pk):
-    # attendances = Attendences.objects.all()
-    # str =''
-    # for attendance in attendances:
-    #     str += "<p> name: {} attend: {}".format(attendance.name, attendance.attend)
-    # return HttpResponse(str)
-    
-    attendancesList = Attendences.objects.all()
-    # a = '0219'
-    # memberList = Member.objects.all()
-    # attenda = []
-    # for i in attendancesList:
-    #     if i.user_phone == a:
-    #         attenda.append(i)
-
-    context = {
-        'attnedances': attendancesList
-    }
-    return render(request, 'calcapp/calcpage_result.html', context)
-
-    ## 메모
-    # a = request.session['user_phone']
-
 def calcpage(request):
     pay = int(15000)
     day1 = int(request.POST['num1'])
     result = day1 * pay
     return render(request, 'calcapp/calcpage.html', {'result':result})
 
+# 상세현황 및 수료현황
 def calcpage_result(request):
-    return render(request, 'calcapp/calcpage_result.html', {'name':'name'})
+    attendancesList = Attendences.objects.all()
+    u_phone = request.session['user_phone']
 
-def calcpage_user(request):
-    attendancesList = Attendences.objects.all()    
-    context = {'attnedances': attendancesList}
-    return render(request, 'calcapp/calcpage_user.html', context) 
+    try: # 나는 학생이니까 정보가 있찌.
+        user_info_list = Attendences.objects.get(user_phone_id=u_phone)
+        context = {
+            'u_phone': u_phone,
+            'name': user_info_list.name,
+            'attend': user_info_list.attend,
+            'absent': user_info_list.absent,
+            'time': user_info_list.time,
+            'time_rate': user_info_list.time_rate,
+            'day_rate': user_info_list.day_rate,
+            'time_cum_rate': user_info_list.time_cum_rate,
+            'day_cum_rate': user_info_list.day_cum_rate,
+            }
+        return render(request, 'calcapp/calcpage_result.html', context)
+    
+    except: # 나는 관리자니까 정보가 없지.
+        context = {
+            'u_phone': u_phone,
+            'attendances': attendancesList
+        }
+        return render(request, 'calcapp/calcpage_result.html', context)
+        # return HttpResponse('등록된 정보가 없습니다.')
 
+# 프로필
 def ProfileView(request, pk):
     profiles = Profile.objects.get(pk=pk)
     if profiles:
