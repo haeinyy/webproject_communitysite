@@ -3,7 +3,6 @@ from restaurant.models import Rest, Review
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
-
 from selenium import  webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.keys import Keys

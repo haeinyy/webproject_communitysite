@@ -37,6 +37,16 @@
             $("#header-box-register__btn").show();
             $("#header-box-logout__btn").hide();
         }
+
+        // #admin__btn 인 애들은 session user_phone == '99999999999'이면 보이게하기
+        if (session_user_phone=="99999999999") {
+            if (document.getElementById('admin__btn') != null ){
+                var admin__btn = document.getElementById('admin__btn').textContent;
+                $("#admin__btn").show();
+            }
+        }
+        
+
         // ajax로 연습
         $('#ajax_button').click(() => {
             $.ajax(
@@ -56,6 +66,7 @@
 
         // 게시판 클릭하면 검사하게하기
         //function session_ischeck()
+        
 
     </script>
 </html>
