@@ -2396,7 +2396,12 @@ ol {
 		padding: 14px 15px 12px;
 	}
 }
-
+/* .justify-content-md-center:first-child(){
+	float: right !important;
+} */
+#board-free-bottom__btn {
+	float: right !important;
+}
 /* Tablet Device = 768px */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2852,3 +2857,4 @@ ol {
 		padding: 14px 30px 12px;
 	}
 }
+

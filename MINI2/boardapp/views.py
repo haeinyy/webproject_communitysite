@@ -1,4 +1,5 @@
 # from django.core.checks import messages
+from boardapp.forms import PostSearchForm
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import BoardAllContentList, Board_comment, Image, Member
@@ -14,7 +15,24 @@ from django.views.generic import View, ListView, DetailView, FormView, CreateVie
 def freeboard(request):
     content_list = BoardAllContentList.objects.order_by('-id')
     
-    # 페이지 번호
+    #################### 검색 ########################
+    serach_key = request.GET.get('search_key')
+    search_type = request.GET.get('type')
+    if serach_key:
+        if search_type == 'all':
+            content_list = content_list.filter(title__icontains=serach_key)
+        elif search_type == 'title':
+            content_list = content_list.filter(title__icontains=serach_key)
+        elif search_type == 'text':
+            content_list = content_list.filter(text__icontains=serach_key)
+        elif search_type == 'writer':
+            content_list = content_list.filter(user__icontains=serach_key)
+        else:
+            messages.error(request, '검색어는 2글자 이상 입력해주세요.')
+
+    ####################################################
+
+    ################### 페이지 번호 ####################
     p = Paginator(content_list,10)
     page = request.GET.get('page')
 
@@ -31,12 +49,10 @@ def freeboard(request):
     now_page = info.number
     # print(now_page)
 
-
-    # now_page = boards.number # 현재페이지
-    # end_page = boards.paginator.num_pages # 마지막페이지
-
     if end_page > p.num_pages:
         end_page = p.num_pages
+    ####################################################
+
 
     context = {
         'content_list':info,
@@ -182,3 +198,22 @@ def likes(request):
         context={'like_count':like_count, 'message':message}
     
     return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+# 검색창
+class SearchFormView(FormView):
+    form_class = PostSearchForm
+
+    def form_vaild(self,form):
+        searchWord = form.cleaned_data['search_word']
+        content_list = BoardAllContentList.objects.filter(
+            Q(title__icontains=searchWord) | 
+            Q(text__icontains=searchWord) | 
+            Q(user__icontains=searchWord)).distinct()
+
+        context = {}
+        context['form'] = form
+        context['search_term'] = searchWord
+        context['content_list'] = content_list
+
+        return render(self.request, 'boardapp/board_free.html',context)
