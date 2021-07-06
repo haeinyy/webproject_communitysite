@@ -4,9 +4,6 @@ from django.db.models.deletion import CASCADE
 from member.models import Member
 from django.conf import settings
 
-
-# Create your models here.
-
 #  모든 게시판 게시물 db
 class BoardAllContentList(models.Model):
     title = models.CharField(max_length=100)
@@ -14,26 +11,20 @@ class BoardAllContentList(models.Model):
     user = models.CharField(max_length=20) # main user db랑 연결 해야함
     text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    seenum = models.IntegerField(null=True)
-    # like = models.ManyToManyField(
-    #     settings.AUTH_USER_MODEL, # this is preferred than just 'User'
-    #     blank=True, # blank is allowed
-    #     related_name='likes_user'
-    # )
-    like_count = models.PositiveIntegerField(default=0)
+    seenum = models.PositiveIntegerField(default=0)
+    like = models.ManyToManyField(Member, default=0,related_name='likes') # 좋아요
+    # like_count = models.PositiveIntegerField(default=0)
     board_kind = models.CharField(max_length=20)
-
-    # def count_likes_user(self): # total likes_user
-    #     return self.like.count()
 
     def __str__(self):
         return self.title
 
-class Profile(models.Model):
-    user_name = models.CharField(max_length=20)
-    # nickname = models.TextField(max_length=10)
-    like_posts = models.ManyToManyField(BoardAllContentList, blank=True, related_name='like_users')
-
+# 좋아요 개수
+# class Board_like(models.Model):
+#     user_name = models.ForeignKey(Member, on_delete=models.CASCADE, null=True) # 이용
+#     id = models.ForeignKey(BoardAllContentList, on_delete=models.CASCADE, null=True)
+#     like = models.ManyToManyField(Member, blank=True,related_name='likes') # 좋아요
+    
 
 # 게시물 별 이미지 db
 class Image(models.Model):
@@ -53,8 +44,3 @@ class Board_comment(models.Model):
     def __str__(self):
         return self.title
 
-
-# 게시물 별 이미지 db
-class Image(models.Model):
-    content = models.ForeignKey(BoardAllContentList, on_delete=models.CASCADE, null=True)
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
