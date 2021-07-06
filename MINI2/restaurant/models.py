@@ -17,11 +17,17 @@ class Rest(models.Model):
     rest_starscore = models.CharField(max_length=10, default=None)
 
 class Review(models.Model):
-    review_user = models.CharField(max_length=100) #user 전화번호 등 id
     review_score = models.FloatField() #리뷰점수
     review_content = models.TextField() #리뷰내용
-    rest = models.ForeignKey(Rest, on_delete=models.CASCADE) #포린키
+    review_writer = models.CharField(max_length=20) 
+    review_date = models.DateTimeField(auto_now_add=True)
+    rest_id = models.ForeignKey(Rest, on_delete=models.CASCADE) #포린키
 
-class Like(models.Model):
+    def __str__(self):
+        return self.rest_name
+
+class Rest_Like(models.Model):
     like_user = models.CharField(max_length=100) #좋아요 누른 전화번호
-    like = models.ForeignKey(Rest, on_delete=models.CASCADE) #포린키
+    like_rest = models.ForeignKey(Rest, on_delete=models.CASCADE) #포린키
+    #게시글 포린키
+
