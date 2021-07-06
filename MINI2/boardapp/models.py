@@ -5,8 +5,6 @@ from member.models import Member
 from django.conf import settings
 
 
-# Create your models here.
-
 #  모든 게시판 게시물 db
 class BoardAllContentList(models.Model):
     title = models.CharField(max_length=100)
@@ -28,7 +26,6 @@ class BoardAllContentList(models.Model):
 #     id = models.ForeignKey(BoardAllContentList, on_delete=models.CASCADE, null=True)
 #     like = models.ManyToManyField(Member, blank=True,related_name='likes') # 좋아요
     
-
 
 # 게시물 별 이미지 db
 class Image(models.Model):

@@ -12,6 +12,5 @@ urlpatterns = [
     path('<int:pk>/content_delete/', views.content_delete, name='content_delete'),
     path('comment_write/<int:pk>/', views.comment_write, name='comment_write'),
     path('likes/', views.likes, name="likes"),
-    path('post_like_toggle/<int:pk>', views.post_like_toggle, name="post_like_toggle"),
     # path('freeboard/<int:pk>', views.content_view, name='content_view'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -157,50 +157,28 @@ def comment_write(request, pk):
     return redirect('/boardapp/'+str(content.pk))
 
 
-
-
-
-def post_like_toggle(request, pk):
-    content = get_object_or_404(BoardAllContentList, id=pk)
-    user = request.session['user_name']
-    profile = Profile.objects.get(user=user_name)
-
-    check_like_post = profile.like_posts.filter(id=pk)
-
-    if check_like_post.exists():
-        profile.like_posts.remove(content)
-        content.like_count -= 1
-        content.save()
-    else:
-        profile.like_posts.add(content)
-        content.like_count += 1
-        content.save()
-
-    return redirect('/boardapp/'+str(content.pk), pk)
-
-
-
 # 게시글 좋아요
 def likes(request):
-    now_login = request.session['user_name'] # 현재 로그인한 유저
-    user = request.user
+    # now_login = request.session['user_name'] # 현재 로그인한 유저
+    # print(now_login)
+    user = Member.objects.get(user_phone=request.session['user_phone']) # 현재 로그인한 유저
 
     if request.is_ajax():
         content_id = request.GET['content_id'] # 좋아요 누른 게시물 id
         content = BoardAllContentList.objects.get(id=content_id)
-        print(id)
-        like_user_list = content.likes.all() # 좋아요 누른 유저 리스트
+        # print(id)
+        like_user_list = content.like.all() # 좋아요 누른 유저 리스트
         print('리스트',like_user_list)
 
         # 현재 게시물에 좋아요한 사람 중 로그인한사람이 있으면 (이미 좋아요 누른경우이면)
-        if now_login in like_user_list:
-            content.like.remove(now_login) # 현재 로그인한 사람지워
+        if user in like_user_list:
+            content.like.remove(user) # 현재 로그인한 사람지워
             message ='좋아요취소'
         else:
-            content.like.add(now_login)
+            content.like.add(user)
             message ='좋아요'
         
         like_count = content.like.count() # 게시물이 받은 좋아요수
         context={'like_count':like_count, 'message':message}
     
-    return HttpResponse(json.dumps(context), context_type='application/json')
+    return HttpResponse(json.dumps(context), content_type='application/json')

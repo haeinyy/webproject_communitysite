@@ -1,4 +1,4 @@
- {% include 'mainpage/load-box.html' %}
+{% include 'mainpage/load-box.html' %}
 <style>
     .heart_poisition {
         position: absolute;
@@ -63,7 +63,7 @@
                     <p>조회수 : {{ content.seenum }}</p>
                     <!-- 좋아요 -->
                     {% comment %} <div class='heart_poisition'>
-                        <a href = "{% url  'boardapp:like_post' content.id%}">
+                        <a href="{% url  'boardapp:like_post' content.id%}">
                             {% if user in content.like.all%}
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-heart" viewBox="0 0 16 16">
@@ -81,22 +81,40 @@
                     </div> {% endcomment %}
 
                     <!-- 좋아요 -->
-                    <button id='{{content.id}}' onclick='post_like(content.id)'>좋아요
+                    <div class='heart_poisition'>
+                        {% if user in content.like.all%}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-heart" viewBox="0 0 16 16" id='{{content.id}}' onclick='post_like("{{content.id}}")'>
+                            <path
+                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                        </svg><br>
+                        <span id='like_count'>{{content.like.count}}</span>
+                        {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-heart" viewBox="0 0 16 16" id='{{content.id}}' onclick='post_like("{{content.id}}")'>
+                            <path
+                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                        </svg><br><span id='like_count'>{{content.like.count}}</span>
+                        {% endif %}
+                    </div>
+
+                    <button id='{{content.id}}' onclick='post_like("{{content.id}}")'>좋아요
                         <span id='like_count'>{{content.like.count}}</span>
                     </button>
 
                     <script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+                        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+                        crossorigin="anonymous"></script>
                     <script type="text/javascript">
-                        function post_like(id){
-                            console.log('hi')
+                        function post_like(id) {
+                            // console.log('hi')
                             $.ajax({
-                                url : "/boardapp/likes",
-                                data : {
-                                    'content_id' : id
+                                url: "/boardapp/likes",
+                                data: {
+                                    'content_id': id
                                 },
-                                dataType : 'json',
-                                success: function(response){
+                                dataType: 'json',
+                                success: function (response) {
                                     $('#like_count').html(response.like_count)
                                     $('#message').html(response.message)
                                 }
@@ -111,7 +129,7 @@
                     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                 </div>
             </div>
-            <hr>
+            <hr size="5">
 
             <!-- 댓글 -->
             <div class="container">
@@ -120,6 +138,7 @@
                 <p>{{ comment.comment_date }}</p>
                 <p><b>{{ comment.comment_writer }}</b></p>
                 <p>{{ comment.comment_content }}</p>
+                <hr>
                 {% empty %}
                 <p>댓글이 없습니다ㅠㅠ 새로운 댓글을 달아주세요^^</p>
                 {% endfor %}
@@ -141,7 +160,8 @@
                 <br>
                 <a href="{% url 'boardapp:writetext' %}"><button type="submit"
                         class="btn btn-secondary pull-left">글쓰기</button></a>
-                <a href="/boardapp/{{content.id}}/content_delete/"><button type="submit" class="btn btn-secondary">삭제</button></a>
+                <a href="/boardapp/{{content.id}}/content_delete/"><button type="submit"
+                        class="btn btn-secondary">삭제</button></a>
                 <a href="#" class="top"><button type="submit" class="btn btn-secondary pull-right">TOP</button></a>
 
                 {% if content.board_kind == '자유게시판' %}
