@@ -14,10 +14,10 @@ import time
 
 #메인페이지
 def restaurant(request):
-    rest_list_offi = Rest.objects.filter(rest_rmd='offi')
+    rest_list_user = Rest.objects.filter(rest_rmd='user').order_by('-id')
     rest_list_kfq = Rest.objects.filter(rest_rmd='kfq')
     rest_list_score = Rest.objects.order_by('-rest_score')
-    context = { 'rest_list_offi' : rest_list_offi, 'rest_list_kfq' : rest_list_kfq , 'rest_list_score' : rest_list_score }
+    context = { 'rest_list_user' : rest_list_user, 'rest_list_kfq' : rest_list_kfq , 'rest_list_score' : rest_list_score }
     return render(request, 'restaurant/restaurant.html',context)
     
 #게시물 리스트로 보기
@@ -132,15 +132,16 @@ def restaurant_search(request):
             rest_tel = tel[0].text #가게 전화번호
 
             td = soup.select('body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(3) > td')
-            rest_kind = td[0].text #가게음식종류
+            if len(td) > 0:
+                rest_kind = td[0].text #가게음식종류
 
             td = soup.select('body > main > article > div.column-wrapper > div.column-contents > div > section.restaurant-detail > table > tbody > tr:nth-child(4) > td')
-            rest_price = td[0].text #가격대
+            if len(td) > 0:
+                rest_price = td[0].text #가격대
 
             rest = Rest(
                 rest_update = timezone.now(),
                 rest_tel = rest_tel,
-                rest_price = rest_price,
                 rest_name = rest_name,
                 rest_address = rest_address,
                 rest_kind = rest_kind,
@@ -149,6 +150,8 @@ def restaurant_search(request):
                 rest_starscore = starscore
                 #입력 안된 것 : seenum, rmd
             )
+            if 'rest_price' in locals():
+                rest_price = rest_price
             if 'rest_img1' in locals() :
                 rest.rest_img1 = rest_img1
             if 'rest_img2' in locals() :

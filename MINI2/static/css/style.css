@@ -1254,10 +1254,16 @@ ol {
 	padding: 40px 40px 30px 40px;
 }
 
-.testimonial__item .rating {
+/* .testimonial__item .rating {
 	position: absolute;
 	right: 40px;
 	top: 52px;
+} */
+.testimonial__item .rating {
+	position: relative;
+    right: 0;
+    top: 0;
+    margin-bottom: 15px;
 }
 
 .testimonial__item .rating i {
