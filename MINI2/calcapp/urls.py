@@ -5,7 +5,7 @@ app_name = 'calcapp'
 urlpatterns = [
     
     # 테스트
-    # path('index/', views.index2),
+    path('test/', views.test, name='test'),
 
     # 공지사항
     path('notice/', views.notice, name='notice'),

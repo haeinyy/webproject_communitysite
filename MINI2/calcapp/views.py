@@ -2,9 +2,19 @@ from django.http import HttpResponse, request
 from . models import Member
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from . models import AttendHistroy, Blog
+from . models import AttendHistory, Blog
 from calcapp.forms import BlogUpdate
 from django.core.paginator import Paginator
+
+# ---------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
+# ## ajax테스트 start
+# ---------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
+def test(request):
+    return render(request,'calcapp/test.html', {} )
+
+
 
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
@@ -114,13 +124,13 @@ def search(request):
 
 # 계산기
 def index(request, pk):
-    # attendances = AttendHistroy.objects.all()
+    # attendances = AttendHistory.objects.all()
     # str =''
     # for attendance in attendances:
     #     str += "<p> name: {} attend: {}".format(attendance.name, attendance.attend)
     # return HttpResponse(str)
     
-    attendancesList = AttendHistroy.objects.all()
+    attendancesList = AttendHistory.objects.all()
     # a = '0219'
     # memberList = Member.objects.all()
     # attenda = []
@@ -150,6 +160,6 @@ def calcpage_info(request):
     return render(request, 'calcapp/calcpage_info.html')
 
 def calcpage_user(request):
-    attendancesList = AttendHistroy.objects.all()    
+    attendancesList = AttendHistory.objects.all()    
     context = {'attnedances': attendancesList}
     return render(request, 'calcapp/calcpage_user.html', context) 

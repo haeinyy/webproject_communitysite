@@ -1,5 +1,5 @@
-from calcapp.models import AttendHistroy, Blog
+from calcapp.models import AttendHistory, Blog
 from django.contrib import admin
 
-admin.site.register(AttendHistroy)
+admin.site.register(AttendHistory)
 admin.site.register(Blog)
