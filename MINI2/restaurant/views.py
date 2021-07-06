@@ -1,3 +1,4 @@
+from django.db.models.fields.related import ForeignKey
 from django.http.response import HttpResponse
 from restaurant.models import Rest, Review
 from django.shortcuts import get_object_or_404, redirect, render
@@ -28,12 +29,16 @@ def restaurant_list(request):
 #상세 게시물 보기
 def restaurant_detail(request, pk):
     rest = Rest.objects.get(pk=pk)
-    if not Review.objects.filter(rest_id = rest).exists() :
-        context = { 'rest' : rest }
-    else :
-        review = Review.objects.filter(rest_id = rest )
-        context = { 'rest' : rest , 'review' : review }
+    review = Review.objects.filter(rest_id = rest)
+    context = { 'rest' : rest , 'review' : review }
     return render(request, 'restaurant/restaurant_detail.html', context)
+    # if not Review.objects.filter(rest_id = rest).exists() :
+    #     context = { 'rest' : rest }
+    # else :
+    #     review = Review.objects.filter(rest_id = rest )
+    #     context = { 'rest' : rest , 'review' : review }
+
+    #return render(request, 'restaurant/restaurant_detail.html', context)
 
 #검색 상세페이지
 def restaurant_search(request): 
@@ -167,7 +172,8 @@ def restaurant_review(request, pk):
 
     # # session_phone = request.session['user_phone']
     # # user = Member.objects.get(user_phone = session_phone)
-    review_score = request.POST.get('score')
+    score = request.POST.get('score')
+    review_score = float(score)
     review_writer = request.session['user_name']
     review_content = request.POST.get('comment')
     review_date = timezone.now()
