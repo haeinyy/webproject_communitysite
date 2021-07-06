@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-6">
-                <div id="map" style="width:400px;height:2500px;"></div>
+                <div id="map" style="width:400px;height:250px;"></div>
                     <script>
                     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                         mapOption = {
@@ -81,7 +81,7 @@
                     var geocoder = new kakao.maps.services.Geocoder();
 
                     // 주소로 좌표를 검색합니다
-                    geocoder.addressSearch('{{ rest.rest_address }}', function(result, status) {
+                    geocoder.addressSearch('서울특별시 금천구 가산디지털1로 168 우림라이온스밸리 A동', function(result, status) {
 
                         // 정상적으로 검색이 완료됐으면 
                         if (status === kakao.maps.services.Status.OK) {
@@ -96,7 +96,7 @@
 
                             // 인포윈도우로 장소에 대한 설명을 표시합니다
                             var infowindow = new kakao.maps.InfoWindow({
-                                content: '<div style="width:150px;text-align:center;padding:6px 0;">{{ rest.rest_name }}</div>'
+                                content: '<div style="width:150px;text-align:center;padding:6px 0;">kfq</div>'
                             });
                             infowindow.open(map, marker);
 
