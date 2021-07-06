@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BoardAllContentList, Image
+from .models import BoardAllContentList
 
 
 # Image 클래스를 inline으로 나타낸다.
@@ -13,5 +13,5 @@ class Boardadmin(admin.ModelAdmin):
     search_fields = ['content']
     # inlines = [ImageInline, ]
 
-admin.site.register(Image, Boardadmin)
+# admin.site.register(Image, Boardadmin)
 admin.site.register(BoardAllContentList, Boardadmin)
