@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.contrib import messages
 
-from .models import Member, Profile
+from .models import Member
 # redierct - url을 이동. name으로 접근. render처럼 context값을 넘기지는 못함.
 # render - 화면에 html파일을 띄우기때문에 url이안변함. context값 넘길 수 있음.
 # reverse - 
@@ -73,42 +73,20 @@ def login(request):
                 request.session['user_name'] = m.user_name
                 return redirect('mainpage:mainhome')
 
-        m = Member.objects.get(user_phone=u_id)
-        error_messages = '로그인 실패'   
-        if m.user_pw == u_pw:
-            # 1. DB와 확인해서 로그인 -> db에 아이디가 있다면 로그인 성공
-            # 세션에 로그인 관련 정보 저장 - 휴대폰번호, 이름
-            request.session['user_phone'] = m.user_phone
-            request.session['user_name'] = m.user_name
-            return redirect('mainpage:mainhome')
-        else:
-            return render(request, 'member/register.html', 
-                        {'error_messages':error_messages})
+        # m = Member.objects.get(user_phone=u_id)
+        # error_messages = '로그인 실패'   
+        # if m.user_pw == u_pw:
+        #     # 1. DB와 확인해서 로그인 -> db에 아이디가 있다면 로그인 성공
+        #     # 세션에 로그인 관련 정보 저장 - 휴대폰번호, 이름
+        #     request.session['user_phone'] = m.user_phone
+        #     request.session['user_name'] = m.user_name
+        #     return redirect('mainpage:mainhome')
+        # else:
+        #     return render(request, 'member/register.html', 
+        #                 {'error_messages':error_messages})
 
 def logout(request):
     if request.session['user_phone']:
         del request.session['user_phone']
         del request.session['user_name']
         return redirect('mainpage:mainhome')
-
-
-### 추가된부분 ###
-# 프로필
-# from django.views.generic.detail import DetailView
-# class ProfileView(DetailView):
-#     context_object_name = 'profile_user'
-#     model = Profile
-#     template_name = 'member/profile.html'
-
-def ProfileView(request, pk):
-    profiles = Profile.objects.get(pk=pk)
-    if profiles:
-        # user = profiles.user_name
-        context = {
-            'nickname': profiles.nickname,
-            'description': profiles.description,
-            'image': profiles.image,            
-            }
-        return render(request, 'member/profile.html', context)
-    else:
-        return redirect('mainpage:mainhome', profiles.pk)

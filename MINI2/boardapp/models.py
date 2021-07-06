@@ -4,7 +4,6 @@ from django.db.models.deletion import CASCADE
 from member.models import Member
 from django.conf import settings
 
-
 #  모든 게시판 게시물 db
 class BoardAllContentList(models.Model):
     title = models.CharField(max_length=100)

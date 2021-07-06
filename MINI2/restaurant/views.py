@@ -1,8 +1,7 @@
 from django.http.response import HttpResponse
-from restaurant.models import Rest
-from django.shortcuts import render
+from restaurant.models import Rest, Review
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-
 
 from selenium import  webdriver
 from bs4 import BeautifulSoup
@@ -12,6 +11,7 @@ import time
 
 # Create your views here.
 
+#메인페이지
 def restaurant(request):
     rest_list_offi = Rest.objects.filter(rest_rmd='offi')
     rest_list_kfq = Rest.objects.filter(rest_rmd='kfq')
@@ -19,7 +19,7 @@ def restaurant(request):
     context = { 'rest_list_offi' : rest_list_offi, 'rest_list_kfq' : rest_list_kfq , 'rest_list_score' : rest_list_score }
     return render(request, 'restaurant/restaurant.html',context)
     
-
+#게시물 리스트로 보기
 def restaurant_list(request):    #,rest_rmd): #rest_rmd : 어떤 추천(offi,kfq,starscore) 리스트인지
     #rest_list = Rest.objects.filter(Rest_rmd=rest_rmd)
     #context = { 'rest_list' : rest_list }
@@ -30,9 +30,20 @@ def restaurant_list(request):    #,rest_rmd): #rest_rmd : 어떤 추천(offi,kfq
     ######################################
     return render(request, 'restaurant/restaurant_list.html',{})   #context)
 
-def restaurant_detail(request): # = None):
-    #rest = get_object_or_404(Rest, rest_name=rest_name)
+#상세 게시물 보기
+def restaurant_detail(request, pk):
+    rest = Rest.objects.get(pk=pk)
+    if not Review.objects.filter(rest_id = rest).exists() :
+        context = { 'rest' : rest }
+    else :
+        review = Review.objects.filter(rest_id = rest )
+        context = { 'rest' : rest , 'review' : review }
+    return render(request, 'restaurant/restaurant_detail.html', context)
+
+#검색 상세페이지
+def restaurant_search(request): 
     search = request.POST.get('search')
+    er = ""
 
     if not Rest.objects.filter(rest_name__contains=search).exists() :  #해당 가게명이 데이터 베이스에 없다.
         
@@ -62,10 +73,15 @@ def restaurant_detail(request): # = None):
         # if soup.select('body > main > article > div.column-wrapper > div > div > section > div.search_result_empty_message > div > p') == '검색한 식당이 망고플레이트에 보이지 않을 땐??':
         #     return HttpResponse('검색어가 존재하지 않습니다.')
         #################################################################
+
         try :
             elem2 = driver.find_element_by_class_name('thumb')
         except :
-            return HttpResponse('검색어가 존재하지 않습니다.')
+            er = "검색어가 존재하지 않습니다."
+            return render(request, 'restaurant/restaurant.html', {'er':er,
+                                                                'search':search})
+            
+            # return HttpResponse('검색어가 존재하지 않습니다.')
         action_chains = ActionChains(driver)
         action_chains.move_to_element_with_offset(elem2, 0, 0).perform()
         action_chains.click().perform()
@@ -142,6 +158,27 @@ def restaurant_detail(request): # = None):
     else :
         rest = Rest.objects.get(rest_name__contains=search)
 
-    
-    context = { 'rest' : rest } 
+    context = { 'rest' : rest,
+                'search':search} 
     return render(request, 'restaurant/restaurant_detail.html', context)
+
+#게시글 review
+def restaurant_review(request, pk):
+    # # if request.method == 'POST':
+    rest = get_object_or_404(Rest, pk = pk)
+
+    # # session_phone = request.session['user_phone']
+    # # user = Member.objects.get(user_phone = session_phone)
+    review_score = request.POST.get('score')
+    review_writer = request.session['user_name']
+    review_content = request.POST.get('comment')
+    review_date = timezone.now()
+    rest_id = rest
+    
+    Re = Review(rest_id = rest_id,
+                review_score = review_score,
+                review_writer = review_writer,
+                review_content = review_content,
+                review_date = review_date)
+    Re.save()
+    return redirect('/restaurant/'+ str(rest.id))
