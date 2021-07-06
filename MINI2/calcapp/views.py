@@ -25,7 +25,6 @@ def create(request):
     return render(request, 'calcapp/create.html')
 
 def postcreate(request):
-    
     blog = Blog()
     blog.title = request.GET['title']
     blog.body = request.GET['body']
