@@ -21,15 +21,10 @@ def restaurant(request):
     return render(request, 'restaurant/restaurant.html',context)
     
 #게시물 리스트로 보기
-def restaurant_list(request):    #,rest_rmd): #rest_rmd : 어떤 추천(offi,kfq,starscore) 리스트인지
-    #rest_list = Rest.objects.filter(Rest_rmd=rest_rmd)
-    #context = { 'rest_list' : rest_list }
-
-    ############## 테스트 ################
+def restaurant_list(request): 
     rest_list = Rest.objects.all()
     context = {'rest_list' : rest_list }
-    ######################################
-    return render(request, 'restaurant/restaurant_list.html',{})   #context)
+    return render(request, 'restaurant/restaurant_list.html', context)
 
 #상세 게시물 보기
 def restaurant_detail(request, pk):
