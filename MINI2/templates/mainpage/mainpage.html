@@ -18,13 +18,9 @@
 </body>
     <!-- JS부분 -->
     {% include 'mainpage/js-script.html' %}
-<<<<<<< HEAD
-    <h1 id="session_user_phone" style="font-size:70px; display:none;">{{request.session.get_user_phone}}</h1>
-=======
     {% comment %} <h1 id="session_user_phone" style="font-size:70px; display:none;">{{request.session.user_phone}}</h1> {% endcomment %}
     <h1 id="session_user_name" style="font-size:70px; display:none;">{{request.session.user_name}}</h1>
     <h1 id="session_user_phone" style="font-size:70px; display:none;">{{request.session.user_phone}}</h1>
->>>>>>> 4c459b79fa2e74abb1044bafedaed4a4107ccf59
     <script>
     // header-box기능 - 로그인, 회원가입, 로그아웃 버튼을 숨기고 보이는 부분
         var session_user_name = document.getElementById('session_user_name').textContent;
@@ -41,6 +37,14 @@
             $("#header-box-register__btn").show();
             $("#header-box-logout__btn").hide();
         }
+
+        // #admin__btn 인 애들은 session user_phone == '99999999999'이면 보이게하기
+        var admin__btn = document.getElementById('admin__btn').textContent;
+        if (session_user_phone=="99999999999") {
+            $("#admin__btn").show();
+        }
+        
+
         // ajax로 연습
         $('#ajax_button').click(() => {
             $.ajax(
@@ -60,6 +64,7 @@
 
         // 게시판 클릭하면 검사하게하기
         //function session_ischeck()
+        
 
     </script>
 </html>

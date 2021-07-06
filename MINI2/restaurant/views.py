@@ -3,7 +3,6 @@ from restaurant.models import Rest
 from django.shortcuts import render
 from django.utils import timezone
 
-
 from selenium import  webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.keys import Keys
