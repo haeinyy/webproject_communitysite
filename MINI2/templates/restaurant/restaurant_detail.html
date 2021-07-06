@@ -9,6 +9,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script> 
 <script defer src='/static/js/restaurant.js'></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8deb5ae77ef38486d8a2541c58a9a934&libraries=services"></script>
 
 
     <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/dogie.jpg">
@@ -83,16 +84,13 @@
                     </div>
                 </div>
 
-
-                {% comment %} ########################################## {% endcomment %}
-
                 <section class="breadcrumb-option spad set-bg" data-setbg="img/breadcrumb-bg.jpg">
                     <div class="testimonial__item">
                         <h1>{{ rest.rest_name }}</h1>
                         <div class="rating">
                             <h3>{{ rest.rest_score }}</h3>
                             {% for x in rest.rest_starscore %}
-                            <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
                             {% endfor %}
                         </div>
                         <br>
@@ -104,23 +102,86 @@
                     </div>
                     <br>
                     <br>
-                    <div>
-                        <div>지도 api pin 찍어줄것</div>
-                    </div>
-                    <div>조회수 : {{ rest.rest_seenum }}</div>
-                    <br>
-                    <div>가게지도 API</div>
-                    <br>
+
+                    <div id="map" style="width:500px;height:400px;"></div>
+                    <script>
+                        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                            mapOption = {
+                                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                                level: 3 // 지도의 확대 레벨
+                            };  
+
+                        // 지도를 생성합니다    
+                        var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+                        // 주소-좌표 변환 객체를 생성합니다
+                        var geocoder = new kakao.maps.services.Geocoder();
+
+                        // 주소로 좌표를 검색합니다
+                        geocoder.addressSearch('{{ rest.rest_address }}', function(result, status) {
+
+                            // 정상적으로 검색이 완료됐으면 
+                            if (status === kakao.maps.services.Status.OK) {
+
+                                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                                // 결과값으로 받은 위치를 마커로 표시합니다
+                                var marker = new kakao.maps.Marker({
+                                    map: map,
+                                    position: coords
+                                });
+
+                                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                                var infowindow = new kakao.maps.InfoWindow({
+                                    content: '<div style="width:150px;text-align:center;padding:6px 0;">{{ rest.rest_name }}</div>'
+                                });
+                                infowindow.open(map, marker);
+
+                                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                                map.setCenter(coords);
+                            } else {
+                                console.log('검색 실패')}
+                        });    
+                    </script>
+
+                    {% comment %} <div>조회수 : {{ rest.rest_seenum }}</div> {% endcomment %}
+                    {% comment %} <div>추천 : {{ rest.rmd }}</div> {% endcomment %}
                     <div>업데이트날짜 : {{ rest.rest_update }}</div>
                     <br>
-                    <div>추천 : {{ rest.rmd }}</div>
                     <br>
+                    <div class="container">
+                        <h5>리뷰</h5>
+                        {% for rev in review %}
+                        <p>{{ rev.review_date }}</p>
+                        <p><b>{{ rev.review_writer }}</p>
+                        <p>{{ rev.review_score }}</p>
+                        <p>{{ rev.review_content }}</p>
+                        <hr>
+                        {% empty %}
+                        <p>댓글이 없습니다ㅠㅠ 새로운 댓글을 달아주세요^^</p>
+                        {% endfor %}
 
-                    <br>
-                    <div>리뷰란</div>
+                        <form method="POST" action="{% url 'restaurant:review' rest.id %}">
+                            {% csrf_token %}
+                            <div class="input-group mb-3">
+                                <input type="float" class="form-control" placeholder="평점을 입력해주세요" name='score'>
+                                <input type="text" class="form-control" placeholder="댓글을 입력해주세요" aria-label="댓글을 입력해주세요"
+                                    name='comment'>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-secondary">등록</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    </section>
 
                     <!-- 실제 페이지 내용 쓰기 END-->
             </div>
         </div>
     </section>
+<<<<<<< HEAD
 {% endblock content %}
+=======
+{% endblock content %}
+>>>>>>> 718730d49d8792143d10b4b22aa52ccac3bdf4e1
