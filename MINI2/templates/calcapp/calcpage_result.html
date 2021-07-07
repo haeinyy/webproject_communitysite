@@ -10,7 +10,7 @@
 
 
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-option spad set-bg" data-setbg="/static/img/submain-bg.png">
+<section class="breadcrumb-option spad set-bg" data-setbg="/static/img/3.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -18,7 +18,7 @@
                     <h2>마이페이지</h2>
                     <div class="breadcrumb__links">
                         <a href="{% url 'mainpage:mainhome' %}">Home</a>
-                        <span>계산기</span>
+                        <span style="color:mediumaquamarine;">계산기</span>
                     </div>
                 </div>
             </div>
@@ -28,146 +28,66 @@
 <!-- Breadcrumb Section End -->
 
 <!-- 계산기, 상세, 수료현황 Start-->
+{% if u_phone != '99999999999' %}
 <section class="pricing spad">
     <div class="container">
-        <div class="row">
-            <div class="col-6 col-md-4">
-                <div class="card" style="width: 30rem;">
-                    <div class="card-body">
-                        <h3 class="card-title">교육 수당 계산기🧮</h3>
-                        <h6 class="card-subtitle mb-2 text-muted">(출석일수 기준)</h6>
-                        <p class="card-text">
-                            Insert contents
-                        </p>
-                        <form action="/calcapp/calcpage/" method="post">
-                            {% csrf_token %}
-                            하루 4시간 이상 20일 기준으로 출석일수를 입력하세요.<br><br>
-                            <input type="text" name="num1" placeholder="ex) 19 or 20">
-                            <input type="submit">
-                        </form>
-                    </div>
+        <div class="col-lg-12 text-center">
+            <div class="card">
+                <div class="text-center">
+                    {% if image %}
+                    <img class="round" src="/media/{{image}}" style="max-width: fit-content;" height="200">
+                    <br>
+                    {% else %}
+                    <img class="round" src="https://i.stack.imgur.com/34AD2.jpg" width="200"> <br>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if nickname %}
+                    <h3 class="card-title">{{nickname}}</h3>
+                    {% endif %}
+                    <!-- {% if user == profile_user %} 로그인한 사용자와 프로필 소유자가 일치할 때만 프로필 편집이 가능하도록 -->
+                    <a href="#"><button type="button" class="btn btn-default">프로필 편집</button></a></h2>
+                    <!-- {% endif %} -->
+                    <p class="card-text">
+                        description: {% if description %} {{description}} {% endif %}<br>
+                    </p>
+                    <a href="#" class="card-link">프로필 수정</a>
                 </div>
             </div>
-            <div class="col-6 col-md-4">
-                <div class="card" style="width: 30rem;">
+        </div>
+    </div>
+<br>
+    <div class="container">
+        <div class="col-lg-12 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">교육 수당 계산기</h3>
+                    <h6 class="card-subtitle mb-2 text-muted">(출석일수 기준)</h6>
+                    <form action="/calcapp/calcpage/" method="post">
+                        {% csrf_token %}
+                        하루 4시간 이상 20일 기준으로 출석일수를 입력하세요.<br><br>
+                        <input type="text" name="num1" placeholder="ex) 19 or 20">
+                        <input type="submit">
+                    </form>
+                    <hr with="90%">
                     <div class="card-body">
-                        <h3 class="card-title">지급 기준📌</h3>
+                        <h3 class="card-title">지급 기준</h3>
                         <!-- <h6 class="card-subtitle mb-2 text-muted">subtitle</h6> -->
                         <p class="card-text">
-                            !월 출석률이 하루 4시간 이상 80% 이상일 경우 교육수당 지급<br>
-                            !교육수당 지급금액은 월 최대 300,000원<br>
+                            3회차 출석률이 하루 4시간 이상 80% 이상일 경우 교육수당 지급<br>
+                            3회차 교육수당 지급금액은 월 최대 300,000원<br>
                         </p>
                         <!-- <a href="#" class="card-link">Card link</a> -->
                         <!-- <a href="#" class="card-link">Another link</a> -->
                     </div>
                 </div>
             </div>
-            <style>
-                *{
-
-                }
-            </style>
-            <div class="col-6 col-md-4">
-                <div class="card" style="width: 30rem; height='400px';">
-                    <div class="col-xs-6 col-md-3">
-                        {% if image %}
-                        <img class="round" src="/media/notice_img/{{image}}" style="max-width: fit-content;" width="200" height="200"> <br>
-                        {% else %}
-                        <img class="round" src="https://i.stack.imgur.com/34AD2.jpg" width="200"> <br>
-                        {% endif %}
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">profile image</h3>
-                        {% if nickname %}
-                        <h6 class="card-subtitle mb-2 text-muted">{{nickname}}</h6>
-                        {% endif %}
-                        <!-- {% if user == profile_user %} 로그인한 사용자와 프로필 소유자가 일치할 때만 프로필 편집이 가능하도록 -->
-                        <a href="#"><button type="button" class="btn btn-default">프로필 편집</button></a></h2>
-                        <!-- {% endif %} -->
-                        <p class="card-text">
-                            username: {% if username %} {{username}} {% endif %}<br>
-                            description: {% if description %} {{description}} {% endif %}<br>
-                        </p>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="#" class="card-link">프로필 수정</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-6 col-md-4">
-                <div class="card" style="width: 30rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4">
-                <div class="card" style="width: 30rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4">
-                <div class="contact__widget">
-                    <div class="contact__widget__icon">
-                        <i class="fa fa-phone"></i>
-                    </div>
-                    <div class="contact__widget__text">
-                        <h5>알림</h5>
-                        <p>공지사항 확인하세요.</p>
-                    </div>
-                </div>
-                <div class="contact__widget">
-                    <div class="contact__widget__icon">
-                        <i class="fa fa-envelope"></i>
-                    </div>
-                    <div class="contact__widget__text">
-                        <h5>채팅</h5>
-                        <p>채팅을 시작하세요.</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
-<!-- 계산기, 상세, 수료현황 End-->
-
-{% comment %} <div class="col-lg-6 order-lg-2">
-    <div class="doctor__item__text">
-        <ul>
-            <li> -- 리마인드 -- </li>
-            <li><i class="fa fa-check-circle"></i> 출석체크</li>
-            <li><i class="fa fa-check-circle"></i> 교육일정</li>
-            <li><i class="fa fa-check-circle"></i> 자격증일정</li>
-            <li><i class="fa fa-check-circle"></i> 퇴실체크</li>
-        </ul>
-        <div class="doctor__item__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-        </div>
-    </div>
-</div> {% endcomment %}
-
 <hr>
+{% endif %}
+<!-- 계산기, 상세, 수료현황 End-->
 
 <section class="pricing spad">
     <div class="container">
@@ -181,10 +101,10 @@
                             <th scope="col">출석일수</th>
                             <th scope="col">결석일수</th>
                             <th scope="col">출석시간</th>
-                            <th scope="col">출석률</th>
-                            <th scope="col">dat_rate</th>
-                            <th scope="col">누적출석률</th>
-                            <th scope="col">day_cum_rate</th>
+                            <th scope="col">월 출석률(시간)</th>
+                            <th scope="col">월 출석률(일)</th>
+                            <th scope="col">누적 출석률(시간)</th>
+                            <th scope="col">누적 출석률(일)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -231,30 +151,22 @@
                 </div>
                 {% endfor %}
                 {% else %}
-                 <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: {{time_cum_rate}}%"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <strong>{{name}} DD 님</strong> 현재 <strong>{{time}}</strong> / 944 시간 완료 하셨습니다.
+                {% if time < 800 %} 현재 수료 <strong>'불가'</strong> 합니다.
+                    {% elif time >= 800 %}
+                    현재 수료 <strong>'가능'</strong> 합니다.
+                    {% endif %}
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{time_cum_rate}}%"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        </div>
                     </div>
-                </div>
-                {% endif %}
-                <!-- progress -->
-                {% comment %} {% for attendance in attnedances %}
-
-                {% if attendance.name == "김소희" %}
-                <span>
-                    지금 까지 {{attendance.time}} / 960 시간 완료 했습니다.
-                    <br>
-                    {% if attendance.time < 800 %} {{attendance.time}} 수료 '불가' 합니다. {% elif attendance.time>= 800 %}
-                        {{attendance.time}} 수료 '가능' 합니다.
-                </span>
-                {% endif %}
-                {% endif %}
-                {% endfor %} {% endcomment %}
+                    {% endif %}
             </div>
         </div>
     </div>
 </section>
-
+<br><br>
 <!-- 버튼 -->
 <!-- <button 
         type="button" 
