@@ -17,7 +17,7 @@
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-option spad set-bg" data-setbg="/static/img/3.jpg>
+<section class="breadcrumb-option spad set-bg" data-setbg="/static/img/3.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -38,6 +38,7 @@
     <div class="card">
         <div class="card-body">
             <h2>{{ blog.title }}</h2>
+            <h6>작성자 : {{ blog.user }}</h6>
             <p>{{ blog.pub_date }}</p>
             <p>{{ blog.body }}</p>
             <br>
