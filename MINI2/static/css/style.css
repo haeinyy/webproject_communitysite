@@ -178,7 +178,7 @@ ol {
 .site-btn {
 	font-size: 15px;
 	color: #ffffff;
-	background: #13a2b7;
+	background: #6B76FF;
 	font-weight: 600;
 	border: none;
 	border-radius: 5px;
@@ -929,7 +929,7 @@ ol {
 -----------------------*/
 
 .footer {
-	background: #121c1d;
+	background: #6B76FF;
 	padding-top: 40px;
 }
 
@@ -957,7 +957,7 @@ ol {
 	font-size: 14px;
 	color: #ffffff;
 	background: transparent;
-	border: 1px solid #13a2b7;
+	border: 1px solid white;
 	padding-left: 20px;
 	border-radius: 50px;
 }
@@ -988,6 +988,7 @@ ol {
 	right: 0;
 	top: 0;
 	height: 100%;
+	border: 1px solid white;
 }
 
 .footer__social {
@@ -1072,7 +1073,7 @@ ol {
 }
 
 .footer__copyright {
-	background: #12191a;
+	background: #6B76FF;
 	padding: 25px 0 20px;
 	margin-top: 30px;
 }
@@ -1125,6 +1126,10 @@ ol {
 	color: #13a2b7;
 }
 
+.footer__widget ul li a,
+.footer__address ul li{
+	color: white;
+}
 /*---------------------
   Breadcrumb
 -----------------------*/
@@ -1261,6 +1266,7 @@ ol {
 	right: 40px;
 	top: 52px;
 } */
+
 .testimonial__item .rating {
 	position: relative;
     right: 0;
@@ -2377,6 +2383,7 @@ ol {
 	width: 100%;
 }
 
+
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1200px) {
@@ -2404,12 +2411,7 @@ ol {
 		padding: 14px 15px 12px;
 	}
 }
-/* .justify-content-md-center:first-child(){
-	float: right !important;
-} */
-#board-free-bottom__btn {
-	float: right !important;
-}
+
 /* Tablet Device = 768px */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2865,4 +2867,3 @@ ol {
 		padding: 14px 30px 12px;
 	}
 }
-
