@@ -1,34 +1,241 @@
 {% extends 'mainpage/mainpage.html' %}
 {% block content %}
-
 {% include 'calcapp/calcpage_common.html' %}
+{% load static %}
 
-<!-- Hero Section Begin -->
+<!-- session -->
 <h1 id="session_user_name" style="font-size:70px; display:none;">{{request.session.user_name}}</h1>
 <h1 id="session_user_phone" style="font-size:70px; display:none;">{{request.session.user_phone}}</h1>
 <script>
     var session_user_name = document.getElementById('session_user_name').textContent;
     var session_user_phone = document.getElementById('session_user_phone').textContent;
     if (session_user_phone != '') {
-        alert('환영합니다 '+session_user_name+'님')
+        alert('환영합니다 ' + session_user_name + 'DD 님')
     }
     else {
         alert('로그인 후 사용가능합니다.')
     }
 </script>
-<section class="hero spad set-bg" data-setbg="/static/img/hero-door.jpg">
+<!-- session -->
+
+ <!-- Hero Section Begin -->
+    <section class="hero spad set-bg" data-setbg="{% static 'img/main-bg.png' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="hero__text">
+                        <span>Kfq 공식 커뮤니티 | DEVELOPER DREAM</span>
+                        <h2>모이자! 뭉치차! 해보자! 개발자를 꿈꾸는 우리들의 공간</h2>                        
+                        <a href="#" class="primary-btn normal-btn">Contact us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+<!-- Chooseus Section Begin -->
+    <section class="chooseus spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <span>우리 커뮤니티는요</span>
+                        <h2>Offer for you</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <img src="{% static 'img/icons/calc.png' %}" alt="">
+                    <div class="chooseus__item">                    
+                        <h5>계산기</h5>
+                        <p>계산기를 통해 수료율을 확인하고,<br>간단한 수당계산을 할 수 있습니다.</p>
+                    </div>                    
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="chooseus__item">
+                        <img src="{% static 'img/icons/board.png' %}" alt="">
+                        <h5>커뮤니티</h5>
+                        <p>커뮤니티를 통해 서로 질문하고 나누고 모임을 형성해보세요.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="chooseus__item">
+                        <img src="{% static 'img/icons/food.png' %}" alt="">
+                        <h5>가디맛집</h5>
+                        <p>점심에 뭐 먹지 고민이 많나요?<br>추천과 리뷰가 많은 음식점을 소개해드릴게요!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="chooseus__item">
+                        <img src="{% static 'img/icons/notice.png' %}" alt="">
+                        <h5>정보마당</h5>
+                        <p>Kfq 공지를 확인하세요!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Chooseus Section End -->
+    <hr>
+    <!-- 공지사항  Start-->
+<section class="latest spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="hero__text">
-                    <span>🔎 원하는 방을 찾아가세요 </span>
-                    <h2>FIND AND DESIGN YOUR FUTURE!</h2>
-                    <a href="#" class="primary-btn normal-btn">WHTCH MORE</a>
+            <div class="col-lg-8 col-md-8 col-sm-6">
+                <div class="section-title">
+                    <span>Our Issues</span>
+                    <h2>공지사항</h2>
+                </div>
+            </div>
+    
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="latest__btn">
+                    <a href="{% url 'calcapp:notice' %}" class="primary-btn">MORE</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for blog in blogs %}
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="latest__item">
+                    <h5><a href="#">{{bolg.title}}</a></h5>
+                    <p>{{blog.body}}</p>
+                    <ul>
+                        <li><img src="{% static 'img/blog/blog-author.jpg' %}" alt="">작성자</li>
+                        <li>{{blog.id}}</li>
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- 공지사항  End-->
+
+<!-- Services Section Begin -->
+<section class="services spad set-bg" data-setbg="{% static 'img/mains-bg2.png' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-6">
+                <div class="section-title">
+                    <span>커뮤니티</span>
+                    <h2>Offer for you</h2>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="services__btn">
+                    <a href="{% url 'boardapp:freeboard' %}" class="primary-btn">MORE</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="services__item">
+                    <div class="services__item__icon">
+                        <span class="flaticon-044-aesthetic"></span>
+                    </div>
+                    <div class="services__item__text">
+                        <h5>자유게시판</h5>
+                        <p>
+                            자유
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="services__item">
+                    <div class="services__item__icon">
+                        <span class="flaticon-027-beauty"></span>
+                    </div>
+                    <div class="services__item__text">
+                        <h5>공모전/스터디</h5>
+                        <p>
+                            모임
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="services__item">
+                    <div class="services__item__icon">
+                        <span class="flaticon-031-anatomy"></span>
+                    </div>
+                    <div class="services__item__text">
+                        <h5>취업/진로</h5>
+                        <p>
+                            진로고민, 정보공유
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="services__item">
+                    <div class="services__item__icon">
+                        <span class="flaticon-008-abdominoplasty"></span>
+                    </div>
+                    <div class="services__item__text">
+                        <h5>물물교환/무료나눔</h5>
+                        <p>
+                            거래~
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Hero Section End -->
-{% endblock %}
+<!-- Services Section End -->
 
+
+
+<!-- 게시판 Begin -->
+<!-- 자유게시판 Begin -->
+
+<!-- 자유게시판 End -->
+<!-- 게시판 End -->
+
+<!-- 맛집 Begin -->
+<section class="testimonials spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <span>가디맛집</span>
+                    <h2>Happy Choice</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="testimonial__slider owl-carousel">
+                {% for rest in rest %}
+                <div class="col-lg-6">
+                    <div class="testimonial__item">
+                        <div class="testimonial__author">
+                            <a href="/restaurant/{{ rest.id }}">
+                                <img src="{{ rest.rest_img1 | default:'/static/img/dogie.jpg'}}" class="block">
+                            </a>
+                        </div>
+                        <div class="rating">
+                            {% for x in rest.rest_starscore %}
+                            <i class="fa fa-star"></i>
+                            {% endfor %}
+                        </div>
+                        <div class="testimonial__author__text">
+                            
+                            <h5>{{rest.rest_name}} {{ rest.rest_score }}</h5>
+                        </div>
+                        <span>{{rest.rest_kind}}</span>
+                        <hr>
+                        <p>{{rest.rest_address}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 맛집 End -->
+<br>
+{% endblock %}

@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 app_name = 'calcapp'
 urlpatterns = [
+    path('contact/', views.contact, name='contact'),
     path('donation/', views.donation, name='donation'),
     # 공지사항
     path('notice/', views.notice, name='notice'),

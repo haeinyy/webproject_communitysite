@@ -6,11 +6,15 @@ from . models import Attendences, Blog
 from calcapp.forms import BlogUpdate
 from django.core.paginator import Paginator
 
+
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
 # ## ajax테스트 start
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
+def contact(request):
+    return render(request, 'calcapp/contact.html', {} )
+    
 def donation(request):
     return render(request,'calcapp/donation.html', {} )
 
