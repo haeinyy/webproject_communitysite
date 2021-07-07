@@ -24,6 +24,12 @@ class Blog(models.Model):
     # python -m pip install Pillow 설치 필요
     images = models.ImageField(blank=True, upload_to="notice_img", null=True)
 
+    # 해인추가
+    user = models.CharField(max_length=20) # main user db랑 연결 해야함
+    board_kind = models.CharField(max_length=20)
+
+
+
     def __str__(self):
         return self.title
     
