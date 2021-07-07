@@ -40,8 +40,8 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="section-title">
-                        <span>우리 커뮤니티는요</span>
-                        <h2>Offer for you</h2>
+                        <h2>우리 커뮤니티는요</h2>
+                        <span>Offer for you</span>
                     </div>
                 </div>
             </div>
@@ -85,8 +85,8 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-6">
                 <div class="section-title">
-                    <span>Our Issues</span>
                     <h2>공지사항</h2>
+                    <span>Our Issues</span>
                 </div>
             </div>
     
@@ -103,7 +103,7 @@
                     <h5><a href="#">{{bolg.title}}</a></h5>
                     <p>{{blog.body}}</p>
                     <ul>
-                        <li><img src="{% static 'img/blog/blog-author.jpg' %}" alt="">작성자</li>
+                        <li><img src="{% static 'img/blog/blog-author.jpg' %}" alt="">{{request.session.user_name}}</li>
                         <li>{{blog.id}}</li>
                     </ul>
                 </div>
@@ -120,8 +120,8 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-6">
                 <div class="section-title">
-                    <span>커뮤니티</span>
-                    <h2>Offer for you</h2>
+                    <h2>게시판</h2>
+                    <span style="color:white; font-size:15px;">Offer for you</span>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
@@ -132,9 +132,9 @@
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6">
-                <div class="services__item">
+                <div class="services__item" OnClick="location.href ='/boardapp/freeboard/'" style="cursor:pointer;">
                     <div class="services__item__icon">
-                        <span class="flaticon-044-aesthetic"></span>
+                        <img src="{% static 'img/icons/freeboard.png' %}" width="70" height="auto">
                     </div>
                     <div class="services__item__text">
                         <h5>자유게시판</h5>
@@ -145,12 +145,12 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
-                <div class="services__item">
+                <div class="services__item" OnClick="location.href ='/boardapp/studyboard/'" style="cursor:pointer;">
                     <div class="services__item__icon">
-                        <span class="flaticon-027-beauty"></span>
+                        <img src="{% static 'img/icons/study.png' %}" width="70" height="auto">
                     </div>
                     <div class="services__item__text">
-                        <h5>공모전/스터디</h5>
+                        <h5>동아리/스터디</h5>
                         <p>
                             모임
                         </p>
@@ -158,9 +158,9 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
-                <div class="services__item">
+                <div class="services__item" OnClick="location.href ='/boardapp/jobboard/'" style="cursor:pointer;">
                     <div class="services__item__icon">
-                        <span class="flaticon-031-anatomy"></span>
+                        <img src="{% static 'img/icons/consulting.png' %}" width="70" height="auto">
                     </div>
                     <div class="services__item__text">
                         <h5>취업/진로</h5>
@@ -171,9 +171,9 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
-                <div class="services__item">
+                <div class="services__item" OnClick="location.href ='/boardapp/tradeboard/'" style="cursor:pointer;">
                     <div class="services__item__icon">
-                        <span class="flaticon-008-abdominoplasty"></span>
+                        <img src="{% static 'img/icons/trading.png' %}" width="70" height="auto">
                     </div>
                     <div class="services__item__text">
                         <h5>물물교환/무료나눔</h5>
@@ -202,145 +202,36 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="section-title">
-                    <span>가디맛집</span>
-                    <h2>Happy Choice</h2>
+                    <h2 style="font-size:15px;">가디맛집</h2>
+                    <span>Happy Choice</span>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="testimonial__slider owl-carousel">
+                {% for rest in rest %}
                 <div class="col-lg-6">
                     <div class="testimonial__item">
                         <div class="testimonial__author">
-                            <div class="testimonial__author__icon">
-                                <i class="fa fa-quote-left"></i>
-                            </div>
-                            <div class="testimonial__author__text">
-                                <h5>Catanis Greimar</h5>
-                                <span>Businesswoman</span>
-                            </div>
+                            <a href="/restaurant/{{ rest.id }}">
+                                <img src="{{ rest.rest_img1 | default:'/static/img/dogie.jpg'}}" class="block">
+                            </a>
                         </div>
                         <div class="rating">
+                            {% for x in rest.rest_starscore %}
                             <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                            {% endfor %}
                         </div>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                        vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
+                        <div class="testimonial__author__text">
+                            
+                            <h5>{{rest.rest_name}} {{ rest.rest_score }}</h5>
+                        </div>
+                        <span>{{rest.rest_kind}}</span>
+                        <hr>
+                        <p>{{rest.rest_address}}</p>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="testimonial__item">
-                        <div class="testimonial__author">
-                            <div class="testimonial__author__icon">
-                                <i class="fa fa-quote-left"></i>
-                            </div>
-                            <div class="testimonial__author__text">
-                                <h5>Catanis Greimar</h5>
-                                <span>Businesswoman</span>
-                            </div>
-                        </div>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                        vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="testimonial__item">
-                        <div class="testimonial__author">
-                            <div class="testimonial__author__icon">
-                                <i class="fa fa-quote-left"></i>
-                            </div>
-                            <div class="testimonial__author__text">
-                                <h5>Catanis Greimar</h5>
-                                <span>Businesswoman</span>
-                            </div>
-                        </div>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                        vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="testimonial__item">
-                        <div class="testimonial__author">
-                            <div class="testimonial__author__icon">
-                                <i class="fa fa-quote-left"></i>
-                            </div>
-                            <div class="testimonial__author__text">
-                                <h5>Catanis Greimar</h5>
-                                <span>Businesswoman</span>
-                            </div>
-                        </div>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                        vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="testimonial__item">
-                        <div class="testimonial__author">
-                            <div class="testimonial__author__icon">
-                                <i class="fa fa-quote-left"></i>
-                            </div>
-                            <div class="testimonial__author__text">
-                                <h5>Catanis Greimar</h5>
-                                <span>Businesswoman</span>
-                            </div>
-                        </div>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                        vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="testimonial__item">
-                        <div class="testimonial__author">
-                            <div class="testimonial__author__icon">
-                                <i class="fa fa-quote-left"></i>
-                            </div>
-                            <div class="testimonial__author__text">
-                                <h5>Catanis Greimar</h5>
-                                <span>Businesswoman</span>
-                            </div>
-                        </div>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus
-                        vel facilisis ut labore et dolore magna aliqua accumsan lacus vel facilisis. </p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
