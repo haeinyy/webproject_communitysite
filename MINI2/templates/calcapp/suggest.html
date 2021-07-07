@@ -47,6 +47,7 @@
     <div class="card">
         <div class="card-body">
             <h1>{{ blog.title }}</h1>
+            <h6>작성자 : {{ blog.user }}</h6>
             <p>{{ blog.pub_date | date:"Y-m-d" }}</p>
             <p>{{ blog.summary }}<a href="{% url 'calcapp:detail' blog.id %}"> ...자세히 보기</a></p>
         </div>

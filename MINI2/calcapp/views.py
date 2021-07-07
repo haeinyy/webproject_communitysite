@@ -1,3 +1,4 @@
+from django.db.models.query import RawQuerySet
 from django.http import HttpResponse, request
 from member.models import Member, Profile
 from django.shortcuts import render, redirect, get_object_or_404
@@ -81,11 +82,14 @@ def create(request):
 
 def postcreate(request):
     blog = Blog()
-    blog.title = request.POST.get('title')
-    blog.body = request.POST.get('body')
-    blog.images = request.FILES.get('images')
-    blog.pub_date = timezone.datetime.now()
-    blog.save()
+    session_value = request.session['user_name']
+    if request.method == 'POST':
+        blog.title = request.POST.get('title')
+        blog.body = request.POST.get('body')
+        blog.images = request.FILES.get('images')
+        blog.pub_date = timezone.datetime.now()
+        blog.user = session_value
+        blog.save()
     return redirect('/calcapp/detail/' + str(blog.id))
 
 def update(request, blog_id):
