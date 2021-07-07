@@ -1,4 +1,4 @@
-{% include 'mainpage/load-box.html' %}
+{% extends 'mainpage/mainpage.html' %}
 <style>
     .heart_poisition {
         position: absolute;
@@ -6,17 +6,7 @@
         right: 20px;
     }
 </style>
-
-
-</head>
-
-<body>
-    <!-- HEADER-BOX START -->
-    {% include 'mainpage/header-box.html' %}
-    <!-- HEADER-BOX END -->
-
-    <!-- 페이지경로 -->
-    <!-- Breadcrumb Section Begin -->
+{% block content %}
     <section class="breadcrumb-option spad set-bg" data-setbg="/static/img/2.jpg">
         <div class="container">
             <div class="row">
@@ -311,14 +301,4 @@
             </div>
         </div>
     </section>
-    <!-- Testimonials Section End -->
-
-
-    <!-- FOOTER-BOX START -->
-    {% include 'mainpage/footer-box.html' %}
-    <!-- FOOTER-BOX END -->
-
-    <!-- JS부분 -->
-    {% include 'mainpage/js-script.html' %}
-</body>
-</html>
+{% endblock content %}

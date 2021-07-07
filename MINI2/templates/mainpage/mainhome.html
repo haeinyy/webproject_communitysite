@@ -101,9 +101,9 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="latest__item">
                     <h5><a href="#">{{bolg.title}}</a></h5>
-                    <p>{{blog.body}}</p>
+                    <p>{{ blog.summary }}<a href="{% url 'calcapp:detail' blog.id %}"> ...자세히 보기</a></p>
                     <ul>
-                        <li><img src="{% static 'img/blog/blog-author.jpg' %}" alt="">{{request.session.user_name}}</li>
+                        <li><img src="{% static 'img/blog/blog-author.jpg' %}" alt="">관리자</li>
                         <li>{{blog.id}}</li>
                     </ul>
                 </div>
