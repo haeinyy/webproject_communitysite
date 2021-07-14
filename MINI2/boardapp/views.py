@@ -8,11 +8,10 @@ from django.contrib import messages
 import json
 from django.views.generic import View, ListView, DetailView, FormView, CreateView
 
-
 # 자유게시판 메인 목록
 def freeboard(request):
     content_list = BoardAllContentList.objects.filter(board_kind='자유게시판').order_by('-id')
-    
+
     #################### 검색 ########################
     serach_key = request.GET.get('search_key')
     search_type = request.GET.get('type')
@@ -51,6 +50,7 @@ def freeboard(request):
         end_page = p.num_pages
     ####################################################
     context = {
+        'list':content_list,
         'content_list':info,
         'pagination' : range(start_page,end_page+1),
         'end_page' : end_page,
@@ -61,7 +61,7 @@ def freeboard(request):
 # 동아리/스터디 메인 목록
 def studyboard(request):
     content_list = BoardAllContentList.objects.filter(board_kind='동아리/스터디').order_by('-id')
-    
+
     #################### 검색 ########################
     serach_key = request.GET.get('search_key')
     search_type = request.GET.get('type')
@@ -106,13 +106,13 @@ def studyboard(request):
         'end_page' : end_page,
         'now_page' : now_page,
     }
-    
+
     return render(request, 'boardapp/board_study.html', context)
 
 # 취업/진로 메인 목록
 def jobboard(request):
     content_list = BoardAllContentList.objects.filter(board_kind='취업/진로').order_by('-id')
-    
+
     #################### 검색 ########################
     serach_key = request.GET.get('search_key')
     search_type = request.GET.get('type')
@@ -157,13 +157,13 @@ def jobboard(request):
         'end_page' : end_page,
         'now_page' : now_page,
     }
-    
+
     return render(request, 'boardapp/board_job.html', context)
 
 # 물물교환/무료나눔 메인 목록
 def tradeboard(request):
     content_list = BoardAllContentList.objects.filter(board_kind='물물교환/무료나눔').order_by('-id')
-    
+
     #################### 검색 ########################
     serach_key = request.GET.get('search_key')
     search_type = request.GET.get('type')
@@ -225,7 +225,7 @@ def writetext(request):
         content.user = session_value
         content.board_kind = request.POST['board_kind']
         content.save()
-        
+
         '''
         for img in request.FILES.getlist('images'):
             # image 객체 생성
@@ -237,7 +237,7 @@ def writetext(request):
             # db에 저장
             image.save()
         '''
-        
+
         return redirect('/boardapp/' + str(content.pk))
     # 내용 입력 없을 떄
     return render(request, 'boardapp/board_write.html',{})
@@ -269,7 +269,7 @@ def content_delete(request, pk):
 def comment_write(request, pk):
     content = get_object_or_404(BoardAllContentList, pk = pk)
     session_value = request.session['user_name']
-    
+
     content.content.create(comment_content = request.POST.get('comment'), comment_date = timezone.now(), comment_writer=session_value)
     return redirect('/boardapp/'+str(content.pk))
 
@@ -277,7 +277,7 @@ def comment_write(request, pk):
 # 게시글 좋아요
 def likes(request):
     # 현재 로그인한 유저
-    user = Member.objects.get(user_phone=request.session['user_phone']) 
+    user = Member.objects.get(user_phone=request.session['user_phone'])
 
     if request.is_ajax():
         content_id = request.GET['content_id'] # 좋아요 누른 게시물 id
@@ -293,8 +293,8 @@ def likes(request):
         else:
             content.like.add(user)
             message ='좋아요'
-        
+
         like_count = content.like.count() # 게시물이 받은 좋아요수
         context={'like_count':like_count, 'message':message}
-    
+
     return HttpResponse(json.dumps(context), content_type='application/json')

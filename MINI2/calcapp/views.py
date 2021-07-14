@@ -15,7 +15,7 @@ from django.core.paginator import Paginator
 # ---------------------------------------------------------------------------------------
 def contact(request):
     return render(request, 'calcapp/contact.html', {} )
-    
+
 def donation(request):
     return render(request,'calcapp/donation.html', {} )
 
@@ -25,7 +25,7 @@ def donation(request):
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
 def faq(request):
-    blogs = Blog.objects.order_by('-id')
+    blogs = Blog.objects.all()
     # 페이징( notice 수정 )
     blog_list = Blog.objects.all().order_by('-id')
     paginator = Paginator(blog_list,3) # 3개씩
@@ -38,7 +38,7 @@ def faq(request):
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
 def suggest(request):
-    blogs = Blog.objects.order_by('-id')
+    blogs = Blog.objects.all()
     # 페이징( notice 수정 )
     blog_list = Blog.objects.all().order_by('-id')
     paginator = Paginator(blog_list,3) # 3개씩
@@ -51,7 +51,7 @@ def suggest(request):
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
 def qna(request):
-    blogs = Blog.objects.order_by('-id')
+    blogs = Blog.objects.all()
     # 페이징( notice 수정 )
     blog_list = Blog.objects.all().order_by('-id')
     paginator = Paginator(blog_list,3) # 3개씩
@@ -64,7 +64,7 @@ def qna(request):
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
 def notice(request):
-    blogs = Blog.objects.order_by('-id')
+    blogs = Blog.objects.all()
     # 페이징( home 수정 )
     blog_list = Blog.objects.all().order_by('-id')
     paginator = Paginator(blog_list,3) # 3개씩
@@ -75,7 +75,9 @@ def notice(request):
 
 def detail(request, blog_id):
     blog_detail = get_object_or_404(Blog, pk=blog_id) # blog_id는 글이 생기면 장고에서 저절로 부여하는 고유 번호
-    return render(request, 'calcapp/detail.html', {'blog': blog_detail})
+    return render(request, 'calcapp/detail.html', {
+        'blog': blog_detail,
+    })
 
 def create(request):
     return render(request, 'calcapp/create.html')
@@ -100,12 +102,13 @@ def update(request, blog_id):
         if form.is_valid():
             blog.title = form.cleaned_data['title']
             blog.body = form.cleaned_data['body']
+            blog.images = form.cleaned_data['images']
             blog.pub_date=timezone.now()
             blog.save()
             return redirect('/calcapp/detail/' + str(blog.id))
     else:
         form = BlogUpdate(instance = blog)
- 
+
         return render(request,'calcapp/update.html', {'form':form})
 
 def delete(request, blog_id):
@@ -117,12 +120,12 @@ def delete(request, blog_id):
 def search(request):
     blogs = Blog.objects.all().order_by('-id')
 
-    q = request.POST.get('q', "") 
+    q = request.POST.get('q', "")
 
     if q:
         blogs = blogs.filter(title__icontains=q)
         return render(request, 'calcapp/search.html', {'blogs' : blogs, 'q' : q})
-    
+
     else:
         return render(request, 'calcapp/search.html')
 
@@ -138,7 +141,7 @@ def calcpage(request):
 def calcpage_result(request):
     attendancesList = Attendences.objects.all()
     u_phone = request.session['user_phone']
-    
+
     try: # 나는 학생이니까 정보가 있찌.
         user_info_list = Attendences.objects.get(user_phone_id=u_phone)
         user_profile = Profile.objects.get(user_name_id=u_phone)
@@ -155,10 +158,10 @@ def calcpage_result(request):
 
             'nickname': user_profile.nickname,
             'description': user_profile.description,
-            'image': user_profile.image,            
+            'image': user_profile.image,
             }
         return render(request, 'calcapp/calcpage_result.html', context)
-    
+
     except: # 나는 관리자니까 정보가 없지.
         context = {
             'u_phone': u_phone,
@@ -179,10 +182,10 @@ def ProfileView(request):
             'username': user_profile.user_name,
             'nickname': user_profile.nickname,
             'description': user_profile.description,
-            'images': user_profile.images,            
+            'images': user_profile.images,
         }
         return render(request, 'calcapp/calcpage_result.html', context)
-    
+
     except:
         context = {
             'u_phone': u_phone,

@@ -47,7 +47,7 @@
                             <li><a href="{% url 'boardapp:freeboard' %}">게시판</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'boardapp:freeboard' %}">자유게시판</a></li>
-                                    <li><a href="{% url 'boardapp:studyboard' %}">동아리/스터디</a></li>
+                                    <li><a href="{% url 'boardapp:studyboard' %}">공모전/스터디</a></li>
                                     <li><a href="{% url 'boardapp:jobboard' %}">취업/진로</a></li>
                                     <li><a href="{% url 'boardapp:tradeboard' %}">물물교환/무료나눔</a></li>
                                 </ul>
@@ -60,10 +60,10 @@
                             </li>
                             <li><a href="{% url 'calcapp:notice' %}">정보마당</a>
                                 <ul class="dropdown">
-                                    <li><a href="{% url 'calcapp:qna' %}">Q&A</a></li>
-                                    <li><a href="{% url 'calcapp:faq' %}">FAQ</a></li>
                                     <li><a href="{% url 'calcapp:notice' %}">공지사항</a></li>
+                                    <li><a href="{% url 'calcapp:faq' %}">FAQ</a></li>
                                     <li><a href="{% url 'calcapp:suggest' %}">건의사항</a></li>
+                                    <li><a href="{% url 'calcapp:qna' %}">Q&A</a></li>
                                 </ul>
                             </li>
                             <li><a href="{% url 'calcapp:contact' %}">Dev Team</a></li>

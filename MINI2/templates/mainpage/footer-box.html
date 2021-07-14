@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="footer__logo">
-                        <a href="{% url 'calcapp:contact' %}" style="color:white; font-size:20px;">Developer Dream</a>
+                        <a href="{% url 'mainpage:mainhome' %}" style="color:white; font-size:20px;">Developer Dream</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-8">
@@ -48,7 +48,7 @@
                     <h5>Quick links</h5>
                     <ul>
                         <li><a href="{% url 'boardapp:freeboard' %}">자유게시판</a></li>
-                        <li><a href="{% url 'boardapp:freeboard' %}">동아리/스터디</a></li>
+                        <li><a href="{% url 'boardapp:freeboard' %}">공모전/스터디</a></li>
                         <li><a href="{% url 'boardapp:freeboard' %}">취업/진로</a></li>
                         <li><a href="{% url 'boardapp:freeboard' %}">물물교환/무료나눔</a></li>
                         <li><a href="{% url 'restaurant:rest' %}">가디맛집</a></li>
@@ -68,16 +68,16 @@
             <div class="col-lg-4 col-md-12 col-sm-6">
                 <div id="map" style="width:400px;height:250px;"></div>
                     <script>
-                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-                        mapOption = { 
+                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                        mapOption = {
                             center: new kakao.maps.LatLng(37.479966429878, 126.88263620024), // 지도의 중심좌표
                             level: 3 // 지도의 확대 레벨
                         };
 
                     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-                    // 마커가 표시될 위치입니다 
-                    var markerPosition  = new kakao.maps.LatLng(37.479966429878, 126.88263620024); 
+                    // 마커가 표시될 위치입니다
+                    var markerPosition  = new kakao.maps.LatLng(37.479966429878, 126.88263620024);
 
                     // 마커를 생성합니다
                     var marker = new kakao.maps.Marker({

@@ -5,7 +5,9 @@ from .models import Blog
 class BlogUpdate(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ['title','body']
+        fields = ['title','body', 'images']
+
+
 # form 이용시 views.py 수정
 
 # from .models import AttendHistroy

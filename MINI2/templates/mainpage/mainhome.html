@@ -25,18 +25,19 @@
                 <div class="col-lg-6">
                     <div class="hero__text">
                         <span>Kfq 공식 커뮤니티 | DEVELOPER DREAM</span>
-                        <h2 style="color: blanchedalmond;">모이자! 뭉치차! 해보자! 개발자를 꿈꾸는 우리들의 공간</h2>                        
-                        <a href="#" class="primary-btn normal-btn">Contact us</a>
+                        <h2 style="color: blanchedalmond;">모이자! 뭉치차! 해보자! 개발자를 꿈꾸는 우리들의 공간</h2>
+                        <a href="{% url 'calcapp:contact' %}" class="primary-btn normal-btn">Contact us</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Hero Section End -->
+<!-- Hero Section End -->
 
 <!-- Chooseus Section Begin -->
     <section class="chooseus spad">
         <div class="container">
+
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="section-title">
@@ -45,78 +46,118 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
-                    <img src="{% static 'img/icons/calc.png' %}" alt="">
-                    <div class="chooseus__item">                    
-                        <h5>계산기</h5>
-                        <p>계산기를 통해 수료율을 확인하고,<br>간단한 수당계산을 할 수 있습니다.</p>
-                    </div>                    
+                    <a href="{% url 'calcapp:calcpage_result' %}" >
+                        <img src="{% static 'img/icons/calc.png' %}" alt="">
+                        <div class="chooseus__item">
+                            <h5>계산기</h5>
+                            <p>계산기를 통해 수료율을 확인하고,<br>간단한 수당계산을 할 수 있습니다.</p>
+                        </div>
+                    </a>
                 </div>
+
                 <div class="col-lg-3 col-md-6 col-sm-6">
+                    <a href="#board" >
                     <div class="chooseus__item">
                         <img src="{% static 'img/icons/board.png' %}" alt="">
                         <h5>커뮤니티</h5>
-                        <p>커뮤니티를 통해 서로 질문하고 나누고 모임을 형성해보세요.</p>
+                        <p>게시판을 통해 서로 질문하고 나누고 모임을 형성해보세요.</p>
                     </div>
+                    </a>
                 </div>
+
                 <div class="col-lg-3 col-md-6 col-sm-6">
+                    <a href="#food" >
                     <div class="chooseus__item">
                         <img src="{% static 'img/icons/food.png' %}" alt="">
                         <h5>가디맛집</h5>
                         <p>점심에 뭐 먹지 고민이 많나요?<br>추천과 리뷰가 많은 음식점을 소개해드릴게요!</p>
                     </div>
+                    </a>
                 </div>
+
                 <div class="col-lg-3 col-md-6 col-sm-6">
+                    <a href="#notice" >
                     <div class="chooseus__item">
                         <img src="{% static 'img/icons/notice.png' %}" alt="">
                         <h5>정보마당</h5>
                         <p>Kfq 공지를 확인하세요!</p>
                     </div>
+                    </a>
                 </div>
+
             </div>
         </div>
     </section>
-    <!-- Chooseus Section End -->
-    <hr>
-    <!-- 공지사항  Start-->
-<section class="latest spad">
+<!-- Chooseus Section End -->
+<hr>
+<!-- 공지사항  Start-->
+<section class="latest spad" id="notice">
     <div class="container">
+
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-6">
                 <div class="section-title">
-                    <h2>공지사항</h2>
+                    <h2>정보마당</h2>
                     <span>Our Issues</span>
                 </div>
             </div>
-    
+
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="latest__btn">
                     <a href="{% url 'calcapp:notice' %}" class="primary-btn">MORE</a>
                 </div>
             </div>
         </div>
+
+        <!-- 공지사항 메인 출력 모양 수정 전-->
+        <!--<div class="row">-->
+        <!--    {% for blog in blogs %}-->
+        <!--    <div class="col-lg-4 col-md-6 col-sm-6">-->
+        <!--        <div class="latest__item">-->
+        <!--            <h5><a href="#">{{bolg.title}}</a></h5>-->
+        <!--            <p>{{ blog.summary }}<a href="{% url 'calcapp:detail' blog.id %}"> ...자세히 보기</a></p>-->
+        <!--            <ul>-->
+        <!--                <li><img src="{% static 'img/dogie.jpg' %}" alt="">{{blog.user}}</li>-->
+        <!--                <li>{{blog.id}}</li>-->
+        <!--            </ul>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--    {% endfor %}-->
+        <!--</div>-->
+
+        <!-- 공지사항 메인 출력 모양 수정 후-->
         <div class="row">
-            {% for blog in blogs %}
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="latest__item">
-                    <h5><a href="#">{{bolg.title}}</a></h5>
-                    <p>{{ blog.summary }}<a href="{% url 'calcapp:detail' blog.id %}"> ...자세히 보기</a></p>
-                    <ul>
-                        <li><img src="{% static 'img/blog/blog-author.jpg' %}" alt="">관리자</li>
-                        <li>{{blog.id}}</li>
-                    </ul>
-                </div>
-            </div>
+            <div class="latest__item">
+             {% for blog in blogs %}
+                <h5><a href="#">{{bolg.title}}</a></h5>
+                    <p>
+                        <li>
+                            {{ blog.summary }}...
+                            <a href="{% url 'calcapp:detail' blog.id %}">
+                                <div align='right'>...MORE</div>
+                            </a>
+                        </li>
+                        <!--<div align='right'>-->
+                        <ul>
+                            <li><img src="{% static 'img/dogie.jpg' %}" alt="">{{blog.user}}</li>
+                            <!--<li>{{blog.id}}</li>-->
+                        </ul>
+                        <!--</div>-->
+                    </p>
             {% endfor %}
+            </div>
         </div>
     </div>
 </section>
 <!-- 공지사항  End-->
 
 <!-- Services Section Begin -->
-<section class="services spad set-bg" data-setbg="{% static 'img/mains-bg2.png' %}">
+<section class="services spad set-bg" data-setbg="{% static 'img/mains-bg2.png' %}" id="board">
     <div class="container">
+
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-6">
                 <div class="section-title">
@@ -124,61 +165,130 @@
                     <span style="color:white; font-size:15px;">Offer for you</span>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="services__btn">
-                    <a href="{% url 'boardapp:freeboard' %}" class="primary-btn">MORE</a>
-                </div>
-            </div>
         </div>
+
         <div class="row">
+
             <div class="col-lg-6 col-md-6">
-                <div class="services__item" OnClick="location.href ='/boardapp/freeboard/'" style="cursor:pointer;">
+                <div class="services__item" style="cursor:pointer;">
                     <div class="services__item__icon">
                         <img src="{% static 'img/icons/freeboard.png' %}" width="70" height="auto">
                     </div>
                     <div class="services__item__text">
                         <h5>자유게시판</h5>
                         <p>
-                            자유
+                        <li>
+                            <a href="{% url 'boardapp:freeboard' %}">
+                            연구원님한테 아이스크림 어필
+                            ...</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'boardapp:freeboard' %}">
+                            결정트리 설명좀 해주실분?ㅜㅜ
+                            ...</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'boardapp:freeboard' %}">
+                            이거 보고 다들 힘내삼~
+                            ...</a>
+                        </li>
+                            <!-- 홈화면에 게시판 목록 노출 미완 -->
+                            <!--{% if boards.board_kind == '자유게시판' %}-->
+                            <!--<table class="table table-hover">-->
+                            <!--    <tbody>-->
+                            <!--        <tr>-->
+                            <!--            <td>{{ boards.title }}</td>-->
+                            <!--            <td>{{ boards.user }}</td>-->
+                            <!--            <td>{{ boards.date }}</td>-->
+                            <!--            <td>{{ boards.seenum }}</td>-->
+                            <!--        </tr>-->
+                            <!--    </tbody>-->
+                            <!--</table>-->
+                            <!--{% endif %}-->
                         </p>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6 col-md-6">
-                <div class="services__item" OnClick="location.href ='/boardapp/studyboard/'" style="cursor:pointer;">
+                <div class="services__item" style="cursor:pointer;">
                     <div class="services__item__icon">
                         <img src="{% static 'img/icons/study.png' %}" width="70" height="auto">
                     </div>
                     <div class="services__item__text">
-                        <h5>동아리/스터디</h5>
+                        <h5>공모전/스터디</h5>
                         <p>
-                            모임
+                        <li>
+                            <a href="{% url 'boardapp:studyboard' %}">
+                            제9회 2021 빅콘에 참여할 분 모집
+                            ...</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'boardapp:studyboard' %}">
+                            코딩 테스트 오늘 쉬어요
+                            ...</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'boardapp:studyboard' %}">
+                            머신러닝 같이 실습 하실 분
+                            ...</a>
+                        </li>
                         </p>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6 col-md-6">
-                <div class="services__item" OnClick="location.href ='/boardapp/jobboard/'" style="cursor:pointer;">
+                <div class="services__item" style="cursor:pointer;">
                     <div class="services__item__icon">
                         <img src="{% static 'img/icons/consulting.png' %}" width="70" height="auto">
                     </div>
                     <div class="services__item__text">
                         <h5>취업/진로</h5>
                         <p>
-                            진로고민, 정보공유
+                            <li>
+                                <a href="{% url 'boardapp:jobboard' %}">
+                                백엔드, 프론트엔드
+                                ...</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'boardapp:jobboard' %}">
+                                개발자 준비 어떻게 하고
+                                ...</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'boardapp:jobboard' %}">
+                                카카오 취업
+                                ...</a>
+                            </li>
                         </p>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6 col-md-6">
-                <div class="services__item" OnClick="location.href ='/boardapp/tradeboard/'" style="cursor:pointer;">
+                <div class="services__item" style="cursor:pointer;">
                     <div class="services__item__icon">
                         <img src="{% static 'img/icons/trading.png' %}" width="70" height="auto">
                     </div>
                     <div class="services__item__text">
                         <h5>물물교환/무료나눔</h5>
                         <p>
-                            거래~
+                            <li>
+                                <a href="{% url 'boardapp:tradeboard' %}">
+                                정처기랑 ADsP 책 교환 하실분?
+                                ...</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'boardapp:tradeboard' %}">
+                                떡메 나눔~
+                                ...</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'boardapp:tradeboard' %}">
+                                sql 자격증 책 구합니다
+                                ...</a>
+                            </li>
                         </p>
                     </div>
                 </div>
@@ -189,20 +299,13 @@
 <!-- Services Section End -->
 
 
-
-<!-- 게시판 Begin -->
-<!-- 자유게시판 Begin -->
-
-<!-- 자유게시판 End -->
-<!-- 게시판 End -->
-
 <!-- 맛집 Begin -->
-<section class="testimonials spad">
+<section class="testimonials spad" id="food">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-8 col-md-8 col-sm-6">
                 <div class="section-title">
-                    <h2 style="font-size:15px;">가디맛집</h2>
+                    <h2>가디맛집</h2>
                     <span>Happy Choice</span>
                 </div>
             </div>
@@ -223,7 +326,7 @@
                             {% endfor %}
                         </div>
                         <div class="testimonial__author__text">
-                            
+
                             <h5>{{rest.rest_name}} {{ rest.rest_score }}</h5>
                         </div>
                         <span>{{rest.rest_kind}}</span>
