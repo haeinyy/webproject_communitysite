@@ -161,10 +161,11 @@ def restaurant_search(request):
     else :
         rest = Rest.objects.get(rest_name__contains=search)
 
-    context = { 'rest' : rest,
-                'search':search} 
-    return render(request, 'restaurant/restaurant_detail.html', context)
-
+    # context = { 'rest' : rest,
+    #             'search':search} 
+    # return render(request, 'restaurant/restaurant_detail.html', context)
+    return redirect('/restaurant/'+ str(rest.id))
+    
 #게시글 review
 def restaurant_review(request, pk):
     # # if request.method == 'POST':
